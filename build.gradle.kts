@@ -57,16 +57,9 @@ subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-actuator")
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         developmentOnly("org.springframework.boot:spring-boot-devtools")
-        runtimeOnly("com.h2database:h2")
-        runtimeOnly("com.mysql:mysql-connector-j")
-        runtimeOnly("io.micrometer:micrometer-registry-prometheus")
-        runtimeOnly("org.postgresql:postgresql")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 }
