@@ -67,7 +67,6 @@ subprojects {
         runtimeOnly("com.mysql:mysql-connector-j")
         runtimeOnly("io.micrometer:micrometer-registry-prometheus")
         runtimeOnly("org.postgresql:postgresql")
-        annotationProcessor("org.projectlombok:lombok")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 }
