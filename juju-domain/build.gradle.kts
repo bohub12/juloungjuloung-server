@@ -8,9 +8,13 @@ tasks {
     }
 }
 
+allOpen {
+    annotation("com.juloungjuloung.juju.domain.infrastructure.config.AllOpen")
+}
+
 dependencies {
 
-    // ORM (Spring Data JPA)
+    // Spring Data JPA
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     // Database
