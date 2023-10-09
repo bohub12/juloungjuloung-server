@@ -3,7 +3,8 @@ package com.juloungjuloung.juju.domain.domain.product.ring
 import com.juloungjuloung.juju.domain.domain.product.CATEGORY_RING
 import com.juloungjuloung.juju.domain.domain.product.Product
 import com.juloungjuloung.juju.domain.domain.product.ProductMaterial
-import jakarta.persistence.*
+import jakarta.persistence.DiscriminatorValue
+import jakarta.persistence.Entity
 
 @Entity
 @DiscriminatorValue(CATEGORY_RING)
