@@ -15,6 +15,7 @@ class Bracelet(
     weightByMilliGram: Int,
     material: ProductMaterial,
     thumbnailImage: String,
+    isActive: Boolean,
 
     @Column(name = "bracelet_maximum_length")
     val maximumLength: Int,
@@ -26,5 +27,6 @@ class Bracelet(
     productCode = productCode,
     weightByMilliGram = weightByMilliGram,
     material = material,
-    thumbnailImage = thumbnailImage
+    thumbnailImage = thumbnailImage,
+    isActive = isActive
 )

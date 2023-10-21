@@ -15,7 +15,7 @@ class Necklace(
     weightByMilliGram: Int,
     material: ProductMaterial,
     thumbnailImage: String,
-
+    isActive: Boolean,
     @Column(name = "necklace_maximum_length")
     val maximumLength: Int,
 
@@ -26,5 +26,6 @@ class Necklace(
     productCode = productCode,
     weightByMilliGram = weightByMilliGram,
     material = material,
-    thumbnailImage = thumbnailImage
+    thumbnailImage = thumbnailImage,
+    isActive = isActive
 )

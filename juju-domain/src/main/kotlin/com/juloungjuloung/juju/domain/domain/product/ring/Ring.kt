@@ -13,11 +13,13 @@ class Ring(
     productCode: String,
     weightByMilliGram: Int,
     material: ProductMaterial,
-    thumbnailImage: String
+    thumbnailImage: String,
+    isActive: Boolean
 ) : Product(
     name = name,
     productCode = productCode,
     weightByMilliGram = weightByMilliGram,
     material = material,
-    thumbnailImage = thumbnailImage
+    thumbnailImage = thumbnailImage,
+    isActive = isActive
 )
