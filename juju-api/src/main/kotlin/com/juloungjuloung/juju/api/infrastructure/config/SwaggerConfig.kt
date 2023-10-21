@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.api.config
+package com.juloungjuloung.juju.api.infrastructure.config
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration
     info = Info(
         title = "juju API",
         description = "juju API Restdocs",
-        version = "v0"
+        version = "v1"
     )
 )
 class SwaggerConfig {
@@ -44,11 +44,18 @@ class SwaggerConfig {
     }
 
     @Bean
-    fun server(): GroupedOpenApi {
+    fun publicApi(): GroupedOpenApi {
         return GroupedOpenApi.builder()
-            .group("juju-api")
-            .pathsToExclude("/health")
-            .packagesToScan("com.juloungjuloung.juju.api")
+            .group("public")
+            .pathsToMatch("/public/**")
+            .build()
+    }
+
+    @Bean
+    fun adminApi(): GroupedOpenApi {
+        return GroupedOpenApi.builder()
+            .group("admin")
+            .pathsToMatch("/admin/**")
             .build()
     }
 }
