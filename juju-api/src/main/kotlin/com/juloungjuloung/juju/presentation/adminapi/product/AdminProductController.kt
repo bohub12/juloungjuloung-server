@@ -4,6 +4,7 @@ import com.juloungjuloung.juju.application.adminapi.product.AdminProductFacade
 import com.juloungjuloung.juju.presentation.ApiResponse
 import com.juloungjuloung.juju.presentation.ApiResponse.Companion.success
 import com.juloungjuloung.juju.presentation.adminapi.product.dto.BraceletDetailRes
+import com.juloungjuloung.juju.presentation.adminapi.product.dto.RingDetailRes
 import io.swagger.v3.oas.annotations.Parameter
 import org.springdoc.core.converters.models.Pageable
 import org.springdoc.core.converters.models.PageableAsQueryParam
@@ -35,6 +36,7 @@ class AdminProductController(
 
     @GetMapping("/rings")
     @PageableAsQueryParam
-    fun readRings(pageable: Pageable) {
+    fun readRings(@Parameter(hidden = true) pageable: Pageable): ApiResponse<List<RingDetailRes>> {
+        return success(adminProductFacade.readRings(pageable))
     }
 }
