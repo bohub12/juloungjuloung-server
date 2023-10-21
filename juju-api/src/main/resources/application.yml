@@ -1,3 +1,4 @@
 spring:
     profiles:
-        include: domain-local
+        active: local
+

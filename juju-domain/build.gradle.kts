@@ -20,7 +20,7 @@ dependencies {
     // Database
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("org.postgresql:postgresql")
+//    runtimeOnly("org.postgresql:postgresql")
 
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 }
