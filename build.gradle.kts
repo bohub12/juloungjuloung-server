@@ -20,6 +20,15 @@ configurations {
     }
 }
 
+tasks {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+}
+
 val projectGroup: String by project
 val applicationVersion: String by project
 allprojects {
@@ -60,6 +69,15 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "org.jetbrains.kotlin.kapt")
+
+    tasks {
+        bootJar {
+            enabled = false
+        }
+        jar {
+            enabled = true
+        }
+    }
 
     dependencies {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

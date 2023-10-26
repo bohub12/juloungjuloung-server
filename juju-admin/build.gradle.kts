@@ -1,7 +1,7 @@
 tasks {
     bootJar {
         enabled = true
-        archiveFileName.set("application.jar")
+        archiveFileName.set("admin-application.jar")
     }
 
     jar {
@@ -10,7 +10,7 @@ tasks {
 }
 
 dependencies {
-    implementation(project(":juju-core:domain"))
+    implementation(project(":juju-core:application"))
 
     implementation(project(":juju-support:utils"))
     implementation(project(":juju-support:constants"))

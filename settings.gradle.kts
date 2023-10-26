@@ -1,6 +1,17 @@
 rootProject.name = "juju"
-include("juju-api")
-include("juju-domain")
+
+include(
+    ":juju-api",
+    ":juju-admin",
+
+    ":juju-core:domain",
+    ":juju-core:application",
+
+    ":juju-infrastructure",
+
+    ":juju-support:utils",
+    ":juju-support:constants"
+)
 
 pluginManagement {
     val kotlinVersion: String by settings
