@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.entity.member
 
 import com.juloungjuloung.juju.entity.BaseEntity
+import com.juloungjuloung.juju.member.MemberRole
 import jakarta.persistence.Entity
 
 @Entity
