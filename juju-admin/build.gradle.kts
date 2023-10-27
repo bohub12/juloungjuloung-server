@@ -1,7 +1,7 @@
 tasks {
     bootJar {
         enabled = true
-        archiveFileName.set("application.jar")
+        archiveFileName.set("admin-application.jar")
     }
 
     jar {

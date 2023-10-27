@@ -1,13 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.1.3"
-    id("io.spring.dependency-management") version "1.1.3" apply false
-    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
-    kotlin("jvm") version "1.8.22"
-    kotlin("plugin.spring") version "1.8.22" apply false
-    kotlin("plugin.jpa") version "1.8.22" apply false
-    kotlin("kapt") version "1.9.10" apply false
+    id("org.springframework.boot")
+    id("io.spring.dependency-management") apply false
+    id("org.jlleitschuh.gradle.ktlint")
+    kotlin("jvm")
+    kotlin("plugin.spring") apply false
+    kotlin("plugin.jpa") apply false
+    kotlin("kapt") apply false
 }
 
 java {
@@ -20,9 +20,21 @@ configurations {
     }
 }
 
+tasks {
+    bootJar {
+        enabled = false
+    }
+    jar {
+        enabled = true
+    }
+}
+
+val projectGroup: String by project
+val applicationVersion: String by project
+
 allprojects {
-    group = "com.juloungjuloung"
-    version = "0.0.1-SNAPSHOT"
+    group = projectGroup
+    version = applicationVersion
     repositories {
         mavenCentral()
     }
@@ -58,6 +70,15 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "org.jetbrains.kotlin.kapt")
+
+    tasks {
+        bootJar {
+            enabled = false
+        }
+        jar {
+            enabled = true
+        }
+    }
 
     dependencies {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
