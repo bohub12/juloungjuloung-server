@@ -1,5 +1,9 @@
 val queryDslVersion: String by project
 
+allOpen {
+    annotation("com.juloungjuloung.juju.config.AllOpen")
+}
+
 dependencies {
     implementation(project(":juju-core:domain"))
 
