@@ -1,6 +1,7 @@
 val queryDslVersion: String by project
 
 dependencies {
+    implementation(project(":juju-core:domain"))
 
     implementation(project(":juju-support:utils"))
     implementation(project(":juju-support:constants"))

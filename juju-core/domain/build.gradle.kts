@@ -1,6 +1,4 @@
 dependencies {
-    implementation(project(":juju-infrastructure"))
-
     implementation(project(":juju-support:utils"))
     implementation(project(":juju-support:constants"))
 

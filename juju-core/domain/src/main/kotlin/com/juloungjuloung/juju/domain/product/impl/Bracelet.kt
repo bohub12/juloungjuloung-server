@@ -1,6 +1,5 @@
 package com.juloungjuloung.juju.domain.product.impl
 
-import com.juloungjuloung.juju.entity.product.impl.BraceletEntity
 import com.juloungjuloung.juju.product.ProductMaterial
 import java.time.LocalDateTime
 
@@ -16,22 +15,4 @@ data class Bracelet(
     val minimumLength: Int,
     val createdAt: LocalDateTime?,
     val updatedAt: LocalDateTime?
-) {
-    companion object {
-        fun of(entity: BraceletEntity): Bracelet {
-            return Bracelet(
-                id = entity.id,
-                name = entity.name,
-                productCode = entity.productCode,
-                weightByMilliGram = entity.weightByMilliGram,
-                material = entity.material,
-                thumbnailImage = entity.thumbnailImage,
-                isActive = entity.isActive,
-                maximumLength = entity.maximumLength,
-                minimumLength = entity.minimumLength,
-                createdAt = entity.createdAt,
-                updatedAt = entity.updatedAt
-            )
-        }
-    }
-}
+)

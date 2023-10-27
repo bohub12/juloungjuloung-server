@@ -1,6 +1,6 @@
 dependencies {
     implementation(project(":juju-core:domain"))
-    implementation(project(":juju-infrastructure"))
+    runtimeOnly(project(":juju-infrastructure"))
 
     implementation(project(":juju-support:utils"))
     implementation(project(":juju-support:constants"))

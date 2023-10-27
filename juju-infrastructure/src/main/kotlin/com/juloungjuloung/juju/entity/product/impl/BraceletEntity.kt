@@ -1,5 +1,6 @@
 package com.juloungjuloung.juju.entity.product.impl
 
+import com.juloungjuloung.juju.domain.product.impl.Bracelet
 import com.juloungjuloung.juju.entity.product.ProductEntity
 import com.juloungjuloung.juju.product.CATEGORY_BRACELET
 import com.juloungjuloung.juju.product.ProductMaterial
@@ -29,4 +30,21 @@ class BraceletEntity(
     material = material,
     thumbnailImage = thumbnailImage,
     isActive = isActive
-)
+) {
+
+    fun toDomain(): Bracelet {
+        return Bracelet(
+            id = this.id,
+            name = this.name,
+            productCode = this.productCode,
+            weightByMilliGram = this.weightByMilliGram,
+            material = this.material,
+            thumbnailImage = this.thumbnailImage,
+            isActive = this.isActive,
+            maximumLength = this.maximumLength,
+            minimumLength = this.minimumLength,
+            createdAt = this.createdAt,
+            updatedAt = this.updatedAt
+        )
+    }
+}
