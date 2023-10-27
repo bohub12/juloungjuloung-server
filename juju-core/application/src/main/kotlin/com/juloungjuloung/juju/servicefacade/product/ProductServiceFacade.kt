@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class ProductServiceFacade(
-    val braceletService: BraceletService,
-    val ringService: RingService
+    private val braceletService: BraceletService,
+    private val ringService: RingService
 ) {
     fun readBracelets(page: Int, size: Int): List<BraceletDetailRes> {
         return braceletService.readBracelets(page, size).stream()

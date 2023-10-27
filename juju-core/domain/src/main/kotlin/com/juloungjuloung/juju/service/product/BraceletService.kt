@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class BraceletService(
-    val braceletRepository: BraceletRepository
+    private val braceletRepository: BraceletRepository
 ) {
 
     fun readBracelets(page: Int, size: Int): List<Bracelet> {

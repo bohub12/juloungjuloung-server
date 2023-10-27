@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class RingService(
-    val ringRepository: RingRepository
+    private val ringRepository: RingRepository
 ) {
 
     fun readRings(page: Int, size: Int): List<Ring> {
