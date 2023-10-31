@@ -2,3 +2,4 @@ spring:
     config:
         import:
             - database-local.yml
+            - aws-local.yml

@@ -1,0 +1,16 @@
+spring:
+    cloud:
+        aws:
+            credentials:
+                access-key: ENC(PSv6ikBqpkI9At5GMCJ0p6wrYEuJwywEXdw7b+jT0Uo=)
+                secret-key: ENC(l8IcM2PpmwJrgOJ/LfBPwBWDHnXbLGhmznsDTDA96/sbz6BAbP/VMLuJgHvCv+JhTDCJR+cP8jU=)
+            region:
+                static: ap-northeast-2
+aws:
+    s3:
+        bucket: ENC(ItrMamuoaBij/4OqW2iXS+jZN3V9HT+jmdxrSXPVHv0=)
+
+jasypt:
+    encryptor:
+        algorithm: PBEWithMD5AndDES
+        iv-generator-classname: org.jasypt.iv.NoIvGenerator
