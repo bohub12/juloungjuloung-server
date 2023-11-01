@@ -46,20 +46,9 @@ allprojects {
         }
     }
 
-    tasks.withType<Test> {
+    tasks.withType<Test>().configureEach {
         useJUnitPlatform()
     }
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "17"
-    }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
 
 subprojects {
@@ -80,9 +69,19 @@ subprojects {
         }
     }
 
+    val kotestVersion: String by project
+    val kotestSpringExtensionVersion: String by project
+    val mockkVersion: String by project
+
     dependencies {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
+
         testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+        testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+        testImplementation("io.kotest:kotest-property:$kotestVersion")
+        testImplementation("io.kotest.extensions:kotest-extensions-spring:$kotestSpringExtensionVersion")
+        testImplementation("io.mockk:mockk:$mockkVersion")
     }
 }

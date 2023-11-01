@@ -2,6 +2,7 @@ package com.juloungjuloung.juju.servicefacade.product
 
 import com.juloungjuloung.juju.dto.product.BraceletDetailRes
 import com.juloungjuloung.juju.dto.product.RingDetailRes
+import com.juloungjuloung.juju.s3.AwsS3Service
 import com.juloungjuloung.juju.service.product.BraceletService
 import com.juloungjuloung.juju.service.product.RingService
 import org.springframework.stereotype.Service
@@ -9,7 +10,8 @@ import org.springframework.stereotype.Service
 @Service
 class ProductServiceFacade(
     private val braceletService: BraceletService,
-    private val ringService: RingService
+    private val ringService: RingService,
+    private val awsS3Service: AwsS3Service
 ) {
     fun readBracelets(page: Int, size: Int): List<BraceletDetailRes> {
         return braceletService.readBracelets(page, size).stream()
