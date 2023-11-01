@@ -15,7 +15,11 @@ class AwsS3Service(
     private val s3PreSigner: S3Presigner
 ) {
 
-    fun createPreSignedUrlForUploadJPG(type: S3PathPrefixConstant, path: String, fileExtension: S3ImageFileExtension): String {
+    fun createPreSignedUrlForUploadJPG(
+        type: S3PathPrefixConstant,
+        path: String,
+        fileExtension: S3ImageFileExtension
+    ): String {
         if (path.contains(".")) {
             throw IllegalStateException("path can not contain file extension")
         }
