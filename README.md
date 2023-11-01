@@ -3,13 +3,13 @@
 # 2. 아키텍처 구성
 
 # 3. 기술 스펙
-- Kotlin, Groovy
+- Kotlin
 - Spring Boot 3.1.3
 - Spring MVC
 - Spring Data JPA, QueryDsl
 - Postgresql, MySQL, Redis, H2
 - Spring Actuator, Prometheus, Grafana
-- JUnit5, Spock
+- JUnit5, Kotest, Mockk
 
 # 4. 컨벤션
 - 코드컨벤션 : [Kotlin Code Coding Convention](https://kotlinlang.org/docs/coding-conventions.html)
