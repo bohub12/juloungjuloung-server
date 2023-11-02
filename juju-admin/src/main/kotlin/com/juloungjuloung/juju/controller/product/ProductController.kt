@@ -1,11 +1,13 @@
 package com.juloungjuloung.juju.controller.product
 
 import com.juloungjuloung.juju.dto.product.BraceletDetailRes
+import com.juloungjuloung.juju.dto.product.EarringDetailRes
 import com.juloungjuloung.juju.dto.product.RingDetailRes
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import com.juloungjuloung.juju.servicefacade.product.ProductServiceFacade
 import io.swagger.v3.oas.annotations.Parameter
+import jakarta.validation.Valid
 import org.springdoc.core.converters.models.Pageable
 import org.springdoc.core.converters.models.PageableAsQueryParam
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,13 +22,22 @@ class ProductController(
 
     @GetMapping("/bracelets")
     @PageableAsQueryParam
-    fun readProducts(@Parameter(hidden = true) pageable: Pageable): ApiResponse<List<BraceletDetailRes>> {
+    fun readProducts(
+        @Valid
+        @Parameter(hidden = true)
+        pageable: Pageable
+    ): ApiResponse<List<BraceletDetailRes>> {
         return success(productFacade.readBracelets(pageable.page, pageable.size))
     }
 
     @GetMapping("/earrings")
     @PageableAsQueryParam
-    fun readEarrings(pageable: Pageable) {
+    fun readEarrings(
+        @Valid
+        @Parameter(hidden = true)
+        pageable: Pageable
+    ): ApiResponse<List<EarringDetailRes>> {
+        return success(productFacade.readEarrings(pageable.page, pageable.size))
     }
 
     @GetMapping("/necklaces")
@@ -36,7 +47,11 @@ class ProductController(
 
     @GetMapping("/rings")
     @PageableAsQueryParam
-    fun readRings(@Parameter(hidden = true) pageable: Pageable): ApiResponse<List<RingDetailRes>> {
+    fun readRings(
+        @Valid
+        @Parameter(hidden = true)
+        pageable: Pageable
+    ): ApiResponse<List<RingDetailRes>> {
         return success(productFacade.readRings(pageable.page, pageable.size))
     }
 }
