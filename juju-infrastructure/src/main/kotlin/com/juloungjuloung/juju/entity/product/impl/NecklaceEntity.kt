@@ -1,5 +1,6 @@
 package com.juloungjuloung.juju.entity.product.impl
 
+import com.juloungjuloung.juju.domain.product.impl.Necklace
 import com.juloungjuloung.juju.entity.product.ProductEntity
 import com.juloungjuloung.juju.product.CATEGORY_NECKLACE
 import com.juloungjuloung.juju.product.ProductMaterial
@@ -28,4 +29,20 @@ class NecklaceEntity(
     material = material,
     thumbnailImage = thumbnailImage,
     isActive = isActive
-)
+) {
+    fun toDomain(): Necklace {
+        return Necklace(
+            id = this.id,
+            name = this.name,
+            productCode = this.productCode,
+            weightByMilliGram = this.weightByMilliGram,
+            material = this.material,
+            thumbnailImage = this.thumbnailImage,
+            isActive = this.isActive,
+            maximumLength = this.maximumLength,
+            minimumLength = this.minimumLength,
+            createdAt = this.createdAt,
+            updatedAt = this.updatedAt
+        )
+    }
+}

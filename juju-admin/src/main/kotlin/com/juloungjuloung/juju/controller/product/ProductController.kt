@@ -1,15 +1,15 @@
 package com.juloungjuloung.juju.controller.product
 
 import com.juloungjuloung.juju.dto.product.BraceletDetailRes
+import com.juloungjuloung.juju.dto.product.EarringDetailRes
+import com.juloungjuloung.juju.dto.product.NecklaceDetailRes
 import com.juloungjuloung.juju.dto.product.RingDetailRes
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import com.juloungjuloung.juju.servicefacade.product.ProductServiceFacade
-import io.swagger.v3.oas.annotations.Parameter
-import org.springdoc.core.converters.models.Pageable
-import org.springdoc.core.converters.models.PageableAsQueryParam
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -19,24 +19,34 @@ class ProductController(
 ) {
 
     @GetMapping("/bracelets")
-    @PageableAsQueryParam
-    fun readProducts(@Parameter(hidden = true) pageable: Pageable): ApiResponse<List<BraceletDetailRes>> {
-        return success(productFacade.readBracelets(pageable.page, pageable.size))
+    fun readProducts(
+        @RequestParam(value = "page", required = false, defaultValue = "0") page: Int,
+        @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
+    ): ApiResponse<List<BraceletDetailRes>> {
+        return success(productFacade.readBracelets(page, size))
     }
 
     @GetMapping("/earrings")
-    @PageableAsQueryParam
-    fun readEarrings(pageable: Pageable) {
+    fun readEarrings(
+        @RequestParam(value = "page", required = false, defaultValue = "0") page: Int,
+        @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
+    ): ApiResponse<List<EarringDetailRes>> {
+        return success(productFacade.readEarrings(page, size))
     }
 
     @GetMapping("/necklaces")
-    @PageableAsQueryParam
-    fun readNecklaces(pageable: Pageable) {
+    fun readNecklaces(
+        @RequestParam(value = "page", required = false, defaultValue = "0") page: Int,
+        @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
+    ): ApiResponse<List<NecklaceDetailRes>> {
+        return success(productFacade.readNecklaces(page, size))
     }
 
     @GetMapping("/rings")
-    @PageableAsQueryParam
-    fun readRings(@Parameter(hidden = true) pageable: Pageable): ApiResponse<List<RingDetailRes>> {
-        return success(productFacade.readRings(pageable.page, pageable.size))
+    fun readRings(
+        @RequestParam(value = "page", required = false, defaultValue = "0") page: Int,
+        @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
+    ): ApiResponse<List<RingDetailRes>> {
+        return success(productFacade.readRings(page, size))
     }
 }

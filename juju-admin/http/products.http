@@ -1,4 +1,17 @@
-# [ADMIN] - 1. 팔찌(Bracelet) 리스트 조회
+### 팔찌(Bracelet) 리스트 조회
 GET {{host}}/admin/api/v1/products/bracelets?page=0&size=10
 Content-Type: application/json
-Accept: application/json
+
+### 반지(Ring) 리스트 조회
+GET {{host}}/admin/api/v1/products/rings?page=0&size=10
+Content-Type: application/json
+
+### 귀걸이(Earring) 리스트 조회
+GET {{host}}/admin/api/v1/products/earrings
+Content-Type: application/json
+
+### 목걸이(Necklace) 리스트 조회
+GET {{host}}/admin/api/v1/products/necklaces
+Content-Type: application/json
+
+
