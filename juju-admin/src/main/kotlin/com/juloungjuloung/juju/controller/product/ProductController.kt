@@ -2,6 +2,7 @@ package com.juloungjuloung.juju.controller.product
 
 import com.juloungjuloung.juju.dto.product.BraceletDetailRes
 import com.juloungjuloung.juju.dto.product.EarringDetailRes
+import com.juloungjuloung.juju.dto.product.NecklaceDetailRes
 import com.juloungjuloung.juju.dto.product.RingDetailRes
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
@@ -42,7 +43,12 @@ class ProductController(
 
     @GetMapping("/necklaces")
     @PageableAsQueryParam
-    fun readNecklaces(pageable: Pageable) {
+    fun readNecklaces(
+        @Valid
+        @Parameter(hidden = true)
+        pageable: Pageable
+    ): ApiResponse<List<NecklaceDetailRes>> {
+        return success(productFacade.readNecklaces(pageable.page, pageable.size))
     }
 
     @GetMapping("/rings")
