@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.product
+package com.juloungjuloung.juju.common.constant
 
 enum class ProductCategory(val desc: String) {
     RING("반지"),

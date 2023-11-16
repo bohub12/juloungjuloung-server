@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.response
+package com.juloungjuloung.juju.common.response
 
 enum class ApiResponseCode(
     val code: Int,

@@ -1,16 +1,17 @@
 package com.juloungjuloung.juju.dto.product
 
 import com.juloungjuloung.juju.domain.product.impl.Earring
-import com.juloungjuloung.juju.product.ProductMaterial
 import java.time.LocalDateTime
 
 data class EarringDetailRes(
     val id: Long,
     val name: String,
     val productCode: String,
-    val weightByMilliGram: Int,
-    val material: ProductMaterial,
+    val price: Long,
+    val weightByMilliGram: Long,
     val thumbnailImage: String,
+    val isDiamond: Boolean,
+    val totalDiamondCaratX100: Int,
     val isActive: Boolean,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime
@@ -21,9 +22,11 @@ data class EarringDetailRes(
                 id = earring.id!!,
                 name = earring.name,
                 productCode = earring.productCode,
+                price = earring.price,
                 weightByMilliGram = earring.weightByMilliGram,
-                material = earring.material,
                 thumbnailImage = earring.thumbnailImage,
+                isDiamond = earring.isDiamond,
+                totalDiamondCaratX100 = earring.totalDiamondCaratX100 ?: 0,
                 isActive = earring.isActive,
                 createdAt = earring.createdAt!!,
                 updatedAt = earring.updatedAt!!
