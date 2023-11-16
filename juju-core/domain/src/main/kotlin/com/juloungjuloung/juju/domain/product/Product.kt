@@ -1,12 +1,18 @@
 package com.juloungjuloung.juju.domain.product
 
-import com.juloungjuloung.juju.product.ProductMaterial
+import java.time.LocalDateTime
 
 data class Product(
+    val id: Long?,
+    // Product Category TODO : Enum or String?
+    val category: String,
     val name: String,
     val productCode: String,
-    val weightByMilliGram: Int,
-    val material: ProductMaterial,
+    val weightByMilliGram: Long,
     val thumbnailImage: String,
-    val isActive: Boolean
+    val isDiamond: Boolean,
+    val totalDiamondCaratX100: Int?,
+    val isActive: Boolean,
+    val createdAt: LocalDateTime?,
+    val updatedAt: LocalDateTime?
 )

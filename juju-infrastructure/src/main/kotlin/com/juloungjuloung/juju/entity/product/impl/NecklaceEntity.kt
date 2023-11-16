@@ -3,7 +3,6 @@ package com.juloungjuloung.juju.entity.product.impl
 import com.juloungjuloung.juju.domain.product.impl.Necklace
 import com.juloungjuloung.juju.entity.product.ProductEntity
 import com.juloungjuloung.juju.product.CATEGORY_NECKLACE
-import com.juloungjuloung.juju.product.ProductMaterial
 import jakarta.persistence.Column
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
@@ -13,9 +12,11 @@ import jakarta.persistence.Entity
 class NecklaceEntity(
     name: String,
     productCode: String,
-    weightByMilliGram: Int,
-    material: ProductMaterial,
+    price: Long,
+    weightByMilliGram: Long,
     thumbnailImage: String,
+    isDiamond: Boolean,
+    totalDiamondCaratX100: Int?,
     isActive: Boolean,
     @Column(name = "necklace_maximum_length")
     val maximumLength: Int,
@@ -25,9 +26,11 @@ class NecklaceEntity(
 ) : ProductEntity(
     name = name,
     productCode = productCode,
+    price = price,
     weightByMilliGram = weightByMilliGram,
-    material = material,
     thumbnailImage = thumbnailImage,
+    isDiamond = isDiamond,
+    totalDiamondCaratX100 = totalDiamondCaratX100,
     isActive = isActive
 ) {
     fun toDomain(): Necklace {
@@ -35,9 +38,11 @@ class NecklaceEntity(
             id = this.id,
             name = this.name,
             productCode = this.productCode,
+            price = this.price,
             weightByMilliGram = this.weightByMilliGram,
-            material = this.material,
             thumbnailImage = this.thumbnailImage,
+            isDiamond = this.isDiamond,
+            totalDiamondCaratX100 = this.totalDiamondCaratX100,
             isActive = this.isActive,
             maximumLength = this.maximumLength,
             minimumLength = this.minimumLength,
