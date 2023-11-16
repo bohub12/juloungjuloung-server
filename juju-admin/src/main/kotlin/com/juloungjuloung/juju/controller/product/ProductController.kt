@@ -1,11 +1,11 @@
 package com.juloungjuloung.juju.controller.product
 
+import com.juloungjuloung.juju.common.response.ApiResponse
+import com.juloungjuloung.juju.common.response.ApiResponse.Companion.success
 import com.juloungjuloung.juju.dto.product.BraceletDetailRes
 import com.juloungjuloung.juju.dto.product.EarringDetailRes
 import com.juloungjuloung.juju.dto.product.NecklaceDetailRes
 import com.juloungjuloung.juju.dto.product.RingDetailRes
-import com.juloungjuloung.juju.response.ApiResponse
-import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import com.juloungjuloung.juju.servicefacade.product.ProductServiceFacade
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

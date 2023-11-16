@@ -1,8 +1,8 @@
 package com.juloungjuloung.juju.entity.product.impl
 
+import com.juloungjuloung.juju.common.constant.CATEGORY_RING
 import com.juloungjuloung.juju.domain.product.impl.Ring
 import com.juloungjuloung.juju.entity.product.ProductEntity
-import com.juloungjuloung.juju.product.CATEGORY_RING
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 

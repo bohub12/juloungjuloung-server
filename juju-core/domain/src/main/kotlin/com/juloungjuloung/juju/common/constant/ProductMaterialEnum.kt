@@ -1,6 +1,6 @@
-package com.juloungjuloung.juju.product
+package com.juloungjuloung.juju.common.constant
 
-enum class ProductMaterial(val desc: String) {
+enum class ProductMaterialEnum(val desc: String) {
     K10("10K"),
     K14("14K"),
     K18("18K"),

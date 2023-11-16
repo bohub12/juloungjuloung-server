@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.response
+package com.juloungjuloung.juju.common.response
 
 import com.fasterxml.jackson.annotation.JsonInclude
 

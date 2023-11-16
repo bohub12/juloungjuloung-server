@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.product
+package com.juloungjuloung.juju.common.constant
 
 enum class ProductColorEnum(val desc: String) {
     GOLD("골드"),

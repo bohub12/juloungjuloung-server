@@ -7,11 +7,8 @@ allOpen {
 dependencies {
     implementation(project(":juju-core:domain"))
 
-    implementation(project(":juju-support:utils"))
-    implementation(project(":juju-support:constants"))
-
     // Spring Data JPA
-    api("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
     // QueryDsl
     implementation("com.querydsl:querydsl-jpa:$queryDslVersion:jakarta")
