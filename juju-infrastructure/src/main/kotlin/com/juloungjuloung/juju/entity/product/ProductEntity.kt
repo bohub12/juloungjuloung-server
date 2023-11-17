@@ -9,7 +9,7 @@ import jakarta.persistence.InheritanceType
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "category", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 abstract class ProductEntity(
     val name: String,
     val productCode: String,
