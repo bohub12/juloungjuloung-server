@@ -1,13 +1,13 @@
 package com.juloungjuloung.juju.entity.product.impl
 
-import com.juloungjuloung.juju.common.constant.CATEGORY_EARRING
+import com.juloungjuloung.juju.common.constant.TYPE_EARRING
 import com.juloungjuloung.juju.domain.product.impl.Earring
 import com.juloungjuloung.juju.entity.product.ProductEntity
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 
 @Entity
-@DiscriminatorValue(CATEGORY_EARRING)
+@DiscriminatorValue(TYPE_EARRING)
 class EarringEntity(
     name: String,
     productCode: String,

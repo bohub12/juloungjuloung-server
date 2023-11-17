@@ -1,6 +1,6 @@
 package com.juloungjuloung.juju.entity.product.impl
 
-import com.juloungjuloung.juju.common.constant.CATEGORY_NECKLACE
+import com.juloungjuloung.juju.common.constant.TYPE_NECKLACE
 import com.juloungjuloung.juju.domain.product.impl.Necklace
 import com.juloungjuloung.juju.entity.product.ProductEntity
 import jakarta.persistence.Column
@@ -8,7 +8,7 @@ import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 
 @Entity
-@DiscriminatorValue(CATEGORY_NECKLACE)
+@DiscriminatorValue(TYPE_NECKLACE)
 class NecklaceEntity(
     name: String,
     productCode: String,

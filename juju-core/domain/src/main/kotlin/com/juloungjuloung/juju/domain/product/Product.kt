@@ -1,13 +1,14 @@
 package com.juloungjuloung.juju.domain.product
 
+import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import java.time.LocalDateTime
 
-data class Product(
+abstract class Product(
     val id: Long?,
-    // Product Category TODO : Enum or String?
-    val category: String,
+    val type: ProductTypeEnum,
     val name: String,
     val productCode: String,
+    val price: Long,
     val weightByMilliGram: Long,
     val thumbnailImage: String,
     val isDiamond: Boolean,
