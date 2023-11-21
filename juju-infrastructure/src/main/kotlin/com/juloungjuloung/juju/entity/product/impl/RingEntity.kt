@@ -13,7 +13,7 @@ class RingEntity(
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int?,
     isActive: Boolean
@@ -41,5 +41,20 @@ class RingEntity(
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
+    }
+
+    companion object {
+        fun of(ring: Ring): RingEntity {
+            return RingEntity(
+                name = ring.name,
+                productCode = ring.productCode,
+                price = ring.price,
+                weightByMilliGram = ring.weightByMilliGram,
+                thumbnailImage = ring.thumbnailImage,
+                isDiamond = ring.isDiamond,
+                totalDiamondCaratX100 = ring.totalDiamondCaratX100,
+                isActive = ring.isActive
+            )
+        }
     }
 }

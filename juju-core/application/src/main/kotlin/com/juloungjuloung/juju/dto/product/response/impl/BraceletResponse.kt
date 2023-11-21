@@ -11,7 +11,7 @@ class BraceletResponse(
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int,
     isActive: Boolean,

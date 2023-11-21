@@ -14,7 +14,7 @@ class BraceletEntity(
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String? = null,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int?,
     isActive: Boolean,
@@ -51,5 +51,22 @@ class BraceletEntity(
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
+    }
+
+    companion object {
+        fun of(bracelet: Bracelet): BraceletEntity {
+            return BraceletEntity(
+                name = bracelet.name,
+                productCode = bracelet.productCode,
+                price = bracelet.price,
+                weightByMilliGram = bracelet.weightByMilliGram,
+                thumbnailImage = bracelet.thumbnailImage,
+                isDiamond = bracelet.isDiamond,
+                totalDiamondCaratX100 = bracelet.totalDiamondCaratX100,
+                isActive = bracelet.isActive,
+                maximumLength = bracelet.maximumLength,
+                minimumLength = bracelet.minimumLength
+            )
+        }
     }
 }

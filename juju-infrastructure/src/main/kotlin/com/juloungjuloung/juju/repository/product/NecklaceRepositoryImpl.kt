@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Necklace
+import com.juloungjuloung.juju.entity.product.impl.NecklaceEntity
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Repository
 
@@ -13,5 +14,10 @@ class NecklaceRepositoryImpl(
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size)).stream()
             .map { it.toDomain() }
             .toList()
+    }
+
+    override fun save(necklace: Necklace): Boolean {
+        delegate.save(NecklaceEntity.of(necklace))
+        return true
     }
 }

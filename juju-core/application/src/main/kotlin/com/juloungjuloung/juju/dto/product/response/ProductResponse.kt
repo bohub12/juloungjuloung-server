@@ -11,7 +11,7 @@ open class ProductResponse(
     val productCode: String,
     val price: Long,
     val weightByMilliGram: Long,
-    val thumbnailImage: String,
+    val thumbnailImage: String?,
     val isDiamond: Boolean,
     val totalDiamondCaratX100: Int,
     val isActive: Boolean,

@@ -4,4 +4,5 @@ import com.juloungjuloung.juju.domain.product.impl.Ring
 
 interface RingRepository {
     fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Ring>
+    fun save(ring: Ring): Boolean
 }

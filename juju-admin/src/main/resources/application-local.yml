@@ -1,5 +1,5 @@
 spring:
     config:
         import:
-            - database-local.yml
+            - application-database-local.yml
             - aws-local.yml

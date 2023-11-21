@@ -16,7 +16,7 @@ abstract class ProductEntity(
     val price: Long,
     // mg 으로 표현. 소수점으로 발생하는 문제 차단
     val weightByMilliGram: Long,
-    val thumbnailImage: String,
+    val thumbnailImage: String?,
     val isDiamond: Boolean,
     // 소수점으로 발생하는 문제 차단 (carat x 100)
     val totalDiamondCaratX100: Int?,
