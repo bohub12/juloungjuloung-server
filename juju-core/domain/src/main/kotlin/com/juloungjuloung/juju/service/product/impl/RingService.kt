@@ -20,11 +20,7 @@ class RingService(
 
     @Transactional
     override fun save(product: Product): Boolean {
-        if (product is Ring) {
-            return ringRepository.save(product)
-        }
-
-        throw IllegalStateException()
+        return ringRepository.save(product as Ring)
     }
 
     override fun getProductType(): ProductTypeEnum {

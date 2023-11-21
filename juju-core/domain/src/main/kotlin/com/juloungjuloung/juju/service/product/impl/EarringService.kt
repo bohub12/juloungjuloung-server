@@ -19,11 +19,7 @@ class EarringService(
 
     @Transactional
     override fun save(product: Product): Boolean {
-        if (product is Earring) {
-            return earringRepository.save(product)
-        }
-
-        throw IllegalStateException()
+        return earringRepository.save(product as Earring)
     }
 
     override fun getProductType(): ProductTypeEnum {

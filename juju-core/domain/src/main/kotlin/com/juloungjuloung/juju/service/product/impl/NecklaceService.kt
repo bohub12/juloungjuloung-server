@@ -19,11 +19,7 @@ class NecklaceService(
 
     @Transactional
     override fun save(product: Product): Boolean {
-        if (product is Necklace) {
-            return necklaceRepository.save(product)
-        }
-
-        throw IllegalStateException()
+        return necklaceRepository.save(product as Necklace)
     }
 
     override fun getProductType(): ProductTypeEnum {
