@@ -6,11 +6,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class ProductServiceFactory(productServices: List<ProductService>) {
-    val serviceMap = HashMap<ProductTypeEnum, ProductService>()
-
-    init {
-        productServices.forEach { serviceMap[it.getProductType()] = it }
-    }
+    val serviceMap = productServices.associateBy { it.getProductType() }
 
     fun get(productTypeEnum: ProductTypeEnum): ProductService {
         return serviceMap[productTypeEnum] ?: throw IllegalStateException()
