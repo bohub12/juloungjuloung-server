@@ -4,6 +4,8 @@ import com.juloungjuloung.juju.common.response.ApiResponse
 import com.juloungjuloung.juju.common.response.ApiResponse.Companion.success
 import com.juloungjuloung.juju.dto.product.request.SaveProductRequest
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
+import com.juloungjuloung.juju.objectmapper.ProductRequestMapper.Companion.toCommand
+import com.juloungjuloung.juju.objectmapper.ProductResponseMapper.Companion.toResponse
 import com.juloungjuloung.juju.service.facade.product.ProductServiceFacade
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.GetMapping
@@ -26,13 +28,21 @@ class ProductController(
         @RequestParam(value = "page", required = false, defaultValue = "0") page: Int,
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): ApiResponse<List<ProductResponse>> {
-        return success(productFacade.readProducts(productType, page, size))
+        return success(
+            productFacade.readProducts(productType, page, size)
+                .map { toResponse(it) }
+                .toList()
+        )
     }
 
     @PostMapping
     fun saveProduct(
         @RequestBody saveProductRequest: SaveProductRequest
     ): ApiResponse<Boolean> {
-        return success(productFacade.saveProducts(saveProductRequest))
+        return success(
+            productFacade.saveProducts(
+                toCommand(saveProductRequest)
+            )
+        )
     }
 }

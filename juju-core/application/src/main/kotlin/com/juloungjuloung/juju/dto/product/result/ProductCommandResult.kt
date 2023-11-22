@@ -1,10 +1,10 @@
-package com.juloungjuloung.juju.dto.product.response
+package com.juloungjuloung.juju.dto.product.result
 
 import com.juloungjuloung.juju.common.constant.TYPE_BASE
 import com.juloungjuloung.juju.domain.product.Product
 import java.time.LocalDateTime
 
-open class ProductResponse(
+open class ProductCommandResult(
     val id: Long,
     val type: String,
     val name: String,
@@ -19,8 +19,8 @@ open class ProductResponse(
     val updatedAt: LocalDateTime
 ) {
     companion object {
-        fun of(product: Product): ProductResponse {
-            return ProductResponse(
+        fun of(product: Product): ProductCommandResult {
+            return ProductCommandResult(
                 id = product.id!!,
                 type = TYPE_BASE,
                 name = product.name,

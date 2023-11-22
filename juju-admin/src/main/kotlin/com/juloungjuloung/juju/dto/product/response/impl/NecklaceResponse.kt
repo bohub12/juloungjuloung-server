@@ -1,12 +1,12 @@
 package com.juloungjuloung.juju.dto.product.response.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
-import com.juloungjuloung.juju.domain.product.impl.Necklace
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
+import com.juloungjuloung.juju.dto.product.result.impl.NecklaceCommandResult
 import java.time.LocalDateTime
 
 class NecklaceResponse(
     id: Long,
+    type: String,
     name: String,
     productCode: String,
     price: Long,
@@ -22,7 +22,7 @@ class NecklaceResponse(
     val minimumLength: Int
 ) : ProductResponse(
     id = id,
-    type = ProductTypeEnum.NECKLACE.name,
+    type = type,
     name = name,
     productCode = productCode,
     price = price,
@@ -35,21 +35,22 @@ class NecklaceResponse(
     updatedAt = updatedAt
 ) {
     companion object {
-        fun of(necklace: Necklace): NecklaceResponse {
+        fun of(result: NecklaceCommandResult): NecklaceResponse {
             return NecklaceResponse(
-                id = necklace.id!!,
-                name = necklace.name,
-                productCode = necklace.productCode,
-                price = necklace.price,
-                weightByMilliGram = necklace.weightByMilliGram,
-                thumbnailImage = necklace.thumbnailImage,
-                isDiamond = necklace.isDiamond,
-                totalDiamondCaratX100 = necklace.totalDiamondCaratX100 ?: 0,
-                isActive = necklace.isActive,
-                maximumLength = necklace.maximumLength,
-                minimumLength = necklace.minimumLength,
-                createdAt = necklace.createdAt!!,
-                updatedAt = necklace.updatedAt!!
+                id = result.id,
+                type = result.type,
+                name = result.name,
+                productCode = result.productCode,
+                price = result.price,
+                weightByMilliGram = result.weightByMilliGram,
+                thumbnailImage = result.thumbnailImage,
+                isDiamond = result.isDiamond,
+                totalDiamondCaratX100 = result.totalDiamondCaratX100,
+                isActive = result.isActive,
+                maximumLength = result.maximumLength,
+                minimumLength = result.minimumLength,
+                createdAt = result.createdAt,
+                updatedAt = result.updatedAt
             )
         }
     }

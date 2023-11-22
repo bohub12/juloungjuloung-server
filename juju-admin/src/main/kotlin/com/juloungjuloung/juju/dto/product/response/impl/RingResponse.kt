@@ -1,12 +1,12 @@
 package com.juloungjuloung.juju.dto.product.response.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
-import com.juloungjuloung.juju.domain.product.impl.Earring
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
+import com.juloungjuloung.juju.dto.product.result.impl.RingCommandResult
 import java.time.LocalDateTime
 
-class EarringResponse(
+class RingResponse(
     id: Long,
+    type: String,
     name: String,
     productCode: String,
     price: Long,
@@ -19,7 +19,7 @@ class EarringResponse(
     updatedAt: LocalDateTime
 ) : ProductResponse(
     id = id,
-    type = ProductTypeEnum.EARRING.name,
+    type = type,
     name = name,
     productCode = productCode,
     price = price,
@@ -32,19 +32,20 @@ class EarringResponse(
     updatedAt = updatedAt
 ) {
     companion object {
-        fun of(earring: Earring): EarringResponse {
-            return EarringResponse(
-                id = earring.id!!,
-                name = earring.name,
-                productCode = earring.productCode,
-                price = earring.price,
-                weightByMilliGram = earring.weightByMilliGram,
-                thumbnailImage = earring.thumbnailImage,
-                isDiamond = earring.isDiamond,
-                totalDiamondCaratX100 = earring.totalDiamondCaratX100 ?: 0,
-                isActive = earring.isActive,
-                createdAt = earring.createdAt!!,
-                updatedAt = earring.updatedAt!!
+        fun of(result: RingCommandResult): RingResponse {
+            return RingResponse(
+                id = result.id,
+                type = result.type,
+                name = result.name,
+                productCode = result.productCode,
+                price = result.price,
+                weightByMilliGram = result.weightByMilliGram,
+                thumbnailImage = result.thumbnailImage,
+                isDiamond = result.isDiamond,
+                totalDiamondCaratX100 = result.totalDiamondCaratX100,
+                isActive = result.isActive,
+                createdAt = result.createdAt,
+                updatedAt = result.updatedAt
             )
         }
     }

@@ -1,11 +1,11 @@
-package com.juloungjuloung.juju.dto.product.response.impl
+package com.juloungjuloung.juju.dto.product.result.impl
 
 import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.impl.Ring
-import com.juloungjuloung.juju.dto.product.response.ProductResponse
+import com.juloungjuloung.juju.dto.product.result.ProductCommandResult
 import java.time.LocalDateTime
 
-class RingResponse(
+class RingCommandResult(
     id: Long,
     name: String,
     productCode: String,
@@ -17,7 +17,7 @@ class RingResponse(
     isActive: Boolean,
     createdAt: LocalDateTime,
     updatedAt: LocalDateTime
-) : ProductResponse(
+) : ProductCommandResult(
     id = id,
     type = ProductTypeEnum.RING.name,
     name = name,
@@ -32,8 +32,8 @@ class RingResponse(
     updatedAt = updatedAt
 ) {
     companion object {
-        fun of(ring: Ring): RingResponse {
-            return RingResponse(
+        fun of(ring: Ring): RingCommandResult {
+            return RingCommandResult(
                 id = ring.id!!,
                 name = ring.name,
                 productCode = ring.productCode,
