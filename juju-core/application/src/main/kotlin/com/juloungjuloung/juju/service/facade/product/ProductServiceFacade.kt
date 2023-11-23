@@ -17,7 +17,7 @@ class ProductServiceFacade(
 ) {
     fun readProducts(productType: String, page: Int, size: Int): List<ProductCommandResult> {
         val service = productServiceFactory.get(
-            (ProductTypeEnum::name findBy productType) ?: throw IllegalStateException()
+            (ProductTypeEnum::name findBy productType) ?: throw IllegalArgumentException()
         )
 
         return service.read(page, size).stream()
@@ -27,7 +27,7 @@ class ProductServiceFacade(
 
     fun saveProducts(saveProductCommand: SaveProductCommand): Boolean {
         val service = productServiceFactory.get(
-            (ProductTypeEnum::name findBy saveProductCommand.productType) ?: throw IllegalStateException()
+            (ProductTypeEnum::name findBy saveProductCommand.productType) ?: throw IllegalArgumentException()
         )
 
         return service.save(
