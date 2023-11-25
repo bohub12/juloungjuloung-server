@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.controller.product
 
 import com.juloungjuloung.juju.dto.product.request.SaveProductRequest
+import com.juloungjuloung.juju.dto.product.request.UpdateProductRequest
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import com.juloungjuloung.juju.objectmapper.ProductRequestMapper.Companion.toCommand
@@ -9,8 +10,10 @@ import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import com.juloungjuloung.juju.service.facade.product.ProductServiceFacade
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -43,6 +46,18 @@ class ProductController(
         return success(
             productFacade.saveProducts(
                 toCommand(saveProductRequest)
+            )
+        )
+    }
+
+    @PutMapping
+    fun updateProducts(
+        @RequestBody @Valid
+        updateProductRequest: UpdateProductRequest
+    ): ApiResponse<Boolean> {
+        return success(
+            productFacade.updateProducts(
+                toCommand(updateProductRequest)
             )
         )
     }

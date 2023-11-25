@@ -17,9 +17,18 @@ class NecklaceService(
         return necklaceRepository.findAllByOrderByCreatedAt(page, size)
     }
 
+    override fun readById(id: Long): Product {
+        return necklaceRepository.findById(id)
+    }
+
     @Transactional
     override fun save(product: Product): Boolean {
         return necklaceRepository.save(product as Necklace)
+    }
+
+    @Transactional
+    override fun update(product: Product): Boolean {
+        return necklaceRepository.update(product as Necklace)
     }
 
     override fun getProductType(): ProductTypeEnum {

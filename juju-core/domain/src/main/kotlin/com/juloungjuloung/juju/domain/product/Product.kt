@@ -6,14 +6,29 @@ import java.time.LocalDateTime
 abstract class Product(
     val id: Long?,
     val type: ProductTypeEnum,
-    val name: String,
+    var name: String,
     val productCode: String,
-    val price: Long,
-    val weightByMilliGram: Long,
-    val thumbnailImage: String?,
-    val isDiamond: Boolean,
-    val totalDiamondCaratX100: Int?,
-    val isActive: Boolean,
+    var price: Long,
+    var weightByMilliGram: Long,
+    var thumbnailImage: String?,
+    var isDiamond: Boolean,
+    var totalDiamondCaratX100: Int?,
+    var isActive: Boolean,
     val createdAt: LocalDateTime?,
     val updatedAt: LocalDateTime?
-)
+) {
+    abstract fun update(
+        name: String?,
+        price: Long?,
+        weightByMilliGram: Long?,
+        isDiamond: Boolean?,
+        totalDiamondCaratX100: Int?,
+        isActive: Boolean?,
+
+        braceletMaximumLength: Int?,
+        braceletMinimumLength: Int?,
+
+        necklaceMaximumLength: Int?,
+        necklaceMinimumLength: Int?
+    )
+}
