@@ -1,6 +1,6 @@
 package com.juloungjuloung.juju.service.factory
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import com.juloungjuloung.juju.repository.product.BraceletRepository
 import com.juloungjuloung.juju.repository.product.EarringRepository
 import com.juloungjuloung.juju.repository.product.NecklaceRepository

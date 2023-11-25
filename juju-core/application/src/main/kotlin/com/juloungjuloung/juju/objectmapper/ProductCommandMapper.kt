@@ -1,17 +1,17 @@
 package com.juloungjuloung.juju.objectmapper
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
 import com.juloungjuloung.juju.domain.product.impl.Earring
 import com.juloungjuloung.juju.domain.product.impl.Necklace
 import com.juloungjuloung.juju.domain.product.impl.Ring
 import com.juloungjuloung.juju.dto.product.command.SaveProductCommand
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 
 class ProductCommandMapper {
     companion object {
-        fun toDomain(command: SaveProductCommand, productTypeEnum: ProductTypeEnum): Product {
-            when (productTypeEnum) {
+        fun toDomain(command: SaveProductCommand): Product {
+            when (command.productType) {
                 ProductTypeEnum.BRACELET -> {
                     return Bracelet(
                         name = command.name,

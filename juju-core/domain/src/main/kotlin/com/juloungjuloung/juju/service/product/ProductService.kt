@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.service.product
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 
 interface ProductService {
 

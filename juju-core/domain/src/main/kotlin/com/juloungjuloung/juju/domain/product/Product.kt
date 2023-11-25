@@ -1,6 +1,6 @@
 package com.juloungjuloung.juju.domain.product
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
 abstract class Product(

@@ -1,8 +1,8 @@
 package com.juloungjuloung.juju.dto.product.result.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
 import com.juloungjuloung.juju.dto.product.result.ProductCommandResult
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
 class BraceletCommandResult(

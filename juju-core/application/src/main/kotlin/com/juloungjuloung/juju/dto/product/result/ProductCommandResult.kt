@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.dto.product.result
 
-import com.juloungjuloung.juju.common.constant.TYPE_BASE
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.enums.TYPE_BASE
 import java.time.LocalDateTime
 
 open class ProductCommandResult(

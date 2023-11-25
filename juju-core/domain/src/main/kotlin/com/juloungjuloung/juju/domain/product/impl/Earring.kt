@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.domain.product.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
 class Earring(

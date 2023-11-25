@@ -1,8 +1,10 @@
 package com.juloungjuloung.juju.dto.product.request
 
+import com.juloungjuloung.juju.enums.ProductTypeEnum
+
 data class SaveProductRequest(
 
-    val productType: String,
+    val productType: ProductTypeEnum,
     val name: String,
     val price: Long,
     val weightByMilliGram: Long,
