@@ -1,17 +1,17 @@
-package com.juloungjuloung.juju.dto.product.response
+package com.juloungjuloung.juju.dto.product.result
 
-import com.juloungjuloung.juju.common.constant.TYPE_BASE
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.enums.TYPE_BASE
 import java.time.LocalDateTime
 
-open class ProductResponse(
+open class ProductCommandResult(
     val id: Long,
     val type: String,
     val name: String,
     val productCode: String,
     val price: Long,
     val weightByMilliGram: Long,
-    val thumbnailImage: String,
+    val thumbnailImage: String?,
     val isDiamond: Boolean,
     val totalDiamondCaratX100: Int,
     val isActive: Boolean,
@@ -19,8 +19,8 @@ open class ProductResponse(
     val updatedAt: LocalDateTime
 ) {
     companion object {
-        fun of(product: Product): ProductResponse {
-            return ProductResponse(
+        fun of(product: Product): ProductCommandResult {
+            return ProductCommandResult(
                 id = product.id!!,
                 type = TYPE_BASE,
                 name = product.name,

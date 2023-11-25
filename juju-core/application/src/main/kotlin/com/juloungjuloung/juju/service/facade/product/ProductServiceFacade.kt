@@ -1,25 +1,30 @@
 package com.juloungjuloung.juju.service.facade.product
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
-import com.juloungjuloung.juju.common.utils.findBy
-import com.juloungjuloung.juju.dto.product.response.ProductResponse
-import com.juloungjuloung.juju.objectmapper.ProductResponseMapper
-import com.juloungjuloung.juju.s3.AwsS3Service
+import com.juloungjuloung.juju.dto.product.command.SaveProductCommand
+import com.juloungjuloung.juju.dto.product.result.ProductCommandResult
+import com.juloungjuloung.juju.enums.ProductTypeEnum
+import com.juloungjuloung.juju.objectmapper.ProductCommandMapper
+import com.juloungjuloung.juju.objectmapper.ProductCommandResultMapper
 import com.juloungjuloung.juju.service.factory.ProductServiceFactory
 import org.springframework.stereotype.Service
 
 @Service
 class ProductServiceFacade(
-    private val productServiceFactory: ProductServiceFactory,
-    private val awsS3Service: AwsS3Service
+    private val productServiceFactory: ProductServiceFactory
 ) {
-    fun readProducts(productType: String, page: Int, size: Int): List<ProductResponse> {
-        val service = productServiceFactory.get(
-            (ProductTypeEnum::name findBy productType) ?: throw IllegalStateException()
-        )
+    fun readProducts(productType: ProductTypeEnum, page: Int, size: Int): List<ProductCommandResult> {
+        val service = productServiceFactory.get(productType)
 
         return service.read(page, size).stream()
-            .map { ProductResponseMapper.toResponse(it) }
+            .map { ProductCommandResultMapper.toCommandResult(it) }
             .toList()
+    }
+
+    fun saveProducts(saveProductCommand: SaveProductCommand): Boolean {
+        val service = productServiceFactory.get(saveProductCommand.productType)
+
+        return service.save(
+            ProductCommandMapper.toDomain(saveProductCommand)
+        )
     }
 }

@@ -1,21 +1,21 @@
 package com.juloungjuloung.juju.domain.product.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
 class Bracelet(
-    id: Long?,
+    id: Long? = null,
     name: String,
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String? = null,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int?,
-    isActive: Boolean,
-    createdAt: LocalDateTime?,
-    updatedAt: LocalDateTime?,
+    isActive: Boolean = false,
+    createdAt: LocalDateTime? = null,
+    updatedAt: LocalDateTime? = null,
 
     val maximumLength: Int,
     val minimumLength: Int

@@ -1,17 +1,17 @@
 package com.juloungjuloung.juju.dto.product.response.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
-import com.juloungjuloung.juju.domain.product.impl.Ring
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
+import com.juloungjuloung.juju.dto.product.result.impl.RingCommandResult
 import java.time.LocalDateTime
 
 class RingResponse(
     id: Long,
+    type: String,
     name: String,
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int,
     isActive: Boolean,
@@ -19,7 +19,7 @@ class RingResponse(
     updatedAt: LocalDateTime
 ) : ProductResponse(
     id = id,
-    type = ProductTypeEnum.RING.name,
+    type = type,
     name = name,
     productCode = productCode,
     price = price,
@@ -32,19 +32,20 @@ class RingResponse(
     updatedAt = updatedAt
 ) {
     companion object {
-        fun of(ring: Ring): RingResponse {
+        fun of(result: RingCommandResult): RingResponse {
             return RingResponse(
-                id = ring.id!!,
-                name = ring.name,
-                productCode = ring.productCode,
-                price = ring.price,
-                weightByMilliGram = ring.weightByMilliGram,
-                thumbnailImage = ring.thumbnailImage,
-                isDiamond = ring.isDiamond,
-                totalDiamondCaratX100 = ring.totalDiamondCaratX100 ?: 0,
-                isActive = ring.isActive,
-                createdAt = ring.createdAt!!,
-                updatedAt = ring.updatedAt!!
+                id = result.id,
+                type = result.type,
+                name = result.name,
+                productCode = result.productCode,
+                price = result.price,
+                weightByMilliGram = result.weightByMilliGram,
+                thumbnailImage = result.thumbnailImage,
+                isDiamond = result.isDiamond,
+                totalDiamondCaratX100 = result.totalDiamondCaratX100,
+                isActive = result.isActive,
+                createdAt = result.createdAt,
+                updatedAt = result.updatedAt
             )
         }
     }

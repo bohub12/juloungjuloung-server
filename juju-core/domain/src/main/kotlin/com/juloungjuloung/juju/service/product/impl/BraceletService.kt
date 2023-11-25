@@ -1,7 +1,8 @@
 package com.juloungjuloung.juju.service.product.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.domain.product.impl.Bracelet
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import com.juloungjuloung.juju.repository.product.BraceletRepository
 import com.juloungjuloung.juju.service.product.ProductService
 import org.springframework.stereotype.Service
@@ -17,8 +18,9 @@ class BraceletService(
         return braceletRepository.findAllByOrderByCreatedAt(page, size)
     }
 
-    override fun save(products: List<Product>) {
-        TODO("Not yet implemented")
+    @Transactional
+    override fun save(product: Product): Boolean {
+        return braceletRepository.save(product as Bracelet)
     }
 
     override fun getProductType(): ProductTypeEnum {

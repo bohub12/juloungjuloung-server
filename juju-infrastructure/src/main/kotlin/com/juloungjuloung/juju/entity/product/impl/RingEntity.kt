@@ -1,8 +1,8 @@
 package com.juloungjuloung.juju.entity.product.impl
 
-import com.juloungjuloung.juju.common.constant.TYPE_RING
 import com.juloungjuloung.juju.domain.product.impl.Ring
 import com.juloungjuloung.juju.entity.product.ProductEntity
+import com.juloungjuloung.juju.enums.TYPE_RING
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 
@@ -13,7 +13,7 @@ class RingEntity(
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int?,
     isActive: Boolean
@@ -41,5 +41,20 @@ class RingEntity(
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
+    }
+
+    companion object {
+        fun of(ring: Ring): RingEntity {
+            return RingEntity(
+                name = ring.name,
+                productCode = ring.productCode,
+                price = ring.price,
+                weightByMilliGram = ring.weightByMilliGram,
+                thumbnailImage = ring.thumbnailImage,
+                isDiamond = ring.isDiamond,
+                totalDiamondCaratX100 = ring.totalDiamondCaratX100,
+                isActive = ring.isActive
+            )
+        }
     }
 }

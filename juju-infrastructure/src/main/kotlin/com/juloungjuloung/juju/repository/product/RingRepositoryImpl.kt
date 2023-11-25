@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Ring
+import com.juloungjuloung.juju.entity.product.impl.RingEntity
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Repository
 
@@ -13,5 +14,10 @@ class RingRepositoryImpl(
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size)).stream()
             .map { it.toDomain() }
             .toList()
+    }
+
+    override fun save(ring: Ring): Boolean {
+        delegate.save(RingEntity.of(ring))
+        return true
     }
 }

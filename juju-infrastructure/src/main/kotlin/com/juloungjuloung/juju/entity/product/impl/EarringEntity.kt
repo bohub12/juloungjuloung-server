@@ -1,8 +1,8 @@
 package com.juloungjuloung.juju.entity.product.impl
 
-import com.juloungjuloung.juju.common.constant.TYPE_EARRING
 import com.juloungjuloung.juju.domain.product.impl.Earring
 import com.juloungjuloung.juju.entity.product.ProductEntity
+import com.juloungjuloung.juju.enums.TYPE_EARRING
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 
@@ -13,7 +13,7 @@ class EarringEntity(
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int?,
     isActive: Boolean
@@ -41,5 +41,20 @@ class EarringEntity(
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
+    }
+
+    companion object {
+        fun of(earring: Earring): EarringEntity {
+            return EarringEntity(
+                name = earring.name,
+                productCode = earring.productCode,
+                price = earring.price,
+                weightByMilliGram = earring.weightByMilliGram,
+                thumbnailImage = earring.thumbnailImage,
+                isDiamond = earring.isDiamond,
+                totalDiamondCaratX100 = earring.totalDiamondCaratX100,
+                isActive = earring.isActive
+            )
+        }
     }
 }

@@ -1,8 +1,8 @@
 package com.juloungjuloung.juju.entity.product.impl
 
-import com.juloungjuloung.juju.common.constant.TYPE_BRACELET
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
 import com.juloungjuloung.juju.entity.product.ProductEntity
+import com.juloungjuloung.juju.enums.TYPE_BRACELET
 import jakarta.persistence.Column
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
@@ -14,7 +14,7 @@ class BraceletEntity(
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String? = null,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int?,
     isActive: Boolean,
@@ -51,5 +51,22 @@ class BraceletEntity(
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
+    }
+
+    companion object {
+        fun of(bracelet: Bracelet): BraceletEntity {
+            return BraceletEntity(
+                name = bracelet.name,
+                productCode = bracelet.productCode,
+                price = bracelet.price,
+                weightByMilliGram = bracelet.weightByMilliGram,
+                thumbnailImage = bracelet.thumbnailImage,
+                isDiamond = bracelet.isDiamond,
+                totalDiamondCaratX100 = bracelet.totalDiamondCaratX100,
+                isActive = bracelet.isActive,
+                maximumLength = bracelet.maximumLength,
+                minimumLength = bracelet.minimumLength
+            )
+        }
     }
 }

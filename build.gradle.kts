@@ -83,5 +83,10 @@ subprojects {
         testImplementation("io.kotest:kotest-property:$kotestVersion")
         testImplementation("io.kotest.extensions:kotest-extensions-spring:$kotestSpringExtensionVersion")
         testImplementation("io.mockk:mockk:$mockkVersion")
+
+        // constant (enum, exception etc ..)
+        if (project.name != "constant") {
+            implementation(project(":juju-support:constant"))
+        }
     }
 }

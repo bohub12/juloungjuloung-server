@@ -1,6 +1,6 @@
 package com.juloungjuloung.juju.domain.product
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
 abstract class Product(
@@ -10,7 +10,7 @@ abstract class Product(
     val productCode: String,
     val price: Long,
     val weightByMilliGram: Long,
-    val thumbnailImage: String,
+    val thumbnailImage: String?,
     val isDiamond: Boolean,
     val totalDiamondCaratX100: Int?,
     val isActive: Boolean,

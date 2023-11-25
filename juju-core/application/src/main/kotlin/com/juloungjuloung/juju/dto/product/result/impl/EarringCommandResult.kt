@@ -1,23 +1,23 @@
-package com.juloungjuloung.juju.dto.product.response.impl
+package com.juloungjuloung.juju.dto.product.result.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.impl.Earring
-import com.juloungjuloung.juju.dto.product.response.ProductResponse
+import com.juloungjuloung.juju.dto.product.result.ProductCommandResult
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
-class EarringResponse(
+class EarringCommandResult(
     id: Long,
     name: String,
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int,
     isActive: Boolean,
     createdAt: LocalDateTime,
     updatedAt: LocalDateTime
-) : ProductResponse(
+) : ProductCommandResult(
     id = id,
     type = ProductTypeEnum.EARRING.name,
     name = name,
@@ -32,8 +32,8 @@ class EarringResponse(
     updatedAt = updatedAt
 ) {
     companion object {
-        fun of(earring: Earring): EarringResponse {
-            return EarringResponse(
+        fun of(earring: Earring): EarringCommandResult {
+            return EarringCommandResult(
                 id = earring.id!!,
                 name = earring.name,
                 productCode = earring.productCode,

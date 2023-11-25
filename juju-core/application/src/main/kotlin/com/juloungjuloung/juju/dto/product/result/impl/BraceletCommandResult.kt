@@ -1,17 +1,17 @@
-package com.juloungjuloung.juju.dto.product.response.impl
+package com.juloungjuloung.juju.dto.product.result.impl
 
-import com.juloungjuloung.juju.common.constant.ProductTypeEnum
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
-import com.juloungjuloung.juju.dto.product.response.ProductResponse
+import com.juloungjuloung.juju.dto.product.result.ProductCommandResult
+import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
-class BraceletResponse(
+class BraceletCommandResult(
     id: Long,
     name: String,
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String,
+    thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int,
     isActive: Boolean,
@@ -20,7 +20,7 @@ class BraceletResponse(
 
     val maximumLength: Int,
     val minimumLength: Int
-) : ProductResponse(
+) : ProductCommandResult(
     id = id,
     type = ProductTypeEnum.BRACELET.name,
     name = name,
@@ -35,8 +35,8 @@ class BraceletResponse(
     updatedAt = updatedAt
 ) {
     companion object {
-        fun of(bracelet: Bracelet): BraceletResponse {
-            return BraceletResponse(
+        fun of(bracelet: Bracelet): BraceletCommandResult {
+            return BraceletCommandResult(
                 id = bracelet.id!!,
                 name = bracelet.name,
                 productCode = bracelet.productCode,

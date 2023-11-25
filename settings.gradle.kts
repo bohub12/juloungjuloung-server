@@ -9,7 +9,8 @@ include(
 
     ":juju-infrastructure",
 
-    ":juju-support:aws"
+    ":juju-support:aws",
+    ":juju-support:constant"
 )
 
 pluginManagement {
