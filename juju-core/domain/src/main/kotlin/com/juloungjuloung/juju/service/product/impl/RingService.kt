@@ -23,12 +23,12 @@ class RingService(
     }
 
     @Transactional
-    override fun save(product: Product): Boolean {
+    override fun save(product: Product): Long {
         return ringRepository.save(product as Ring)
     }
 
     @Transactional
-    override fun update(product: Product): Boolean {
+    override fun update(product: Product): Long {
         return ringRepository.update(product as Ring)
     }
 

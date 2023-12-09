@@ -25,12 +25,11 @@ class NecklaceRepositoryImpl(
             .toList()
     }
 
-    override fun save(necklace: Necklace): Boolean {
-        delegate.save(NecklaceEntity.of(necklace))
-        return true
+    override fun save(necklace: Necklace): Long {
+        return delegate.save(NecklaceEntity.of(necklace)).id!!
     }
 
-    override fun update(necklace: Necklace): Boolean {
+    override fun update(necklace: Necklace): Long {
         jpaQueryFactory.update(necklaceEntity)
             .set(necklaceEntity.name, necklace.name)
             .set(necklaceEntity.price, necklace.price)
@@ -43,6 +42,6 @@ class NecklaceRepositoryImpl(
             .where(necklaceEntity.id.eq(necklace.id))
             .execute()
 
-        return true
+        return necklace.id!!
     }
 }

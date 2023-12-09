@@ -42,7 +42,7 @@ class ProductController(
     @PostMapping
     fun saveProduct(
         @RequestBody saveProductRequest: SaveProductRequest
-    ): ApiResponse<Boolean> {
+    ): ApiResponse<Long> {
         return success(
             productFacade.saveProducts(
                 toCommand(saveProductRequest)
@@ -54,7 +54,7 @@ class ProductController(
     fun updateProducts(
         @RequestBody @Valid
         updateProductRequest: UpdateProductRequest
-    ): ApiResponse<Boolean> {
+    ): ApiResponse<Long> {
         return success(
             productFacade.updateProducts(
                 toCommand(updateProductRequest)

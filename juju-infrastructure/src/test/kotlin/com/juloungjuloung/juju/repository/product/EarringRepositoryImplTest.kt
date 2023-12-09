@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.SharedMySQLTestContainer
-import com.juloungjuloung.juju.domain.product.impl.Bracelet
+import com.juloungjuloung.juju.domain.product.impl.Earring
 import com.navercorp.fixturemonkey.FixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
@@ -15,44 +15,42 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
 @DataJpaTest
-class BraceletRepositoryImplTest : SharedMySQLTestContainer() {
+class EarringRepositoryImplTest : SharedMySQLTestContainer() {
     val fixtureMonkey: FixtureMonkey = FixtureMonkey.builder()
         .plugin(KotlinPlugin())
         .build()
 
-    @Autowired
-    lateinit var braceletJpaRepository: BraceletJpaRepository
+    @Autowired lateinit var earringJpaRepository: EarringJpaRepository
 
-    @Autowired
-    lateinit var jpaQueryFactory: JPAQueryFactory
-    lateinit var braceletRepositoryImpl: BraceletRepositoryImpl
+    @Autowired lateinit var jpaQueryFactory: JPAQueryFactory
+    lateinit var earringRepositoryImpl: EarringRepositoryImpl
 
     @BeforeEach
     fun setup() {
-        braceletRepositoryImpl = BraceletRepositoryImpl(braceletJpaRepository, jpaQueryFactory)
+        earringRepositoryImpl = EarringRepositoryImpl(earringJpaRepository, jpaQueryFactory)
     }
 
     @Test
     fun `findById_성공`() {
         // given
-        val givenBracelet = fixtureMonkey.giveMeBuilder<Bracelet>().sample()
-        val savedId = braceletRepositoryImpl.save(givenBracelet)
+        val givenEarring = fixtureMonkey.giveMeBuilder<Earring>().sample()
+        val savedId = earringRepositoryImpl.save(givenEarring)
 
         // when
-        val findBracelet = braceletRepositoryImpl.findById(savedId)
+        val findEarring = earringRepositoryImpl.findById(savedId)
 
         // then
-        findBracelet.name shouldBe givenBracelet.name
-        findBracelet.productCode shouldBe givenBracelet.productCode
+        findEarring.name shouldBe givenEarring.name
+        findEarring.productCode shouldBe givenEarring.productCode
     }
 
     @Test
     fun `save_성공`() {
         // given
-        val givenBracelet = fixtureMonkey.giveMeBuilder<Bracelet>().sample()
+        val givenEarring = fixtureMonkey.giveMeBuilder<Earring>().sample()
 
         // when
-        val savedId = braceletRepositoryImpl.save(givenBracelet)
+        val savedId = earringRepositoryImpl.save(givenEarring)
 
         // then
         assertThat(savedId).isNotNull()
@@ -61,13 +59,13 @@ class BraceletRepositoryImplTest : SharedMySQLTestContainer() {
     @Test
     fun `update_성공`() {
         // given
-        val savedId = braceletRepositoryImpl.save(fixtureMonkey.giveMeBuilder<Bracelet>().sample())
-        val updateBracelet = fixtureMonkey.giveMeBuilder<Bracelet>()
-            .setExp(Bracelet::id, savedId)
+        val savedId = earringRepositoryImpl.save(fixtureMonkey.giveMeBuilder<Earring>().sample())
+        val updateEarring = fixtureMonkey.giveMeBuilder<Earring>()
+            .setExp(Earring::id, savedId)
             .sample()
 
         // when
-        val updatedId = braceletRepositoryImpl.update(updateBracelet)
+        val updatedId = earringRepositoryImpl.update(updateEarring)
 
         // then
         assertThat(updatedId).isNotNull()

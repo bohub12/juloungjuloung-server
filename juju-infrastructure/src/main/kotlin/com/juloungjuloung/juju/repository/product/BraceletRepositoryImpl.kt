@@ -25,12 +25,11 @@ class BraceletRepositoryImpl(
             .toList()
     }
 
-    override fun save(bracelet: Bracelet): Boolean {
-        delegate.save(BraceletEntity.of(bracelet))
-        return true
+    override fun save(bracelet: Bracelet): Long {
+        return delegate.save(BraceletEntity.of(bracelet)).id!!
     }
 
-    override fun update(bracelet: Bracelet): Boolean {
+    override fun update(bracelet: Bracelet): Long {
         jpaQueryFactory.update(braceletEntity)
             .set(braceletEntity.name, bracelet.name)
             .set(braceletEntity.price, bracelet.price)
@@ -43,6 +42,6 @@ class BraceletRepositoryImpl(
             .where(braceletEntity.id.eq(bracelet.id))
             .execute()
 
-        return true
+        return bracelet.id!!
     }
 }

@@ -25,12 +25,11 @@ class RingRepositoryImpl(
             .toList()
     }
 
-    override fun save(ring: Ring): Boolean {
-        delegate.save(RingEntity.of(ring))
-        return true
+    override fun save(ring: Ring): Long {
+        return delegate.save(RingEntity.of(ring)).id!!
     }
 
-    override fun update(ring: Ring): Boolean {
+    override fun update(ring: Ring): Long {
         jpaQueryFactory.update(ringEntity)
             .set(ringEntity.name, ring.name)
             .set(ringEntity.price, ring.price)
@@ -41,6 +40,6 @@ class RingRepositoryImpl(
             .where(ringEntity.id.eq(ring.id))
             .execute()
 
-        return true
+        return ring.id!!
     }
 }

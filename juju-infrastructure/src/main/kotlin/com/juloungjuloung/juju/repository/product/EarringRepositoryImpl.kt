@@ -25,12 +25,11 @@ class EarringRepositoryImpl(
             .toList()
     }
 
-    override fun save(earring: Earring): Boolean {
-        delegate.save(EarringEntity.of(earring))
-        return true
+    override fun save(earring: Earring): Long {
+        return delegate.save(EarringEntity.of(earring)).id!!
     }
 
-    override fun update(earring: Earring): Boolean {
+    override fun update(earring: Earring): Long {
         jpaQueryFactory.update(earringEntity)
             .set(earringEntity.name, earring.name)
             .set(earringEntity.price, earring.price)
@@ -41,6 +40,6 @@ class EarringRepositoryImpl(
             .where(earringEntity.id.eq(earring.id))
             .execute()
 
-        return true
+        return earring.id!!
     }
 }

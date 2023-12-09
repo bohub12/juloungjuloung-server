@@ -9,9 +9,9 @@ interface ProductService {
 
     fun readById(id: Long): Product
 
-    fun save(product: Product): Boolean
+    fun save(product: Product): Long
 
-    fun update(product: Product): Boolean
+    fun update(product: Product): Long
 
     fun getProductType(): ProductTypeEnum
 }

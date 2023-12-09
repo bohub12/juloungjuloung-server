@@ -72,6 +72,9 @@ subprojects {
     val kotestVersion: String by project
     val kotestSpringExtensionVersion: String by project
     val mockkVersion: String by project
+    val testContainerVersion: String by project
+    val fixtureMonkeyVersion: String by project
+//    val kotestTestContainerVersion: String by project
 
     dependencies {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -83,7 +86,13 @@ subprojects {
         testImplementation("io.kotest:kotest-property:$kotestVersion")
         testImplementation("io.kotest.extensions:kotest-extensions-spring:$kotestSpringExtensionVersion")
         testImplementation("io.mockk:mockk:$mockkVersion")
+        testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin:$fixtureMonkeyVersion")
 
+        // testcontainers bom (auto configure specific version)
+        implementation(platform("org.testcontainers:testcontainers-bom:$testContainerVersion"))
+        testImplementation("org.testcontainers:mysql")
+        testImplementation("org.testcontainers:junit-jupiter")
+//        testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:$kotestTestContainerVersion")
         // constant (enum, exception etc ..)
         if (project.name != "constant") {
             implementation(project(":juju-support:constant"))

@@ -22,12 +22,12 @@ class EarringService(
     }
 
     @Transactional
-    override fun save(product: Product): Boolean {
+    override fun save(product: Product): Long {
         return earringRepository.save(product as Earring)
     }
 
     @Transactional
-    override fun update(product: Product): Boolean {
+    override fun update(product: Product): Long {
         return earringRepository.update(product as Earring)
     }
 

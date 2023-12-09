@@ -21,7 +21,7 @@ class ProductServiceFacade(
             .toList()
     }
 
-    fun saveProducts(command: SaveProductCommand): Boolean {
+    fun saveProducts(command: SaveProductCommand): Long {
         val service = productServiceFactory.get(command.productType)
 
         return service.save(
@@ -29,7 +29,7 @@ class ProductServiceFacade(
         )
     }
 
-    fun updateProducts(command: UpdateProductCommand): Boolean {
+    fun updateProducts(command: UpdateProductCommand): Long {
         val service = productServiceFactory.get(command.productType)
 
         val product = service.readById(command.id)

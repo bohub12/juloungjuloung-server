@@ -22,12 +22,12 @@ class NecklaceService(
     }
 
     @Transactional
-    override fun save(product: Product): Boolean {
+    override fun save(product: Product): Long {
         return necklaceRepository.save(product as Necklace)
     }
 
     @Transactional
-    override fun update(product: Product): Boolean {
+    override fun update(product: Product): Long {
         return necklaceRepository.update(product as Necklace)
     }
 
