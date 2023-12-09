@@ -18,9 +18,18 @@ class BraceletService(
         return braceletRepository.findAllByOrderByCreatedAt(page, size)
     }
 
+    override fun readById(id: Long): Product {
+        return braceletRepository.findById(id)
+    }
+
     @Transactional
-    override fun save(product: Product): Boolean {
+    override fun save(product: Product): Long {
         return braceletRepository.save(product as Bracelet)
+    }
+
+    @Transactional
+    override fun update(product: Product): Long {
+        return braceletRepository.update(product as Bracelet)
     }
 
     override fun getProductType(): ProductTypeEnum {

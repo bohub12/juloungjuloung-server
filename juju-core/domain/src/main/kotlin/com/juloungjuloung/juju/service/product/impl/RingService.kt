@@ -18,9 +18,18 @@ class RingService(
         return ringRepository.findAllByOrderByCreatedAt(page, size)
     }
 
+    override fun readById(id: Long): Product {
+        return ringRepository.findById(id)
+    }
+
     @Transactional
-    override fun save(product: Product): Boolean {
+    override fun save(product: Product): Long {
         return ringRepository.save(product as Ring)
+    }
+
+    @Transactional
+    override fun update(product: Product): Long {
+        return ringRepository.update(product as Ring)
     }
 
     override fun getProductType(): ProductTypeEnum {

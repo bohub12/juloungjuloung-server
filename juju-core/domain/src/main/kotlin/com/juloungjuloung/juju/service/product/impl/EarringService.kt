@@ -17,9 +17,18 @@ class EarringService(
         return earringRepository.findAllByOrderByCreatedAt(page, size)
     }
 
+    override fun readById(id: Long): Product {
+        return earringRepository.findById(id)
+    }
+
     @Transactional
-    override fun save(product: Product): Boolean {
+    override fun save(product: Product): Long {
         return earringRepository.save(product as Earring)
+    }
+
+    @Transactional
+    override fun update(product: Product): Long {
+        return earringRepository.update(product as Earring)
     }
 
     override fun getProductType(): ProductTypeEnum {

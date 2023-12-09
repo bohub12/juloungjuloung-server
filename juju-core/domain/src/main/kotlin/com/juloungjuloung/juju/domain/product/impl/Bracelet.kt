@@ -17,8 +17,8 @@ class Bracelet(
     createdAt: LocalDateTime? = null,
     updatedAt: LocalDateTime? = null,
 
-    val maximumLength: Int,
-    val minimumLength: Int
+    var maximumLength: Int,
+    var minimumLength: Int
 ) : Product(
     id = id,
     type = ProductTypeEnum.BRACELET,
@@ -32,4 +32,26 @@ class Bracelet(
     isActive = isActive,
     createdAt = createdAt,
     updatedAt = updatedAt
-)
+) {
+    override fun update(
+        name: String?,
+        price: Long?,
+        weightByMilliGram: Long?,
+        isDiamond: Boolean?,
+        totalDiamondCaratX100: Int?,
+        isActive: Boolean?,
+        braceletMaximumLength: Int?,
+        braceletMinimumLength: Int?,
+        necklaceMaximumLength: Int?,
+        necklaceMinimumLength: Int?
+    ) {
+        name?.let { this.name = name }
+        price?.let { this.price = price }
+        weightByMilliGram?.let { this.weightByMilliGram = weightByMilliGram }
+        isDiamond?.let { this.isDiamond = isDiamond }
+        totalDiamondCaratX100?.let { this.totalDiamondCaratX100 = totalDiamondCaratX100 }
+        isActive?.let { this.isActive = isActive }
+        braceletMaximumLength?.let { this.maximumLength = braceletMaximumLength }
+        braceletMinimumLength?.let { this.minimumLength = braceletMinimumLength }
+    }
+}

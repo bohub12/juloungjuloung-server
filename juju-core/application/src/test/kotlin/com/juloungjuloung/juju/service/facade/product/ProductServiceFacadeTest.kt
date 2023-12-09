@@ -22,7 +22,7 @@ class ProductServiceFacadeTest : BehaviorSpec({
 
             productServiceFacade.readProducts(ProductTypeEnum.RING, 0, 10)
             productServiceFacade.saveProducts(
-                saveProductCommand = SaveProductCommand(
+                command = SaveProductCommand(
                     productType = ProductTypeEnum.RING,
                     name = "name1",
                     price = 12000,

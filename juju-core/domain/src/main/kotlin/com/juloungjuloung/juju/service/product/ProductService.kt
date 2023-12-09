@@ -7,7 +7,11 @@ interface ProductService {
 
     fun read(page: Int, size: Int): List<Product>
 
-    fun save(product: Product): Boolean
+    fun readById(id: Long): Product
+
+    fun save(product: Product): Long
+
+    fun update(product: Product): Long
 
     fun getProductType(): ProductTypeEnum
 }
