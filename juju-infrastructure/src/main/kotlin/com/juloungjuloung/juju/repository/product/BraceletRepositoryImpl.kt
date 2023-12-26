@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
+import com.juloungjuloung.juju.domain.product.repository.BraceletRepository
 import com.juloungjuloung.juju.entity.product.impl.BraceletEntity
 import com.juloungjuloung.juju.entity.product.impl.QBraceletEntity.Companion.braceletEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException
@@ -36,7 +37,7 @@ class BraceletRepositoryImpl(
             .set(braceletEntity.weightByMilliGram, bracelet.weightByMilliGram)
             .set(braceletEntity.isDiamond, bracelet.isDiamond)
             .set(braceletEntity.totalDiamondCaratX100, bracelet.totalDiamondCaratX100)
-            .set(braceletEntity.isActive, bracelet.isActive)
+            .set(braceletEntity.isDisplay, bracelet.isDisplay)
             .set(braceletEntity.maximumLength, bracelet.maximumLength)
             .set(braceletEntity.minimumLength, bracelet.minimumLength)
             .where(braceletEntity.id.eq(bracelet.id))

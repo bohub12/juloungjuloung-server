@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Earring
+import com.juloungjuloung.juju.domain.product.repository.EarringRepository
 import com.juloungjuloung.juju.entity.product.impl.EarringEntity
 import com.juloungjuloung.juju.entity.product.impl.QEarringEntity.Companion.earringEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException
@@ -36,7 +37,7 @@ class EarringRepositoryImpl(
             .set(earringEntity.weightByMilliGram, earring.weightByMilliGram)
             .set(earringEntity.isDiamond, earring.isDiamond)
             .set(earringEntity.totalDiamondCaratX100, earring.totalDiamondCaratX100)
-            .set(earringEntity.isActive, earring.isActive)
+            .set(earringEntity.isDisplay, earring.isDisplay)
             .where(earringEntity.id.eq(earring.id))
             .execute()
 

@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.dto.product.response.impl
 
+import com.juloungjuloung.juju.domain.product.impl.Bracelet
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
-import com.juloungjuloung.juju.dto.product.result.impl.BraceletCommandResult
 import java.time.LocalDateTime
 
 class BraceletResponse(
@@ -14,7 +14,7 @@ class BraceletResponse(
     thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int,
-    isActive: Boolean,
+    isDisplay: Boolean,
     createdAt: LocalDateTime,
     updatedAt: LocalDateTime,
 
@@ -30,15 +30,15 @@ class BraceletResponse(
     thumbnailImage = thumbnailImage,
     isDiamond = isDiamond,
     totalDiamondCaratX100 = totalDiamondCaratX100,
-    isActive = isActive,
+    isDisplay = isDisplay,
     createdAt = createdAt,
     updatedAt = updatedAt
 ) {
     companion object {
-        fun of(result: BraceletCommandResult): BraceletResponse {
+        fun of(result: Bracelet): BraceletResponse {
             return BraceletResponse(
                 id = result.id,
-                type = result.type,
+                type = result.type.name,
                 name = result.name,
                 productCode = result.productCode,
                 price = result.price,
@@ -46,7 +46,7 @@ class BraceletResponse(
                 thumbnailImage = result.thumbnailImage,
                 isDiamond = result.isDiamond,
                 totalDiamondCaratX100 = result.totalDiamondCaratX100,
-                isActive = result.isActive,
+                isDisplay = result.isDisplay,
                 maximumLength = result.maximumLength,
                 minimumLength = result.minimumLength,
                 createdAt = result.createdAt,

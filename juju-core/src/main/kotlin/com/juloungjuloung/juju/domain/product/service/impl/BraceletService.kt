@@ -2,9 +2,9 @@ package com.juloungjuloung.juju.domain.product.service.impl
 
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
+import com.juloungjuloung.juju.domain.product.repository.BraceletRepository
+import com.juloungjuloung.juju.domain.product.service.ProductService
 import com.juloungjuloung.juju.enums.ProductTypeEnum
-import com.juloungjuloung.juju.repository.product.BraceletRepository
-import com.juloungjuloung.juju.service.product.ProductService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

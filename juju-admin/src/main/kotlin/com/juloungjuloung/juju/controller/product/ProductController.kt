@@ -4,7 +4,7 @@ import com.juloungjuloung.juju.dto.product.request.SaveProductRequest
 import com.juloungjuloung.juju.dto.product.request.UpdateProductRequest
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
 import com.juloungjuloung.juju.enums.ProductTypeEnum
-import com.juloungjuloung.juju.objectmapper.ProductRequestMapper.Companion.toCommand
+import com.juloungjuloung.juju.objectmapper.ProductRequestMapper.Companion.toDomain
 import com.juloungjuloung.juju.objectmapper.ProductResponseMapper.Companion.toResponse
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
@@ -45,7 +45,7 @@ class ProductController(
     ): ApiResponse<Long> {
         return success(
             productFacade.saveProducts(
-                toCommand(saveProductRequest)
+                toDomain(saveProductRequest)
             )
         )
     }
@@ -56,9 +56,7 @@ class ProductController(
         updateProductRequest: UpdateProductRequest
     ): ApiResponse<Long> {
         return success(
-            productFacade.updateProducts(
-                toCommand(updateProductRequest)
-            )
+            productFacade.updateProducts(toDomain(updateProductRequest))
         )
     }
 }

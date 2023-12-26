@@ -9,7 +9,7 @@ import jakarta.persistence.InheritanceType
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)
 abstract class ProductEntity(
     val name: String,
     val productCode: String,
@@ -19,6 +19,6 @@ abstract class ProductEntity(
     val thumbnailImage: String?,
     val isDiamond: Boolean,
     // 소수점으로 발생하는 문제 차단 (carat x 100)
-    val totalDiamondCaratX100: Int?,
-    val isActive: Boolean
+    val totalDiamondCaratX100: Int,
+    val isDisplay: Boolean
 ) : BaseEntity()

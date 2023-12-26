@@ -3,8 +3,8 @@ package com.juloungjuloung.juju.domain.product
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
-abstract class Product(
-    val id: Long?,
+open class Product(
+    val id: Long = 0L,
     val type: ProductTypeEnum,
     var name: String,
     val productCode: String,
@@ -12,23 +12,30 @@ abstract class Product(
     var weightByMilliGram: Long,
     var thumbnailImage: String?,
     var isDiamond: Boolean,
-    var totalDiamondCaratX100: Int?,
-    var isActive: Boolean,
-    val createdAt: LocalDateTime?,
-    val updatedAt: LocalDateTime?
+    var totalDiamondCaratX100: Int,
+    var isDisplay: Boolean,
+    val createdAt: LocalDateTime,
+    val updatedAt: LocalDateTime
 ) {
-    abstract fun update(
+    open fun update(
         name: String?,
         price: Long?,
         weightByMilliGram: Long?,
         isDiamond: Boolean?,
         totalDiamondCaratX100: Int?,
-        isActive: Boolean?,
+        isDisplay: Boolean?,
 
         braceletMaximumLength: Int?,
         braceletMinimumLength: Int?,
 
         necklaceMaximumLength: Int?,
         necklaceMinimumLength: Int?
-    )
+    ) {
+        name?.let { this.name = name }
+        price?.let { this.price = price }
+        weightByMilliGram?.let { this.weightByMilliGram = weightByMilliGram }
+        isDiamond?.let { this.isDiamond = isDiamond }
+        totalDiamondCaratX100?.let { this.totalDiamondCaratX100 = totalDiamondCaratX100 }
+        isDisplay?.let { this.isDisplay = isDisplay }
+    }
 }

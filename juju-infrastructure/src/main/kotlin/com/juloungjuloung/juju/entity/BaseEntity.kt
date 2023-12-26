@@ -18,7 +18,7 @@ abstract class BaseEntity {
 
     @Id
     @GeneratedValue
-    val id: Long? = null
+    var id: Long = 0L
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Ring
+import com.juloungjuloung.juju.domain.product.repository.RingRepository
 import com.juloungjuloung.juju.entity.product.impl.QRingEntity.Companion.ringEntity
 import com.juloungjuloung.juju.entity.product.impl.RingEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException
@@ -36,7 +37,7 @@ class RingRepositoryImpl(
             .set(ringEntity.weightByMilliGram, ring.weightByMilliGram)
             .set(ringEntity.isDiamond, ring.isDiamond)
             .set(ringEntity.totalDiamondCaratX100, ring.totalDiamondCaratX100)
-            .set(ringEntity.isActive, ring.isActive)
+            .set(ringEntity.isDisplay, ring.isDisplay)
             .where(ringEntity.id.eq(ring.id))
             .execute()
 

@@ -10,7 +10,7 @@ data class UpdateProductRequest(
     val weightByMilliGram: Long?,
     val isDiamond: Boolean?,
     val totalDiamondCaratX100: Int?,
-    val isActive: Boolean?,
+    val isDisplay: Boolean?,
 
     val additionalBraceletRequest: UpdateBraceletAdditionalRequest?,
     val additionalNecklaceAdditionalRequest: UpdateNecklaceAdditionalRequest?

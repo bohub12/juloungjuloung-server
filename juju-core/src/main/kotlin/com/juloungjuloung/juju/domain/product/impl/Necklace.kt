@@ -5,17 +5,17 @@ import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
 class Necklace(
-    id: Long? = null,
+    id: Long = 0L,
     name: String,
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String? = null,
+    thumbnailImage: String?,
     isDiamond: Boolean,
-    totalDiamondCaratX100: Int?,
-    isActive: Boolean = false,
-    createdAt: LocalDateTime? = null,
-    updatedAt: LocalDateTime? = null,
+    totalDiamondCaratX100: Int,
+    isDisplay: Boolean,
+    createdAt: LocalDateTime = LocalDateTime.now(),
+    updatedAt: LocalDateTime = LocalDateTime.now(),
 
     var maximumLength: Int,
     var minimumLength: Int
@@ -29,7 +29,7 @@ class Necklace(
     thumbnailImage = thumbnailImage,
     isDiamond = isDiamond,
     totalDiamondCaratX100 = totalDiamondCaratX100,
-    isActive = isActive,
+    isDisplay = isDisplay,
     createdAt = createdAt,
     updatedAt = updatedAt
 ) {
@@ -39,18 +39,24 @@ class Necklace(
         weightByMilliGram: Long?,
         isDiamond: Boolean?,
         totalDiamondCaratX100: Int?,
-        isActive: Boolean?,
+        isDisplay: Boolean?,
         braceletMaximumLength: Int?,
         braceletMinimumLength: Int?,
         necklaceMaximumLength: Int?,
         necklaceMinimumLength: Int?
     ) {
-        name?.let { this.name = name }
-        price?.let { this.price = price }
-        weightByMilliGram?.let { this.weightByMilliGram = weightByMilliGram }
-        isDiamond?.let { this.isDiamond = isDiamond }
-        totalDiamondCaratX100?.let { this.totalDiamondCaratX100 = totalDiamondCaratX100 }
-        isActive?.let { this.isActive = isActive }
+        super.update(
+            name,
+            price,
+            weightByMilliGram,
+            isDiamond,
+            totalDiamondCaratX100,
+            isDisplay,
+            braceletMaximumLength,
+            braceletMinimumLength,
+            necklaceMaximumLength,
+            necklaceMinimumLength
+        )
         necklaceMaximumLength?.let { this.maximumLength = necklaceMaximumLength }
         necklaceMinimumLength?.let { this.minimumLength = necklaceMinimumLength }
     }

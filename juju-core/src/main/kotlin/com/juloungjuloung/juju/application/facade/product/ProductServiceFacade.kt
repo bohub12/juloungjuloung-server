@@ -2,9 +2,7 @@ package com.juloungjuloung.juju.service.facade.product
 
 import com.juloungjuloung.juju.application.factory.ProductServiceFactory
 import com.juloungjuloung.juju.domain.product.Product
-import com.juloungjuloung.juju.dto.product.command.UpdateProductCommand
 import com.juloungjuloung.juju.enums.ProductTypeEnum
-import com.juloungjuloung.juju.objectmapper.ProductCommandMapper
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,31 +16,17 @@ class ProductServiceFacade(
     }
 
     fun saveProducts(product: Product): Long {
-        val service = productServiceFactory.get(command.productType)
+        val service = productServiceFactory.get(product.type)
 
-        return service.save(
-            ProductCommandMapper.toDomain(command)
-        )
+        return service.save(product)
     }
 
-    fun updateProducts(command: UpdateProductCommand): Long {
-        val service = productServiceFactory.get(command.productType)
+    fun updateProducts(productForUpdate: Product): Long {
+        val service = productServiceFactory.get(productForUpdate.type)
 
-        val product = service.readById(command.id)
+        val findProduct = service.readById(productForUpdate.id)
+        findProduct.update()
 
-        product.update(
-            name = command.name,
-            price = command.price,
-            weightByMilliGram = command.weightByMilliGram,
-            isDiamond = command.isDiamond,
-            totalDiamondCaratX100 = command.totalDiamondCaratX100,
-            isActive = command.isActive,
-            braceletMaximumLength = command.additionalBraceletRequest?.maximumLength,
-            braceletMinimumLength = command.additionalBraceletRequest?.minimumLength,
-            necklaceMaximumLength = command.additionalNecklaceAdditionalRequest?.maximumLength,
-            necklaceMinimumLength = command.additionalNecklaceAdditionalRequest?.minimumLength
-        )
-
-        return service.update(product)
+        return service.update(findProduct)
     }
 }

@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.dto.product.response.impl
 
+import com.juloungjuloung.juju.domain.product.impl.Ring
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
-import com.juloungjuloung.juju.dto.product.result.impl.RingCommandResult
 import java.time.LocalDateTime
 
 class RingResponse(
@@ -14,7 +14,7 @@ class RingResponse(
     thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int,
-    isActive: Boolean,
+    isDisplay: Boolean,
     createdAt: LocalDateTime,
     updatedAt: LocalDateTime
 ) : ProductResponse(
@@ -27,15 +27,15 @@ class RingResponse(
     thumbnailImage = thumbnailImage,
     isDiamond = isDiamond,
     totalDiamondCaratX100 = totalDiamondCaratX100,
-    isActive = isActive,
+    isDisplay = isDisplay,
     createdAt = createdAt,
     updatedAt = updatedAt
 ) {
     companion object {
-        fun of(result: RingCommandResult): RingResponse {
+        fun of(result: Ring): RingResponse {
             return RingResponse(
                 id = result.id,
-                type = result.type,
+                type = result.type.name,
                 name = result.name,
                 productCode = result.productCode,
                 price = result.price,
@@ -43,7 +43,7 @@ class RingResponse(
                 thumbnailImage = result.thumbnailImage,
                 isDiamond = result.isDiamond,
                 totalDiamondCaratX100 = result.totalDiamondCaratX100,
-                isActive = result.isActive,
+                isDisplay = result.isDisplay,
                 createdAt = result.createdAt,
                 updatedAt = result.updatedAt
             )

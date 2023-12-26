@@ -16,8 +16,8 @@ class NecklaceEntity(
     weightByMilliGram: Long,
     thumbnailImage: String?,
     isDiamond: Boolean,
-    totalDiamondCaratX100: Int?,
-    isActive: Boolean,
+    totalDiamondCaratX100: Int,
+    isDisplay: Boolean,
     @Column(name = "necklace_maximum_length")
     val maximumLength: Int,
 
@@ -31,7 +31,7 @@ class NecklaceEntity(
     thumbnailImage = thumbnailImage,
     isDiamond = isDiamond,
     totalDiamondCaratX100 = totalDiamondCaratX100,
-    isActive = isActive
+    isDisplay = isDisplay
 ) {
     fun toDomain(): Necklace {
         return Necklace(
@@ -43,7 +43,7 @@ class NecklaceEntity(
             thumbnailImage = this.thumbnailImage,
             isDiamond = this.isDiamond,
             totalDiamondCaratX100 = this.totalDiamondCaratX100,
-            isActive = this.isActive,
+            isDisplay = this.isDisplay,
             maximumLength = this.maximumLength,
             minimumLength = this.minimumLength,
             createdAt = this.createdAt,
@@ -61,7 +61,7 @@ class NecklaceEntity(
                 thumbnailImage = necklace.thumbnailImage,
                 isDiamond = necklace.isDiamond,
                 totalDiamondCaratX100 = necklace.totalDiamondCaratX100,
-                isActive = necklace.isActive,
+                isDisplay = necklace.isDisplay,
                 maximumLength = necklace.maximumLength,
                 minimumLength = necklace.minimumLength
             )
