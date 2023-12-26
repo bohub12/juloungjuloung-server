@@ -3,34 +3,21 @@ package com.juloungjuloung.juju.repository.product
 import com.juloungjuloung.juju.SharedMySQLTestContainer
 import com.juloungjuloung.juju.domain.product.impl.Ring
 import com.navercorp.fixturemonkey.FixtureMonkey
-import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
 import com.navercorp.fixturemonkey.kotlin.setExp
-import com.querydsl.jpa.impl.JPAQueryFactory
 import io.kotest.matchers.shouldBe
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
 @DataJpaTest
 class RingRepositoryImplTest : SharedMySQLTestContainer() {
-    val fixtureMonkey: FixtureMonkey = FixtureMonkey.builder()
-        .plugin(KotlinPlugin())
-        .build()
+    @Autowired
+    lateinit var fixtureMonkey: FixtureMonkey
 
     @Autowired
-    lateinit var ringJpaRepository: RingJpaRepository
-
-    @Autowired
-    lateinit var jpaQueryFactory: JPAQueryFactory
     lateinit var ringRepositoryImpl: RingRepositoryImpl
-
-    @BeforeEach
-    fun setup() {
-        ringRepositoryImpl = RingRepositoryImpl(ringJpaRepository, jpaQueryFactory)
-    }
 
     @Test
     fun `findById_성공`() {
