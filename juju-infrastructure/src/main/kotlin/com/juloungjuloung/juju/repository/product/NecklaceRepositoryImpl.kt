@@ -27,7 +27,7 @@ class NecklaceRepositoryImpl(
     }
 
     override fun save(necklace: Necklace): Long {
-        return delegate.save(NecklaceEntity.of(necklace)).id!!
+        return delegate.save(NecklaceEntity.of(necklace)).id
     }
 
     override fun update(necklace: Necklace): Long {
@@ -43,6 +43,6 @@ class NecklaceRepositoryImpl(
             .where(necklaceEntity.id.eq(necklace.id))
             .execute()
 
-        return necklace.id!!
+        return necklace.id
     }
 }

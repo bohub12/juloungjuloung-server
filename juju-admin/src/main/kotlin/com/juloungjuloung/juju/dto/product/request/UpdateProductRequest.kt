@@ -17,11 +17,11 @@ data class UpdateProductRequest(
 )
 
 data class UpdateBraceletAdditionalRequest(
-    val maximumLength: Int?,
-    val minimumLength: Int?
+    val maximumLength: Int,
+    val minimumLength: Int
 )
 
 data class UpdateNecklaceAdditionalRequest(
-    val maximumLength: Int?,
-    val minimumLength: Int?
+    val maximumLength: Int,
+    val minimumLength: Int
 )

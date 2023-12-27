@@ -1,5 +1,6 @@
 package com.juloungjuloung.juju.service.facade.product
 
+import com.juloungjuloung.juju.application.dto.UpdateProductDto
 import com.juloungjuloung.juju.application.factory.ProductServiceFactory
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.enums.ProductTypeEnum
@@ -15,17 +16,17 @@ class ProductServiceFacade(
         return service.read(page, size)
     }
 
-    fun saveProducts(product: Product): Long {
+    fun saveProduct(product: Product): Long {
         val service = productServiceFactory.get(product.type)
 
         return service.save(product)
     }
 
-    fun updateProducts(productForUpdate: Product): Long {
-        val service = productServiceFactory.get(productForUpdate.type)
+    fun updateProduct(updateProductDto: UpdateProductDto): Long {
+        val service = productServiceFactory.get(updateProductDto.productType)
 
-        val findProduct = service.readById(productForUpdate.id)
-        findProduct.update()
+        val findProduct = service.readById(updateProductDto.id)
+        findProduct.update(updateProductDto)
 
         return service.update(findProduct)
     }

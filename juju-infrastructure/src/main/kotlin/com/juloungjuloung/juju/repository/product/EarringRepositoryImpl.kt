@@ -27,7 +27,7 @@ class EarringRepositoryImpl(
     }
 
     override fun save(earring: Earring): Long {
-        return delegate.save(EarringEntity.of(earring)).id!!
+        return delegate.save(EarringEntity.of(earring)).id
     }
 
     override fun update(earring: Earring): Long {
@@ -41,6 +41,6 @@ class EarringRepositoryImpl(
             .where(earringEntity.id.eq(earring.id))
             .execute()
 
-        return earring.id!!
+        return earring.id
     }
 }

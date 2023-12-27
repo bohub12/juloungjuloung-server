@@ -17,6 +17,16 @@ data class SaveProductRequest(
     val additionalBraceletRequest: SaveBraceletAdditionalRequest?,
     val additionalNecklaceRequest: SaveNecklaceAdditionalRequest?
 ) {
+    init {
+        if (ProductTypeEnum.BRACELET == productType) {
+            requireNotNull(additionalBraceletRequest)
+        }
+
+        if (ProductTypeEnum.NECKLACE == productType) {
+            requireNotNull(additionalNecklaceRequest)
+        }
+    }
+
     fun toBracelet(): Bracelet {
         return Bracelet(
             name = name,

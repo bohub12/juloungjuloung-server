@@ -27,7 +27,7 @@ class RingRepositoryImpl(
     }
 
     override fun save(ring: Ring): Long {
-        return delegate.save(RingEntity.of(ring)).id!!
+        return delegate.save(RingEntity.of(ring)).id
     }
 
     override fun update(ring: Ring): Long {
@@ -41,6 +41,6 @@ class RingRepositoryImpl(
             .where(ringEntity.id.eq(ring.id))
             .execute()
 
-        return ring.id!!
+        return ring.id
     }
 }

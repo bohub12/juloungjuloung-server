@@ -1,6 +1,5 @@
 package com.juloungjuloung.juju.exceptionhandler
 
-import com.juloungjuloung.juju.exception.BadRequestException
 import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.fail
@@ -13,11 +12,21 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @RestControllerAdvice
 class ExceptionHandler {
 
-    @ExceptionHandler(Exception::class)
-    fun exceptionHandle(e: Exception): ApiResponse<Boolean> {
+    /**
+     * custom exception
+     */
+    @ExceptionHandler(BusinessLogicException::class)
+    fun exceptionHandle(e: BusinessLogicException): ApiResponse<Boolean> {
         // TODO : logging stack trace
         e.printStackTrace()
-        return fail(ApiResponseCode.INTERNAL_SERVER_ERROR)
+        return fail(e.code)
+    }
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun exceptionHandle(e: IllegalArgumentException): ApiResponse<Boolean> {
+        // TODO : loggin stack trace
+        e.printStackTrace()
+        return fail(ApiResponseCode.ILLEGAL_ARGUMENT)
     }
 
     @ExceptionHandler(value = [MethodArgumentTypeMismatchException::class, ConversionFailedException::class])
@@ -26,17 +35,10 @@ class ExceptionHandler {
         return fail(ApiResponseCode.BAD_REQUEST_ENUM)
     }
 
-    @ExceptionHandler(BadRequestException::class)
-    fun exceptionHandle(e: BadRequestException): ApiResponse<Boolean> {
+    @ExceptionHandler(Exception::class)
+    fun exceptionHandle(e: Exception): ApiResponse<Boolean> {
         // TODO : logging stack trace
         e.printStackTrace()
-        return fail(e.code)
-    }
-
-    @ExceptionHandler(BusinessLogicException::class)
-    fun exceptionHandle(e: BusinessLogicException): ApiResponse<Boolean> {
-        // TODO : logging stack trace
-        e.printStackTrace()
-        return fail(e.code)
+        return fail(ApiResponseCode.INTERNAL_SERVER_ERROR)
     }
 }

@@ -1,5 +1,6 @@
 package com.juloungjuloung.juju.domain.product.impl
 
+import com.juloungjuloung.juju.application.dto.UpdateProductDto
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
@@ -33,31 +34,12 @@ class Bracelet(
     createdAt = createdAt,
     updatedAt = updatedAt
 ) {
-    override fun update(
-        name: String?,
-        price: Long?,
-        weightByMilliGram: Long?,
-        isDiamond: Boolean?,
-        totalDiamondCaratX100: Int?,
-        isDisplay: Boolean?,
-        braceletMaximumLength: Int?,
-        braceletMinimumLength: Int?,
-        necklaceMaximumLength: Int?,
-        necklaceMinimumLength: Int?
-    ) {
-        super.update(
-            name,
-            price,
-            weightByMilliGram,
-            isDiamond,
-            totalDiamondCaratX100,
-            isDisplay,
-            braceletMaximumLength,
-            braceletMinimumLength,
-            necklaceMaximumLength,
-            necklaceMinimumLength
-        )
-        braceletMaximumLength?.let { this.maximumLength = braceletMaximumLength }
-        braceletMinimumLength?.let { this.minimumLength = braceletMinimumLength }
+    override fun update(updateProductDto: UpdateProductDto) {
+        super.update(updateProductDto)
+
+        updateProductDto.additionalBraceletRequest?.let {
+            this.maximumLength = updateProductDto.additionalBraceletRequest.maximumLength
+            this.minimumLength = updateProductDto.additionalBraceletRequest.minimumLength
+        }
     }
 }

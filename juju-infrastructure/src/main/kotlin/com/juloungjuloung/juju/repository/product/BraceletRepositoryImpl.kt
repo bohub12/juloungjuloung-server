@@ -27,7 +27,7 @@ class BraceletRepositoryImpl(
     }
 
     override fun save(bracelet: Bracelet): Long {
-        return delegate.save(BraceletEntity.of(bracelet)).id!!
+        return delegate.save(BraceletEntity.of(bracelet)).id
     }
 
     override fun update(bracelet: Bracelet): Long {
@@ -43,6 +43,6 @@ class BraceletRepositoryImpl(
             .where(braceletEntity.id.eq(bracelet.id))
             .execute()
 
-        return bracelet.id!!
+        return bracelet.id
     }
 }

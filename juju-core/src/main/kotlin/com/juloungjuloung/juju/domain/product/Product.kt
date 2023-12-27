@@ -1,5 +1,6 @@
 package com.juloungjuloung.juju.domain.product
 
+import com.juloungjuloung.juju.application.dto.UpdateProductDto
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
@@ -17,25 +18,28 @@ open class Product(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime
 ) {
+    init {
+        requireProperties()
+    }
+
+    private fun requireProperties() {
+        if (isDisplay) {
+            requireNotNull(thumbnailImage)
+        }
+    }
+
     open fun update(
-        name: String?,
-        price: Long?,
-        weightByMilliGram: Long?,
-        isDiamond: Boolean?,
-        totalDiamondCaratX100: Int?,
-        isDisplay: Boolean?,
-
-        braceletMaximumLength: Int?,
-        braceletMinimumLength: Int?,
-
-        necklaceMaximumLength: Int?,
-        necklaceMinimumLength: Int?
+        updateProductDto: UpdateProductDto
     ) {
-        name?.let { this.name = name }
-        price?.let { this.price = price }
-        weightByMilliGram?.let { this.weightByMilliGram = weightByMilliGram }
-        isDiamond?.let { this.isDiamond = isDiamond }
-        totalDiamondCaratX100?.let { this.totalDiamondCaratX100 = totalDiamondCaratX100 }
-        isDisplay?.let { this.isDisplay = isDisplay }
+        updateProductDto.name?.let { this.name = updateProductDto.name }
+        updateProductDto.price?.let { this.price = updateProductDto.price }
+        updateProductDto.weightByMilliGram?.let { this.weightByMilliGram = updateProductDto.weightByMilliGram }
+        updateProductDto.isDiamond?.let { this.isDiamond = updateProductDto.isDiamond }
+        updateProductDto.totalDiamondCaratX100?.let {
+            this.totalDiamondCaratX100 = updateProductDto.totalDiamondCaratX100
+        }
+        updateProductDto.isDisplay?.let { this.isDisplay = updateProductDto.isDisplay }
+
+        requireProperties()
     }
 }
