@@ -1,28 +1,37 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.SharedMySQLTestContainer
-import com.juloungjuloung.juju.domain.product.impl.Ring
-import com.navercorp.fixturemonkey.FixtureMonkey
-import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
-import com.navercorp.fixturemonkey.kotlin.setExp
+import com.juloungjuloung.juju.ringFixture
+import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import org.assertj.core.api.Assertions.assertThat
+import jakarta.persistence.EntityManager
+import jakarta.persistence.PersistenceContext
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.test.context.ActiveProfiles
 
 @DataJpaTest
+@ActiveProfiles("test")
 class RingRepositoryImplTest : SharedMySQLTestContainer() {
-    @Autowired
-    lateinit var fixtureMonkey: FixtureMonkey
+
+    @PersistenceContext
+    lateinit var em: EntityManager
 
     @Autowired
     lateinit var ringRepositoryImpl: RingRepositoryImpl
 
+    @BeforeEach
+    fun setUp() {
+        em.flush()
+        em.clear()
+    }
+
     @Test
     fun `findById_성공`() {
         // given
-        val givenRing = fixtureMonkey.giveMeBuilder<Ring>().sample()
+        val givenRing = ringFixture()
         val savedId = ringRepositoryImpl.save(givenRing)
 
         // when
@@ -36,27 +45,35 @@ class RingRepositoryImplTest : SharedMySQLTestContainer() {
     @Test
     fun `save_성공`() {
         // given
-        val givenRing = fixtureMonkey.giveMeBuilder<Ring>().sample()
+        val givenRing = ringFixture()
 
         // when
         val savedId = ringRepositoryImpl.save(givenRing)
 
         // then
-        assertThat(savedId).isNotNull()
+        savedId.shouldNotBeNull()
     }
 
     @Test
     fun `update_성공`() {
         // given
-        val savedId = ringRepositoryImpl.save(fixtureMonkey.giveMeBuilder<Ring>().sample())
-        val updateRing = fixtureMonkey.giveMeBuilder<Ring>()
-            .setExp(Ring::id, savedId)
-            .sample()
+        val savedId = ringRepositoryImpl.save(ringFixture())
+        val givenRing = ringFixture(updatable = true, id = savedId)
+        em.flush()
+        em.clear()
 
         // when
-        val updatedId = ringRepositoryImpl.update(updateRing)
+        val updatedId = ringRepositoryImpl.update(givenRing)
+        val updatedRing = ringRepositoryImpl.findById(updatedId)
 
         // then
-        assertThat(updatedId).isNotNull()
+        updatedId shouldBe savedId
+        updatedRing.name shouldBe givenRing.name
+        updatedRing.price shouldBe givenRing.price
+        updatedRing.weightByMilliGram shouldBe givenRing.weightByMilliGram
+        updatedRing.thumbnailImage shouldBe givenRing.thumbnailImage
+        updatedRing.isDiamond shouldBe givenRing.isDiamond
+        updatedRing.totalDiamondCaratX100 shouldBe givenRing.totalDiamondCaratX100
+        updatedRing.isDisplay shouldBe givenRing.isDisplay
     }
 }

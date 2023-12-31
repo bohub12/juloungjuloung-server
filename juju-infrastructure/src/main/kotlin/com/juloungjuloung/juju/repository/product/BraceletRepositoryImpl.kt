@@ -35,6 +35,7 @@ class BraceletRepositoryImpl(
             .set(braceletEntity.name, bracelet.name)
             .set(braceletEntity.price, bracelet.price)
             .set(braceletEntity.weightByMilliGram, bracelet.weightByMilliGram)
+            .set(braceletEntity.thumbnailImage, bracelet.thumbnailImage)
             .set(braceletEntity.isDiamond, bracelet.isDiamond)
             .set(braceletEntity.totalDiamondCaratX100, bracelet.totalDiamondCaratX100)
             .set(braceletEntity.isDisplay, bracelet.isDisplay)

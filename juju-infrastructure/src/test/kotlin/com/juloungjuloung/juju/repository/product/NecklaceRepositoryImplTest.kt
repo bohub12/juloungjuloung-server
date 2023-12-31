@@ -1,28 +1,37 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.SharedMySQLTestContainer
-import com.juloungjuloung.juju.domain.product.impl.Necklace
-import com.navercorp.fixturemonkey.FixtureMonkey
-import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
-import com.navercorp.fixturemonkey.kotlin.setExp
+import com.juloungjuloung.juju.necklaceFixture
+import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import org.assertj.core.api.Assertions.assertThat
+import jakarta.persistence.EntityManager
+import jakarta.persistence.PersistenceContext
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.test.context.ActiveProfiles
 
 @DataJpaTest
+@ActiveProfiles("test")
 class NecklaceRepositoryImplTest : SharedMySQLTestContainer() {
-    @Autowired
-    lateinit var fixtureMonkey: FixtureMonkey
+
+    @PersistenceContext
+    lateinit var em: EntityManager
 
     @Autowired
     lateinit var necklaceRepositoryImpl: NecklaceRepositoryImpl
 
+    @BeforeEach
+    fun setUp() {
+        em.flush()
+        em.clear()
+    }
+
     @Test
     fun `findById_성공`() {
         // given
-        val givenNecklace = fixtureMonkey.giveMeBuilder<Necklace>().sample()
+        val givenNecklace = necklaceFixture()
         val savedId = necklaceRepositoryImpl.save(givenNecklace)
 
         // when
@@ -36,27 +45,37 @@ class NecklaceRepositoryImplTest : SharedMySQLTestContainer() {
     @Test
     fun `save_성공`() {
         // given
-        val givenNecklace = fixtureMonkey.giveMeBuilder<Necklace>().sample()
+        val givenNecklace = necklaceFixture()
 
         // when
         val savedId = necklaceRepositoryImpl.save(givenNecklace)
 
         // then
-        assertThat(savedId).isNotNull()
+        savedId.shouldNotBeNull()
     }
 
     @Test
     fun `update_성공`() {
         // given
-        val savedId = necklaceRepositoryImpl.save(fixtureMonkey.giveMeBuilder<Necklace>().sample())
-        val updateNecklace = fixtureMonkey.giveMeBuilder<Necklace>()
-            .setExp(Necklace::id, savedId)
-            .sample()
+        val savedId = necklaceRepositoryImpl.save(necklaceFixture())
+        val givenNecklace = necklaceFixture(updatable = true, id = savedId)
+        em.flush()
+        em.clear()
 
         // when
-        val updatedId = necklaceRepositoryImpl.update(updateNecklace)
+        val updatedId = necklaceRepositoryImpl.update(givenNecklace)
+        val updatedNecklace = necklaceRepositoryImpl.findById(updatedId)
 
         // then
-        assertThat(updatedId).isNotNull()
+        updatedId shouldBe savedId
+        updatedNecklace.name shouldBe givenNecklace.name
+        updatedNecklace.price shouldBe givenNecklace.price
+        updatedNecklace.weightByMilliGram shouldBe givenNecklace.weightByMilliGram
+        updatedNecklace.thumbnailImage shouldBe givenNecklace.thumbnailImage
+        updatedNecklace.isDiamond shouldBe givenNecklace.isDiamond
+        updatedNecklace.totalDiamondCaratX100 shouldBe givenNecklace.totalDiamondCaratX100
+        updatedNecklace.isDisplay shouldBe givenNecklace.isDisplay
+        updatedNecklace.maximumLength shouldBe givenNecklace.maximumLength
+        updatedNecklace.minimumLength shouldBe givenNecklace.minimumLength
     }
 }

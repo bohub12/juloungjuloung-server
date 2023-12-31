@@ -1,12 +1,12 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.SharedMySQLTestContainer
-import com.juloungjuloung.juju.domain.product.impl.Bracelet
-import com.navercorp.fixturemonkey.FixtureMonkey
-import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
-import com.navercorp.fixturemonkey.kotlin.setExp
+import com.juloungjuloung.juju.braceletFixture
+import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import org.assertj.core.api.Assertions.assertThat
+import jakarta.persistence.EntityManager
+import jakarta.persistence.PersistenceContext
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -15,16 +15,22 @@ import org.springframework.test.context.ActiveProfiles
 @DataJpaTest
 @ActiveProfiles("test")
 class BraceletRepositoryImplTest : SharedMySQLTestContainer() {
-    @Autowired
-    lateinit var fixtureMonkey: FixtureMonkey
+    @PersistenceContext
+    lateinit var em: EntityManager
 
     @Autowired
     lateinit var braceletRepositoryImpl: BraceletRepositoryImpl
 
+    @BeforeEach
+    fun setUp() {
+        em.flush()
+        em.clear()
+    }
+
     @Test
     fun `findById_성공`() {
         // given
-        val givenBracelet = fixtureMonkey.giveMeBuilder<Bracelet>().sample()
+        val givenBracelet = braceletFixture()
         val savedId = braceletRepositoryImpl.save(givenBracelet)
 
         // when
@@ -38,27 +44,37 @@ class BraceletRepositoryImplTest : SharedMySQLTestContainer() {
     @Test
     fun `save_성공`() {
         // given
-        val givenBracelet = fixtureMonkey.giveMeBuilder<Bracelet>().sample()
+        val givenBracelet = braceletFixture()
 
         // when
         val savedId = braceletRepositoryImpl.save(givenBracelet)
 
         // then
-        assertThat(savedId).isNotNull()
+        savedId.shouldNotBeNull()
     }
 
     @Test
     fun `update_성공`() {
         // given
-        val savedId = braceletRepositoryImpl.save(fixtureMonkey.giveMeBuilder<Bracelet>().sample())
-        val updateBracelet = fixtureMonkey.giveMeBuilder<Bracelet>()
-            .setExp(Bracelet::id, savedId)
-            .sample()
+        val savedId = braceletRepositoryImpl.save(braceletFixture())
+        val givenBracelet = braceletFixture(updatable = true, id = savedId)
+        em.flush()
+        em.clear()
 
         // when
-        val updatedId = braceletRepositoryImpl.update(updateBracelet)
+        val updatedId = braceletRepositoryImpl.update(givenBracelet)
+        val updatedBracelet = braceletRepositoryImpl.findById(updatedId)
 
         // then
-        assertThat(updatedId).isNotNull()
+        updatedId shouldBe savedId
+        updatedBracelet.name shouldBe givenBracelet.name
+        updatedBracelet.price shouldBe givenBracelet.price
+        updatedBracelet.weightByMilliGram shouldBe givenBracelet.weightByMilliGram
+        updatedBracelet.thumbnailImage shouldBe givenBracelet.thumbnailImage
+        updatedBracelet.isDiamond shouldBe givenBracelet.isDiamond
+        updatedBracelet.totalDiamondCaratX100 shouldBe givenBracelet.totalDiamondCaratX100
+        updatedBracelet.isDisplay shouldBe givenBracelet.isDisplay
+        updatedBracelet.maximumLength shouldBe givenBracelet.maximumLength
+        updatedBracelet.minimumLength shouldBe givenBracelet.minimumLength
     }
 }

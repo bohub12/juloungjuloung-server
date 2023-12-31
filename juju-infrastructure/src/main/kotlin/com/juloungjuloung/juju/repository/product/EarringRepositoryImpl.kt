@@ -35,6 +35,7 @@ class EarringRepositoryImpl(
             .set(earringEntity.name, earring.name)
             .set(earringEntity.price, earring.price)
             .set(earringEntity.weightByMilliGram, earring.weightByMilliGram)
+            .set(earringEntity.thumbnailImage, earring.thumbnailImage)
             .set(earringEntity.isDiamond, earring.isDiamond)
             .set(earringEntity.totalDiamondCaratX100, earring.totalDiamondCaratX100)
             .set(earringEntity.isDisplay, earring.isDisplay)
