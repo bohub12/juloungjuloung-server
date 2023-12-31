@@ -23,6 +23,9 @@ open class Product(
     }
 
     private fun requireProperties() {
+        require(price >= 0)
+        require(weightByMilliGram >= 0)
+
         if (isDisplay) {
             requireNotNull(thumbnailImage)
         }

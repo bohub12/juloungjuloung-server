@@ -34,6 +34,11 @@ class Necklace(
     createdAt = createdAt,
     updatedAt = updatedAt
 ) {
+    init {
+        require(minimumLength >= 0)
+        require(maximumLength > minimumLength)
+    }
+
     override fun update(updateProductDto: UpdateProductDto) {
         super.update(updateProductDto)
 
