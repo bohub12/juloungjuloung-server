@@ -4,7 +4,8 @@ import com.juloungjuloung.juju.dto.product.request.SaveProductRequest
 import com.juloungjuloung.juju.dto.product.request.UpdateProductRequest
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
 import com.juloungjuloung.juju.enums.ProductTypeEnum
-import com.juloungjuloung.juju.objectmapper.ProductRequestMapper.Companion.toCommand
+import com.juloungjuloung.juju.objectmapper.ProductRequestMapper.Companion.toDomain
+import com.juloungjuloung.juju.objectmapper.ProductRequestMapper.Companion.toUpdateDto
 import com.juloungjuloung.juju.objectmapper.ProductResponseMapper.Companion.toResponse
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
@@ -44,21 +45,19 @@ class ProductController(
         @RequestBody saveProductRequest: SaveProductRequest
     ): ApiResponse<Long> {
         return success(
-            productFacade.saveProducts(
-                toCommand(saveProductRequest)
+            productFacade.saveProduct(
+                toDomain(saveProductRequest)
             )
         )
     }
 
     @PutMapping
-    fun updateProducts(
+    fun updateProduct(
         @RequestBody @Valid
         updateProductRequest: UpdateProductRequest
     ): ApiResponse<Long> {
         return success(
-            productFacade.updateProducts(
-                toCommand(updateProductRequest)
-            )
+            productFacade.updateProduct(toUpdateDto(updateProductRequest))
         )
     }
 }

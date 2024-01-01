@@ -4,11 +4,8 @@ include(
     ":juju-api",
     ":juju-admin",
 
-    ":juju-core:domain",
-    ":juju-core:application",
-
+    ":juju-core",
     ":juju-infrastructure",
-
     ":juju-support:aws",
     ":juju-support:constant"
 )

@@ -15,8 +15,8 @@ class RingEntity(
     weightByMilliGram: Long,
     thumbnailImage: String?,
     isDiamond: Boolean,
-    totalDiamondCaratX100: Int?,
-    isActive: Boolean
+    totalDiamondCaratX100: Int,
+    isDisplay: Boolean
 ) : ProductEntity(
     name = name,
     productCode = productCode,
@@ -25,7 +25,7 @@ class RingEntity(
     thumbnailImage = thumbnailImage,
     isDiamond = isDiamond,
     totalDiamondCaratX100 = totalDiamondCaratX100,
-    isActive = isActive
+    isDisplay = isDisplay
 ) {
     fun toDomain(): Ring {
         return Ring(
@@ -37,7 +37,7 @@ class RingEntity(
             thumbnailImage = this.thumbnailImage,
             isDiamond = this.isDiamond,
             totalDiamondCaratX100 = this.totalDiamondCaratX100,
-            isActive = this.isActive,
+            isDisplay = this.isDisplay,
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
@@ -53,7 +53,7 @@ class RingEntity(
                 thumbnailImage = ring.thumbnailImage,
                 isDiamond = ring.isDiamond,
                 totalDiamondCaratX100 = ring.totalDiamondCaratX100,
-                isActive = ring.isActive
+                isDisplay = ring.isDisplay
             )
         }
     }

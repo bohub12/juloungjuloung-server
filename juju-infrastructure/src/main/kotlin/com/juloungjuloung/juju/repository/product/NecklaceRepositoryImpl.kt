@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Necklace
+import com.juloungjuloung.juju.domain.product.repository.NecklaceRepository
 import com.juloungjuloung.juju.entity.product.impl.NecklaceEntity
 import com.juloungjuloung.juju.entity.product.impl.QNecklaceEntity.Companion.necklaceEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException
@@ -26,7 +27,7 @@ class NecklaceRepositoryImpl(
     }
 
     override fun save(necklace: Necklace): Long {
-        return delegate.save(NecklaceEntity.of(necklace)).id!!
+        return delegate.save(NecklaceEntity.of(necklace)).id
     }
 
     override fun update(necklace: Necklace): Long {
@@ -34,14 +35,15 @@ class NecklaceRepositoryImpl(
             .set(necklaceEntity.name, necklace.name)
             .set(necklaceEntity.price, necklace.price)
             .set(necklaceEntity.weightByMilliGram, necklace.weightByMilliGram)
+            .set(necklaceEntity.thumbnailImage, necklace.thumbnailImage)
             .set(necklaceEntity.isDiamond, necklace.isDiamond)
             .set(necklaceEntity.totalDiamondCaratX100, necklace.totalDiamondCaratX100)
-            .set(necklaceEntity.isActive, necklace.isActive)
+            .set(necklaceEntity.isDisplay, necklace.isDisplay)
             .set(necklaceEntity.maximumLength, necklace.maximumLength)
             .set(necklaceEntity.minimumLength, necklace.minimumLength)
             .where(necklaceEntity.id.eq(necklace.id))
             .execute()
 
-        return necklace.id!!
+        return necklace.id
     }
 }

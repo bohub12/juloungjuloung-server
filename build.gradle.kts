@@ -92,7 +92,7 @@ subprojects {
         implementation(platform("org.testcontainers:testcontainers-bom:$testContainerVersion"))
         testImplementation("org.testcontainers:mysql")
         testImplementation("org.testcontainers:junit-jupiter")
-//        testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:$kotestTestContainerVersion")
+
         // constant (enum, exception etc ..)
         if (project.name != "constant") {
             implementation(project(":juju-support:constant"))

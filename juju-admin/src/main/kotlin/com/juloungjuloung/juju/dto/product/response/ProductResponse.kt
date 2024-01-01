@@ -1,10 +1,9 @@
 package com.juloungjuloung.juju.dto.product.response
 
-import com.juloungjuloung.juju.dto.product.result.ProductCommandResult
+import com.juloungjuloung.juju.domain.product.Product
 import java.time.LocalDateTime
 
 open class ProductResponse(
-    val id: Long,
     val type: String,
     val name: String,
     val productCode: String,
@@ -13,25 +12,26 @@ open class ProductResponse(
     val thumbnailImage: String?,
     val isDiamond: Boolean,
     val totalDiamondCaratX100: Int,
-    val isActive: Boolean,
+    val isDisplay: Boolean,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime
+    val updatedAt: LocalDateTime,
+    val id: Long = 0L
 ) {
     companion object {
-        fun of(productCommandResult: ProductCommandResult): ProductResponse {
+        fun of(product: Product): ProductResponse {
             return ProductResponse(
-                id = productCommandResult.id,
-                type = productCommandResult.type,
-                name = productCommandResult.name,
-                productCode = productCommandResult.productCode,
-                price = productCommandResult.price,
-                weightByMilliGram = productCommandResult.weightByMilliGram,
-                thumbnailImage = productCommandResult.thumbnailImage,
-                isDiamond = productCommandResult.isDiamond,
-                totalDiamondCaratX100 = productCommandResult.totalDiamondCaratX100,
-                isActive = productCommandResult.isActive,
-                createdAt = productCommandResult.createdAt,
-                updatedAt = productCommandResult.updatedAt
+                id = product.id,
+                type = product.type.name,
+                name = product.name,
+                productCode = product.productCode,
+                price = product.price,
+                weightByMilliGram = product.weightByMilliGram,
+                thumbnailImage = product.thumbnailImage,
+                isDiamond = product.isDiamond,
+                totalDiamondCaratX100 = product.totalDiamondCaratX100,
+                isDisplay = product.isDisplay,
+                createdAt = product.createdAt,
+                updatedAt = product.updatedAt
             )
         }
     }

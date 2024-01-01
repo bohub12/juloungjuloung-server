@@ -5,7 +5,8 @@ allOpen {
 }
 
 dependencies {
-    implementation(project(":juju-core:domain"))
+    implementation(project(":juju-core"))
+    testImplementation(testFixtures(project(":juju-core")))
 
     // Spring Data JPA
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

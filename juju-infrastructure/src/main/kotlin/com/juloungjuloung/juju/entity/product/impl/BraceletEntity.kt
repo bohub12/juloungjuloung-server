@@ -16,8 +16,8 @@ class BraceletEntity(
     weightByMilliGram: Long,
     thumbnailImage: String? = null,
     isDiamond: Boolean,
-    totalDiamondCaratX100: Int?,
-    isActive: Boolean,
+    totalDiamondCaratX100: Int,
+    isDisplay: Boolean,
 
     @Column(name = "bracelet_maximum_length")
     val maximumLength: Int,
@@ -32,7 +32,7 @@ class BraceletEntity(
     thumbnailImage = thumbnailImage,
     isDiamond = isDiamond,
     totalDiamondCaratX100 = totalDiamondCaratX100,
-    isActive = isActive
+    isDisplay = isDisplay
 ) {
 
     fun toDomain(): Bracelet {
@@ -45,7 +45,7 @@ class BraceletEntity(
             thumbnailImage = this.thumbnailImage,
             isDiamond = this.isDiamond,
             totalDiamondCaratX100 = this.totalDiamondCaratX100,
-            isActive = this.isActive,
+            isDisplay = this.isDisplay,
             maximumLength = this.maximumLength,
             minimumLength = this.minimumLength,
             createdAt = this.createdAt,
@@ -63,7 +63,7 @@ class BraceletEntity(
                 thumbnailImage = bracelet.thumbnailImage,
                 isDiamond = bracelet.isDiamond,
                 totalDiamondCaratX100 = bracelet.totalDiamondCaratX100,
-                isActive = bracelet.isActive,
+                isDisplay = bracelet.isDisplay,
                 maximumLength = bracelet.maximumLength,
                 minimumLength = bracelet.minimumLength
             )

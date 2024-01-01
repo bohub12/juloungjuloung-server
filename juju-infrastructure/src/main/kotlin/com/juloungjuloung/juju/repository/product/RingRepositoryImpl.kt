@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Ring
+import com.juloungjuloung.juju.domain.product.repository.RingRepository
 import com.juloungjuloung.juju.entity.product.impl.QRingEntity.Companion.ringEntity
 import com.juloungjuloung.juju.entity.product.impl.RingEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException
@@ -26,7 +27,7 @@ class RingRepositoryImpl(
     }
 
     override fun save(ring: Ring): Long {
-        return delegate.save(RingEntity.of(ring)).id!!
+        return delegate.save(RingEntity.of(ring)).id
     }
 
     override fun update(ring: Ring): Long {
@@ -34,12 +35,13 @@ class RingRepositoryImpl(
             .set(ringEntity.name, ring.name)
             .set(ringEntity.price, ring.price)
             .set(ringEntity.weightByMilliGram, ring.weightByMilliGram)
+            .set(ringEntity.thumbnailImage, ring.thumbnailImage)
             .set(ringEntity.isDiamond, ring.isDiamond)
             .set(ringEntity.totalDiamondCaratX100, ring.totalDiamondCaratX100)
-            .set(ringEntity.isActive, ring.isActive)
+            .set(ringEntity.isDisplay, ring.isDisplay)
             .where(ringEntity.id.eq(ring.id))
             .execute()
 
-        return ring.id!!
+        return ring.id
     }
 }

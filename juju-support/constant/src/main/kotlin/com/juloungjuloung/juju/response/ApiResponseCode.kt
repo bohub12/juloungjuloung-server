@@ -9,6 +9,7 @@ enum class ApiResponseCode(
     SUCCESS(200, "성공"),
 
     // Common
+    ILLEGAL_ARGUMENT(400, "잘못된 입력입니다"),
     BAD_REQUEST_ID(400, "잘못된 ID 입니다"),
     BAD_REQUEST_ENUM(400, "잘못된 Enum 값 입니다"),
 

@@ -15,8 +15,8 @@ class EarringEntity(
     weightByMilliGram: Long,
     thumbnailImage: String?,
     isDiamond: Boolean,
-    totalDiamondCaratX100: Int?,
-    isActive: Boolean
+    totalDiamondCaratX100: Int,
+    isDisplay: Boolean
 ) : ProductEntity(
     name = name,
     productCode = productCode,
@@ -25,7 +25,7 @@ class EarringEntity(
     thumbnailImage = thumbnailImage,
     isDiamond = isDiamond,
     totalDiamondCaratX100 = totalDiamondCaratX100,
-    isActive = isActive
+    isDisplay = isDisplay
 ) {
     fun toDomain(): Earring {
         return Earring(
@@ -37,7 +37,7 @@ class EarringEntity(
             thumbnailImage = this.thumbnailImage,
             isDiamond = this.isDiamond,
             totalDiamondCaratX100 = this.totalDiamondCaratX100,
-            isActive = this.isActive,
+            isDisplay = this.isDisplay,
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
@@ -53,7 +53,7 @@ class EarringEntity(
                 thumbnailImage = earring.thumbnailImage,
                 isDiamond = earring.isDiamond,
                 totalDiamondCaratX100 = earring.totalDiamondCaratX100,
-                isActive = earring.isActive
+                isDisplay = earring.isDisplay
             )
         }
     }
