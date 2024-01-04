@@ -1,23 +1,18 @@
-package com.juloungjuloung.juju
+package com.juloungjuloung.juju.domain
 
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
 import com.juloungjuloung.juju.domain.product.impl.Earring
 import com.juloungjuloung.juju.domain.product.impl.Necklace
 import com.juloungjuloung.juju.domain.product.impl.Ring
 import com.juloungjuloung.juju.enums.ProductTypeEnum
-import com.navercorp.fixturemonkey.FixtureMonkey
-import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
+import com.juloungjuloung.juju.fixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
 import com.navercorp.fixturemonkey.kotlin.setExp
 import com.navercorp.fixturemonkey.kotlin.setNotNullExp
 
-val fixtureMonkey: FixtureMonkey = FixtureMonkey.builder()
-    .plugin(KotlinPlugin())
-    .build()
-
 fun braceletFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean = false): Bracelet {
     return fixtureMonkey.giveMeBuilder<Bracelet>()
-        .setExp(Bracelet::type, ProductTypeEnum.BRACELET)
+        .setExp(Bracelet::productType, ProductTypeEnum.BRACELET)
         .setExp(Bracelet::id, 0L)
         .setExp(Bracelet::price, 10000L)
         .setExp(Bracelet::weightByMilliGram, 10000L)
@@ -37,7 +32,7 @@ fun braceletFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolea
 
 fun earringFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean = false): Earring {
     return fixtureMonkey.giveMeBuilder<Earring>()
-        .setExp(Earring::type, ProductTypeEnum.EARRING)
+        .setExp(Earring::productType, ProductTypeEnum.EARRING)
         .setExp(Earring::id, 0L)
         .setExp(Earring::price, 10000L)
         .setExp(Earring::weightByMilliGram, 10000L)
@@ -55,7 +50,7 @@ fun earringFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean
 
 fun necklaceFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean = false): Necklace {
     return fixtureMonkey.giveMeBuilder<Necklace>()
-        .setExp(Necklace::type, ProductTypeEnum.NECKLACE)
+        .setExp(Necklace::productType, ProductTypeEnum.NECKLACE)
         .setExp(Necklace::id, 0L)
         .setExp(Necklace::price, 10000L)
         .setExp(Necklace::weightByMilliGram, 10000L)
@@ -75,7 +70,7 @@ fun necklaceFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolea
 
 fun ringFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean = false): Ring {
     return fixtureMonkey.giveMeBuilder<Ring>()
-        .setExp(Ring::type, ProductTypeEnum.RING)
+        .setExp(Ring::productType, ProductTypeEnum.RING)
         .setExp(Ring::id, 0L)
         .setExp(Ring::price, 10000L)
         .setExp(Ring::weightByMilliGram, 10000L)

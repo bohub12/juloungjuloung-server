@@ -4,7 +4,7 @@ import com.juloungjuloung.juju.domain.product.Product
 import java.time.LocalDateTime
 
 open class ProductResponse(
-    val type: String,
+    val productType: String,
     val name: String,
     val productCode: String,
     val price: Long,
@@ -21,7 +21,7 @@ open class ProductResponse(
         fun of(product: Product): ProductResponse {
             return ProductResponse(
                 id = product.id,
-                type = product.type.name,
+                productType = product.productType.name,
                 name = product.name,
                 productCode = product.productCode,
                 price = product.price,

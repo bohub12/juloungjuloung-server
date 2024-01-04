@@ -19,7 +19,7 @@ class EarringResponse(
     updatedAt: LocalDateTime
 ) : ProductResponse(
     id = id,
-    type = type,
+    productType = type,
     name = name,
     productCode = productCode,
     price = price,
@@ -35,7 +35,7 @@ class EarringResponse(
         fun of(result: Earring): EarringResponse {
             return EarringResponse(
                 id = result.id,
-                type = result.type.name,
+                type = result.productType.name,
                 name = result.name,
                 productCode = result.productCode,
                 price = result.price,

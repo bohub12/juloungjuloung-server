@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.domain.product.impl
 
-import com.juloungjuloung.juju.application.dto.UpdateProductDto
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
@@ -22,7 +22,7 @@ class Necklace(
     var minimumLength: Int
 ) : Product(
     id = id,
-    type = ProductTypeEnum.NECKLACE,
+    productType = ProductTypeEnum.NECKLACE,
     name = name,
     productCode = productCode,
     price = price,
@@ -39,12 +39,12 @@ class Necklace(
         require(maximumLength > minimumLength)
     }
 
-    override fun update(updateProductDto: UpdateProductDto) {
-        super.update(updateProductDto)
+    override fun update(updateProductVO: UpdateProductVO) {
+        super.update(updateProductVO)
 
-        updateProductDto.additionalNecklaceAdditionalRequest?.let {
-            this.maximumLength = updateProductDto.additionalNecklaceAdditionalRequest.maximumLength
-            this.minimumLength = updateProductDto.additionalNecklaceAdditionalRequest.minimumLength
+        updateProductVO.additionalNecklaceVO?.let {
+            this.maximumLength = updateProductVO.additionalNecklaceVO.maximumLength
+            this.minimumLength = updateProductVO.additionalNecklaceVO.minimumLength
         }
     }
 }
