@@ -2,7 +2,7 @@ package com.juloungjuloung.juju.domain.product.service.impl
 
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.impl.Earring
-import com.juloungjuloung.juju.domain.product.repository.EarringRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.EarringRepository
 import com.juloungjuloung.juju.domain.product.service.ProductService
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import org.springframework.stereotype.Service

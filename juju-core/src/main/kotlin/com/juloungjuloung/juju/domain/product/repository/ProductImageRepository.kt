@@ -1,0 +1,3 @@
+package com.juloungjuloung.juju.domain.product.repository
+
+interface ProductImageRepository

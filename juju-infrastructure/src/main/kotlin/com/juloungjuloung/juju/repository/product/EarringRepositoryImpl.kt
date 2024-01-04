@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Earring
-import com.juloungjuloung.juju.domain.product.repository.EarringRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.EarringRepository
 import com.juloungjuloung.juju.entity.product.impl.EarringEntity
 import com.juloungjuloung.juju.entity.product.impl.QEarringEntity.Companion.earringEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException

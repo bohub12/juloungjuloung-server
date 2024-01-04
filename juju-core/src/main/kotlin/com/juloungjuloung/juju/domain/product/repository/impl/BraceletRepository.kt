@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.domain.product.repository
+package com.juloungjuloung.juju.domain.product.repository.impl
 
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
 

@@ -15,7 +15,7 @@ class AwsS3Service(
     private val s3PreSigner: S3Presigner
 ) {
 
-    fun createPreSignedUrlForUploadJPG(
+    fun createPreSignedUrlForUpload(
         type: S3PathPrefixConstant,
         path: String,
         fileExtension: S3ImageFileExtension

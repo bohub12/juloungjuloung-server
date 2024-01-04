@@ -28,7 +28,7 @@ class AwsS3ServiceTest : BehaviorSpec({
         When("잘못된 path(확장자 포함)가 들어오면") {
             Then("exception이 발생한다") {
                 shouldThrow<IllegalStateException> {
-                    awsS3Service.createPreSignedUrlForUploadJPG(
+                    awsS3Service.createPreSignedUrlForUpload(
                         S3PathPrefixConstant.MEMBER,
                         "1.png",
                         S3ImageFileExtension.JPG
@@ -39,7 +39,7 @@ class AwsS3ServiceTest : BehaviorSpec({
 
         When("정상적인 파라미터가 들어오면") {
             Then("정상적으로 url을 생성한다") {
-                val preSignedUrl = awsS3Service.createPreSignedUrlForUploadJPG(
+                val preSignedUrl = awsS3Service.createPreSignedUrlForUpload(
                     S3PathPrefixConstant.MEMBER,
                     UUID.randomUUID().toString(),
                     S3ImageFileExtension.JPG
