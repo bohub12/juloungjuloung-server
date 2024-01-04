@@ -18,7 +18,7 @@ class Earring(
     updatedAt: LocalDateTime = LocalDateTime.now()
 ) : Product(
     id = id,
-    type = ProductTypeEnum.EARRING,
+    productType = ProductTypeEnum.EARRING,
     name = name,
     productCode = productCode,
     price = price,

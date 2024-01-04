@@ -18,7 +18,7 @@ class Ring(
     updatedAt: LocalDateTime = LocalDateTime.now()
 ) : Product(
     id = id,
-    type = ProductTypeEnum.NECKLACE,
+    productType = ProductTypeEnum.NECKLACE,
     name = name,
     productCode = productCode,
     price = price,

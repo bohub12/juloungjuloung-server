@@ -1,27 +1,28 @@
-package com.juloungjuloung.juju.application.dto
+package com.juloungjuloung.juju.domain.product.vo
 
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 
-data class UpdateProductDto(
+data class UpdateProductVO(
     val id: Long,
     val productType: ProductTypeEnum,
     val name: String? = null,
     val price: Long? = null,
     val weightByMilliGram: Long? = null,
+    val thumbnailImage: String?,
     val isDiamond: Boolean? = null,
     val totalDiamondCaratX100: Int? = null,
     val isDisplay: Boolean? = null,
 
-    val additionalBraceletRequest: UpdateBraceletAdditionalDto? = null,
-    val additionalNecklaceAdditionalRequest: UpdateNecklaceAdditionalDto? = null
+    val additionalBraceletVO: UpdateBraceletAdditionalVO? = null,
+    val additionalNecklaceVO: UpdateNecklaceAdditionalVO? = null
 )
 
-data class UpdateBraceletAdditionalDto(
+data class UpdateBraceletAdditionalVO(
     val maximumLength: Int,
     val minimumLength: Int
 )
 
-data class UpdateNecklaceAdditionalDto(
+data class UpdateNecklaceAdditionalVO(
     val maximumLength: Int,
     val minimumLength: Int
 )

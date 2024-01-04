@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.domain.product.impl
 
-import com.juloungjuloung.juju.application.dto.UpdateProductDto
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
@@ -22,7 +22,7 @@ class Bracelet(
     var minimumLength: Int
 ) : Product(
     id = id,
-    type = ProductTypeEnum.BRACELET,
+    productType = ProductTypeEnum.BRACELET,
     name = name,
     productCode = productCode,
     price = price,
@@ -39,12 +39,12 @@ class Bracelet(
         require(maximumLength > minimumLength)
     }
 
-    override fun update(updateProductDto: UpdateProductDto) {
-        super.update(updateProductDto)
+    override fun update(updateProductVO: UpdateProductVO) {
+        super.update(updateProductVO)
 
-        updateProductDto.additionalBraceletRequest?.let {
-            this.maximumLength = updateProductDto.additionalBraceletRequest.maximumLength
-            this.minimumLength = updateProductDto.additionalBraceletRequest.minimumLength
+        updateProductVO.additionalBraceletVO?.let {
+            this.maximumLength = updateProductVO.additionalBraceletVO.maximumLength
+            this.minimumLength = updateProductVO.additionalBraceletVO.minimumLength
         }
     }
 }

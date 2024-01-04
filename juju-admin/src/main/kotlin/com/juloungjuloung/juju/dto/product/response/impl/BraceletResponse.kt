@@ -22,7 +22,7 @@ class BraceletResponse(
     val minimumLength: Int
 ) : ProductResponse(
     id = id,
-    type = type,
+    productType = type,
     name = name,
     productCode = productCode,
     price = price,
@@ -38,7 +38,7 @@ class BraceletResponse(
         fun of(result: Bracelet): BraceletResponse {
             return BraceletResponse(
                 id = result.id,
-                type = result.type.name,
+                type = result.productType.name,
                 name = result.name,
                 productCode = result.productCode,
                 price = result.price,
