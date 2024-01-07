@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.SharedMySQLTestContainer
-import com.juloungjuloung.juju.necklaceFixture
+import com.juloungjuloung.juju.domain.necklaceFixture
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager

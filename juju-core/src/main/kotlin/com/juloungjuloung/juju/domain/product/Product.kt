@@ -2,11 +2,12 @@ package com.juloungjuloung.juju.domain.product
 
 import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
+import com.juloungjuloung.juju.enums.ProductTypeEnum.BASE
 import java.time.LocalDateTime
 
 open class Product(
     val id: Long = 0L,
-    val productType: ProductTypeEnum,
+    val productType: ProductTypeEnum = BASE,
     var name: String,
     val productCode: String,
     var price: Long,
@@ -15,8 +16,8 @@ open class Product(
     var isDiamond: Boolean,
     var totalDiamondCaratX100: Int,
     var isDisplay: Boolean,
-    val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val updatedAt: LocalDateTime = LocalDateTime.now()
 ) {
     init {
         requireProperties()

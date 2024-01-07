@@ -10,6 +10,8 @@ import com.juloungjuloung.juju.enums.ProductTypeEnum.BRACELET
 import com.juloungjuloung.juju.enums.ProductTypeEnum.EARRING
 import com.juloungjuloung.juju.enums.ProductTypeEnum.NECKLACE
 import com.juloungjuloung.juju.enums.ProductTypeEnum.RING
+import com.juloungjuloung.juju.exception.BusinessLogicException
+import com.juloungjuloung.juju.response.ApiResponseCode.BAD_REQUEST_ENUM
 
 data class SaveProductVO(
     val productType: ProductTypeEnum,
@@ -30,6 +32,7 @@ data class SaveProductVO(
             EARRING -> toEarring()
             NECKLACE -> toNecklace()
             RING -> toRing()
+            else -> throw BusinessLogicException(BAD_REQUEST_ENUM)
         }
     }
 

@@ -33,7 +33,7 @@ class NecklaceEntity(
     totalDiamondCaratX100 = totalDiamondCaratX100,
     isDisplay = isDisplay
 ) {
-    fun toDomain(): Necklace {
+    override fun toDomain(): Necklace {
         return Necklace(
             id = this.id,
             name = this.name,

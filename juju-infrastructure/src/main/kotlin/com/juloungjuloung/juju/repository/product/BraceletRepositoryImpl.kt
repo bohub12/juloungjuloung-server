@@ -21,7 +21,7 @@ class BraceletRepositoryImpl(
     }
 
     override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Bracelet> {
-        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size)).stream()
+        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()
     }

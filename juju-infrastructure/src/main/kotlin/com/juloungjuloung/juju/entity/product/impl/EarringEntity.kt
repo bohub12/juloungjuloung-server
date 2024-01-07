@@ -27,7 +27,7 @@ class EarringEntity(
     totalDiamondCaratX100 = totalDiamondCaratX100,
     isDisplay = isDisplay
 ) {
-    fun toDomain(): Earring {
+    override fun toDomain(): Earring {
         return Earring(
             id = this.id,
             name = this.name,

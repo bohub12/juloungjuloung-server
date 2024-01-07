@@ -10,7 +10,6 @@ import com.juloungjuloung.juju.objectmapper.ProductRequestMapper.Companion.toUpd
 import com.juloungjuloung.juju.objectmapper.ProductResponseMapper.Companion.toResponse
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
-import com.juloungjuloung.juju.application.facade.product.ProductServiceFacade
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
