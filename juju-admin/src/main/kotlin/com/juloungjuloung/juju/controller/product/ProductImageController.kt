@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-@Tag(name = "상품 컨트롤러")
+@Tag(name = "상품 이미지 컨트롤러")
 @RestController
 @RequestMapping("/admin/api/v1/products/images")
 class ProductImageController(
