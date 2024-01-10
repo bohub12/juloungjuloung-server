@@ -1,8 +1,8 @@
 package com.juloungjuloung.juju.application.facade.product
 
 import com.juloungjuloung.juju.application.factory.ProductServiceFactory
+import com.juloungjuloung.juju.domain.product.saveRingVOFixture
 import com.juloungjuloung.juju.domain.product.service.impl.RingService
-import com.juloungjuloung.juju.domain.saveRingVOFixture
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every

@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.domain
+package com.juloungjuloung.juju.domain.product
 
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
 import com.juloungjuloung.juju.domain.product.impl.Earring

@@ -2,7 +2,7 @@ package com.juloungjuloung.juju.application.facade.product
 
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.domain.product.service.ProductImageService
-import com.juloungjuloung.juju.domain.saveProductImageVOFixture
+import com.juloungjuloung.juju.domain.productImage.saveProductImageVOFixture
 import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode
 import com.juloungjuloung.juju.s3.AwsS3Service
