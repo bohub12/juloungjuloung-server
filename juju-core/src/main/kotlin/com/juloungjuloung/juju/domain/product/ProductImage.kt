@@ -7,17 +7,25 @@ import java.time.LocalDateTime
 
 data class ProductImage(
     val id: Long = 0L,
-    val product: Product,
+    val productId: Long,
     val imageUrl: String,
     val isPrimary: Boolean,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
 
+fun List<ProductImage>.toProductImages(): ProductImages {
+    return ProductImages(this)
+}
+
 data class ProductImages(
     val productImages: List<ProductImage>
 ) {
     init {
+        requireProperties()
+    }
+
+    private fun requireProperties() {
         if (productImages.size >= 10) {
             throw BusinessLogicException(PRODUCT_IMAGE_SIZE_EXCEED_MAX)
         }
@@ -29,5 +37,13 @@ data class ProductImages(
 
     fun getPrimaryImage(): ProductImage {
         return productImages.first { it.isPrimary }
+    }
+
+    fun getProductId(): Long {
+        return productImages[0].productId
+    }
+
+    fun combineForValidation(productImages: List<ProductImage>) {
+        ProductImages(this.productImages + productImages)
     }
 }

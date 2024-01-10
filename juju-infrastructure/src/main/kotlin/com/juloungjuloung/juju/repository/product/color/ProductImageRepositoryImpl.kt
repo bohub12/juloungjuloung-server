@@ -1,11 +1,9 @@
 package com.juloungjuloung.juju.repository.product.color
 
-import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.ProductImage
 import com.juloungjuloung.juju.domain.product.ProductImages
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.entity.product.ProductImageEntity
-import com.juloungjuloung.juju.entity.product.QProductImageEntity.Companion.productImageEntity
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
 
@@ -14,10 +12,8 @@ class ProductImageRepositoryImpl(
     private val delegate: ProductImageJpaRepository,
     private val jpaQueryFactory: JPAQueryFactory
 ) : ProductImageRepository {
-    override fun findByProduct(product: Product): List<ProductImage> {
-        return jpaQueryFactory.selectFrom(productImageEntity)
-            .where(productImageEntity.product.id.eq(product.id))
-            .fetch()
+    override fun findByProduct(productId: Long): List<ProductImage> {
+        return delegate.findByProductId(productId = productId)
             .map { it.toDomain() }
     }
 

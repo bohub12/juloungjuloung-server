@@ -1,7 +1,6 @@
 package com.juloungjuloung.juju.s3
 
-import com.juloungjuloung.juju.constants.S3ImageFileExtension
-import com.juloungjuloung.juju.constants.S3PathPrefixConstant
+import com.juloungjuloung.juju.constants.ImageFileExtension
 import com.juloungjuloung.juju.properties.AwsS3Properties
 import org.springframework.stereotype.Service
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
@@ -16,9 +15,8 @@ class AwsS3Service(
 ) {
 
     fun createPreSignedUrlForUpload(
-        type: S3PathPrefixConstant,
         path: String,
-        fileExtension: S3ImageFileExtension
+        fileExtension: ImageFileExtension
     ): String {
         if (path.contains(".")) {
             throw IllegalStateException("path can not contain file extension")
@@ -26,7 +24,7 @@ class AwsS3Service(
 
         val putObjectRequest = PutObjectRequest.builder()
             .bucket(awsS3Properties.bucket)
-            .key(type.prefix + path + fileExtension.extension)
+            .key(path + fileExtension.extension)
             .contentType(fileExtension.contentType)
             .build()
 
