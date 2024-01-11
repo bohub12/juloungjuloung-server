@@ -1,22 +1,19 @@
 package com.juloungjuloung.juju.domain.product.vo
 
 import com.juloungjuloung.juju.domain.product.ProductImage
-import com.juloungjuloung.juju.domain.product.ProductImages
 
 data class SaveProductImageVO(
     val productId: Long,
     val saveProductImageInternalVOs: List<SaveProductImageInternalVO>
 ) {
-    fun toDomain(): ProductImages {
-        return ProductImages(
-            productImages = saveProductImageInternalVOs.map {
-                ProductImage(
-                    productId = productId,
-                    imageUrl = it.imageUrl,
-                    isPrimary = it.isPrimary
-                )
-            }
-        )
+    fun toDomain(): List<ProductImage> {
+        return saveProductImageInternalVOs.map {
+            ProductImage(
+                productId = productId,
+                imageUrl = it.imageUrl,
+                isPrimary = it.isPrimary
+            )
+        }
     }
 }
 

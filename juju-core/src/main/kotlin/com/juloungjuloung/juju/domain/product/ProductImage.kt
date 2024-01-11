@@ -25,6 +25,13 @@ data class ProductImages(
         requireProperties()
     }
 
+    companion object {
+        fun combineForValidation(vararg lists: List<ProductImage>): ProductImages {
+            val combinedImages = lists.flatMap { it }
+            return ProductImages(combinedImages)
+        }
+    }
+
     private fun requireProperties() {
         if (productImages.size >= 10) {
             throw BusinessLogicException(PRODUCT_IMAGE_SIZE_EXCEED_MAX)
@@ -41,9 +48,5 @@ data class ProductImages(
 
     fun getProductId(): Long {
         return productImages[0].productId
-    }
-
-    fun combineForValidation(productImages: List<ProductImage>) {
-        ProductImages(this.productImages + productImages)
     }
 }

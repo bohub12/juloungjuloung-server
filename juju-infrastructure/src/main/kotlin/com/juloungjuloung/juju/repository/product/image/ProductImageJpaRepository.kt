@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.repository.product.color
+package com.juloungjuloung.juju.repository.product.image
 
 import com.juloungjuloung.juju.entity.product.ProductImageEntity
 import org.springframework.data.jpa.repository.JpaRepository

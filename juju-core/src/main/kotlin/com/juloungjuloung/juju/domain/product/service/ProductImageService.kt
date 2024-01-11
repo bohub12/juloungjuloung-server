@@ -2,6 +2,7 @@ package com.juloungjuloung.juju.domain.product.service
 
 import com.juloungjuloung.juju.constants.ImageFileExtension
 import com.juloungjuloung.juju.constants.S3PathPrefixConstant.PRODUCT_IMAGE
+import com.juloungjuloung.juju.domain.product.ProductImage
 import com.juloungjuloung.juju.domain.product.ProductImages
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import org.springframework.stereotype.Service
@@ -24,9 +25,11 @@ class ProductImageService(
     }
 
     @Transactional
-    fun saveAll(productImages: ProductImages): List<Long> {
-        val savedProductImages = productImageRepository.findByProduct(productImages.getProductId())
-        productImages.combineForValidation(savedProductImages)
+    fun saveAll(productImages: List<ProductImage>): List<Long> {
+        ProductImages.combineForValidation(
+            productImages,
+            productImageRepository.findByProduct(productImages[0].productId)
+        )
 
         return productImageRepository.saveAll(productImages)
     }
