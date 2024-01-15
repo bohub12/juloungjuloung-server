@@ -27,7 +27,7 @@ class RingEntity(
     totalDiamondCaratX100 = totalDiamondCaratX100,
     isDisplay = isDisplay
 ) {
-    fun toDomain(): Ring {
+    override fun toDomain(): Ring {
         return Ring(
             id = this.id,
             name = this.name,

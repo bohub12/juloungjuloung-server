@@ -34,8 +34,7 @@ class BraceletEntity(
     totalDiamondCaratX100 = totalDiamondCaratX100,
     isDisplay = isDisplay
 ) {
-
-    fun toDomain(): Bracelet {
+    override fun toDomain(): Bracelet {
         return Bracelet(
             id = this.id,
             name = this.name,

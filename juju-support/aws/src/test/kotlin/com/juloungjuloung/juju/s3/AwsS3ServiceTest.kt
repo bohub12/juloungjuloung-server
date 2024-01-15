@@ -1,7 +1,6 @@
 package com.juloungjuloung.juju.s3
 
-import com.juloungjuloung.juju.constants.S3ImageFileExtension
-import com.juloungjuloung.juju.constants.S3PathPrefixConstant
+import com.juloungjuloung.juju.constants.ImageFileExtension
 import com.juloungjuloung.juju.properties.AwsS3Properties
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
@@ -10,8 +9,7 @@ import io.mockk.every
 import io.mockk.mockk
 import software.amazon.awssdk.services.s3.presigner.S3Presigner
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest
-import java.lang.IllegalStateException
-import java.util.UUID
+import java.util.*
 
 class AwsS3ServiceTest : BehaviorSpec({
 
@@ -28,10 +26,9 @@ class AwsS3ServiceTest : BehaviorSpec({
         When("잘못된 path(확장자 포함)가 들어오면") {
             Then("exception이 발생한다") {
                 shouldThrow<IllegalStateException> {
-                    awsS3Service.createPreSignedUrlForUploadJPG(
-                        S3PathPrefixConstant.MEMBER,
+                    awsS3Service.createPreSignedUrlForUpload(
                         "1.png",
-                        S3ImageFileExtension.JPG
+                        ImageFileExtension.JPG
                     )
                 }
             }
@@ -39,10 +36,9 @@ class AwsS3ServiceTest : BehaviorSpec({
 
         When("정상적인 파라미터가 들어오면") {
             Then("정상적으로 url을 생성한다") {
-                val preSignedUrl = awsS3Service.createPreSignedUrlForUploadJPG(
-                    S3PathPrefixConstant.MEMBER,
+                val preSignedUrl = awsS3Service.createPreSignedUrlForUpload(
                     UUID.randomUUID().toString(),
-                    S3ImageFileExtension.JPG
+                    ImageFileExtension.JPG
                 )
 
                 preSignedUrl shouldNotBe null

@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Bracelet
-import com.juloungjuloung.juju.domain.product.repository.BraceletRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.BraceletRepository
 import com.juloungjuloung.juju.entity.product.impl.BraceletEntity
 import com.juloungjuloung.juju.entity.product.impl.QBraceletEntity.Companion.braceletEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException
@@ -21,7 +21,7 @@ class BraceletRepositoryImpl(
     }
 
     override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Bracelet> {
-        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size)).stream()
+        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()
     }

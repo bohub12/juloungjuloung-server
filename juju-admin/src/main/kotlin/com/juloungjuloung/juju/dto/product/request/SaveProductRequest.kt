@@ -2,6 +2,8 @@ package com.juloungjuloung.juju.dto.product.request
 
 import com.juloungjuloung.juju.enums.ProductImageEnum.PRODUCT_DEFAULT_IMAGE
 import com.juloungjuloung.juju.enums.ProductTypeEnum
+import com.juloungjuloung.juju.exception.BusinessLogicException
+import com.juloungjuloung.juju.response.ApiResponseCode.BAD_REQUEST_ENUM
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.PositiveOrZero
@@ -32,6 +34,10 @@ data class SaveProductRequest(
     val saveNecklaceAdditionalRequest: SaveNecklaceAdditionalRequest?
 ) {
     init {
+        if (ProductTypeEnum.BASE == productType) {
+            throw BusinessLogicException(BAD_REQUEST_ENUM)
+        }
+
         if (ProductTypeEnum.BRACELET == productType) {
             requireNotNull(saveBraceletAdditionalRequest)
         }

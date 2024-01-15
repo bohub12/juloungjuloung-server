@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Necklace
-import com.juloungjuloung.juju.domain.product.repository.NecklaceRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.NecklaceRepository
 import com.juloungjuloung.juju.entity.product.impl.NecklaceEntity
 import com.juloungjuloung.juju.entity.product.impl.QNecklaceEntity.Companion.necklaceEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException
@@ -21,7 +21,7 @@ class NecklaceRepositoryImpl(
     }
 
     override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Necklace> {
-        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size)).stream()
+        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()
     }

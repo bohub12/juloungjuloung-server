@@ -1,9 +1,9 @@
 package com.juloungjuloung.juju.application.factory
 
-import com.juloungjuloung.juju.domain.product.repository.BraceletRepository
-import com.juloungjuloung.juju.domain.product.repository.EarringRepository
-import com.juloungjuloung.juju.domain.product.repository.NecklaceRepository
-import com.juloungjuloung.juju.domain.product.repository.RingRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.BraceletRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.EarringRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.NecklaceRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.RingRepository
 import com.juloungjuloung.juju.domain.product.service.impl.BraceletService
 import com.juloungjuloung.juju.domain.product.service.impl.EarringService
 import com.juloungjuloung.juju.domain.product.service.impl.NecklaceService

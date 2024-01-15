@@ -13,5 +13,11 @@ enum class ApiResponseCode(
     BAD_REQUEST_ID(400, "잘못된 ID 입니다"),
     BAD_REQUEST_ENUM(400, "잘못된 Enum 값 입니다"),
 
-    INTERNAL_SERVER_ERROR(500, "서버 에러입니다")
+    INTERNAL_SERVER_ERROR(500, "서버 에러입니다"),
+
+    // 1000 [Product]
+
+    // 1100 [Product Image]
+    PRODUCT_IMAGE_SIZE_EXCEED_MAX(1100, "상품 이미지의 개수가 10개 미만이여야 합니다"),
+    PRODUCT_IMAGE_PRIMARY_NOT_ONE(1101, "상품 기본 이미지 개수가 1개여야 합니다.")
 }

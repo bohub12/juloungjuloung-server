@@ -1,6 +1,6 @@
 package com.juloungjuloung.juju.constants
 
-enum class S3ImageFileExtension(
+enum class ImageFileExtension(
     val extension: String,
     val contentType: String
 ) {

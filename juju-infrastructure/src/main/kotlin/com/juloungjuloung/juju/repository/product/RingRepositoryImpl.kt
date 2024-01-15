@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.repository.product
 
 import com.juloungjuloung.juju.domain.product.impl.Ring
-import com.juloungjuloung.juju.domain.product.repository.RingRepository
+import com.juloungjuloung.juju.domain.product.repository.impl.RingRepository
 import com.juloungjuloung.juju.entity.product.impl.QRingEntity.Companion.ringEntity
 import com.juloungjuloung.juju.entity.product.impl.RingEntity
 import com.juloungjuloung.juju.exception.BusinessLogicException
@@ -21,7 +21,7 @@ class RingRepositoryImpl(
     }
 
     override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Ring> {
-        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size)).stream()
+        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()
     }

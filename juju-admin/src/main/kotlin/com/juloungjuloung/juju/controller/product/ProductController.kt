@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/admin/api/v1/products")
 class ProductController(
-    val productFacade: ProductServiceFacade
+    private val productFacade: ProductServiceFacade
 ) {
 
     @GetMapping
