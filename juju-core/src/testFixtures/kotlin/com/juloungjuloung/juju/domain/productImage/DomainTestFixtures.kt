@@ -1,3 +1,9 @@
 package com.juloungjuloung.juju.domain.productImage
 
-class DomainTestFixtures
+//fun productImagesFixture(isForSave: Boolean = false): ProductImages {
+//
+//}
+//
+//fun productImageFixture(): ProductImage {
+//
+//}
