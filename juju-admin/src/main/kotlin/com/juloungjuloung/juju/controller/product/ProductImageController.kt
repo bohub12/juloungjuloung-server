@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.controller.product
 
-import com.juloungjuloung.juju.application.facade.product.ProductImageServiceFacade
+import com.juloungjuloung.juju.application.facade.product.CreatePreSignedUrlServiceFacade
+import com.juloungjuloung.juju.domain.product.service.ProductImageService
 import com.juloungjuloung.juju.dto.product.request.SaveProductImageRequest
 import com.juloungjuloung.juju.dto.product.response.GetPreSignedUrlResponse
 import com.juloungjuloung.juju.objectmapper.toResponse
@@ -17,18 +18,19 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/admin/api/v1/products/images")
 class ProductImageController(
-    private val productImageServiceFacade: ProductImageServiceFacade
+    private val createPreSignedUrlServiceFacade: CreatePreSignedUrlServiceFacade,
+    private val productImageService: ProductImageService
 ) {
 
     @PostMapping("/pre-signed-url")
     fun createPreSignedUrl(): ApiResponse<GetPreSignedUrlResponse> {
-        return success(toResponse(productImageServiceFacade.getPreSignedUrl()))
+        return success(toResponse(createPreSignedUrlServiceFacade.getPreSignedUrl()))
     }
 
     @PostMapping
     fun saveAll(
         @RequestBody saveProductImageRequest: SaveProductImageRequest
     ): ApiResponse<List<Long>> {
-        return success(productImageServiceFacade.saveAll(toSaveVO(saveProductImageRequest)))
+        return success(productImageService.saveAll(toSaveVO(saveProductImageRequest)))
     }
 }

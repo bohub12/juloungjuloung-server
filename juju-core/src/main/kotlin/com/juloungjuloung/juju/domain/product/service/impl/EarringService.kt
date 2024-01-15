@@ -4,6 +4,8 @@ import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.impl.Earring
 import com.juloungjuloung.juju.domain.product.repository.impl.EarringRepository
 import com.juloungjuloung.juju.domain.product.service.ProductService
+import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
+import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -22,13 +24,16 @@ class EarringService(
     }
 
     @Transactional
-    override fun save(product: Product): Long {
-        return earringRepository.save(product as Earring)
+    override fun save(saveProductVO: SaveProductVO): Long {
+        return earringRepository.save(saveProductVO.toDomain() as Earring)
     }
 
     @Transactional
-    override fun update(product: Product): Long {
-        return earringRepository.update(product as Earring)
+    override fun update(updateProductVO: UpdateProductVO): Long {
+        val findProduct = earringRepository.findById(updateProductVO.id)
+        findProduct.update(updateProductVO)
+
+        return earringRepository.update(findProduct)
     }
 
     override fun getProductType(): ProductTypeEnum {

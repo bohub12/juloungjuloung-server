@@ -1,6 +1,8 @@
 package com.juloungjuloung.juju.domain.product.service
 
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
+import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 
 interface ProductService {
@@ -9,9 +11,9 @@ interface ProductService {
 
     fun readById(id: Long): Product
 
-    fun save(product: Product): Long
+    fun save(saveProductVO: SaveProductVO): Long
 
-    fun update(product: Product): Long
+    fun update(updateProductVO: UpdateProductVO): Long
 
     fun getProductType(): ProductTypeEnum
 }

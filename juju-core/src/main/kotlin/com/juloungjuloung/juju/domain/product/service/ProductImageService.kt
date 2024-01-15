@@ -2,9 +2,9 @@ package com.juloungjuloung.juju.domain.product.service
 
 import com.juloungjuloung.juju.constants.ImageFileExtension
 import com.juloungjuloung.juju.constants.S3PathPrefixConstant.PRODUCT_IMAGE
-import com.juloungjuloung.juju.domain.product.ProductImage
-import com.juloungjuloung.juju.domain.product.ProductImages
+import com.juloungjuloung.juju.domain.product.add
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
+import com.juloungjuloung.juju.domain.product.vo.SaveProductImageVO
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -25,12 +25,12 @@ class ProductImageService(
     }
 
     @Transactional
-    fun saveAll(productImages: List<ProductImage>): List<Long> {
-        ProductImages.combineForValidation(
-            productImages,
-            productImageRepository.findByProduct(productImages[0].productId)
-        )
+    fun saveAll(saveProductImageVO: SaveProductImageVO): List<Long> {
+        val productImages = saveProductImageVO.toDomain()
 
-        return productImageRepository.saveAll(productImages)
+        val savedProductImages = productImageRepository.findByProduct(saveProductImageVO.productId)
+        val totalProductImages = savedProductImages.add(productImages)
+
+        return productImageRepository.saveAll(totalProductImages.filterNotSaved())
     }
 }

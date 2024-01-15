@@ -4,6 +4,8 @@ import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.impl.Necklace
 import com.juloungjuloung.juju.domain.product.repository.impl.NecklaceRepository
 import com.juloungjuloung.juju.domain.product.service.ProductService
+import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
+import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -22,13 +24,16 @@ class NecklaceService(
     }
 
     @Transactional
-    override fun save(product: Product): Long {
-        return necklaceRepository.save(product as Necklace)
+    override fun save(saveProductVO: SaveProductVO): Long {
+        return necklaceRepository.save(saveProductVO.toDomain() as Necklace)
     }
 
     @Transactional
-    override fun update(product: Product): Long {
-        return necklaceRepository.update(product as Necklace)
+    override fun update(updateProductVO: UpdateProductVO): Long {
+        val findProduct = necklaceRepository.findById(updateProductVO.id)
+        findProduct.update(updateProductVO)
+
+        return necklaceRepository.update(findProduct)
     }
 
     override fun getProductType(): ProductTypeEnum {
