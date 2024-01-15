@@ -3,6 +3,8 @@ package com.juloungjuloung.juju.domain.product.service.impl
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.repository.ProductRepository
 import com.juloungjuloung.juju.domain.product.service.ProductService
+import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
+import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,11 +22,11 @@ class ProductServiceImpl(
         return productRepository.findById(id)
     }
 
-    override fun save(product: Product): Long {
+    override fun save(saveProductVO: SaveProductVO): Long {
         TODO("Not yet implemented")
     }
 
-    override fun update(product: Product): Long {
+    override fun update(updateProductVO: UpdateProductVO): Long {
         TODO("Not yet implemented")
     }
 

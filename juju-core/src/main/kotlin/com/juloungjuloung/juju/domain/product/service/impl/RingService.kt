@@ -4,6 +4,8 @@ import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.impl.Ring
 import com.juloungjuloung.juju.domain.product.repository.impl.RingRepository
 import com.juloungjuloung.juju.domain.product.service.ProductService
+import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
+import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -23,13 +25,16 @@ class RingService(
     }
 
     @Transactional
-    override fun save(product: Product): Long {
-        return ringRepository.save(product as Ring)
+    override fun save(saveProductVO: SaveProductVO): Long {
+        return ringRepository.save(saveProductVO.toDomain() as Ring)
     }
 
     @Transactional
-    override fun update(product: Product): Long {
-        return ringRepository.update(product as Ring)
+    override fun update(updateProductVO: UpdateProductVO): Long {
+        val findProduct = ringRepository.findById(updateProductVO.id)
+        findProduct.update(updateProductVO)
+
+        return ringRepository.update(findProduct)
     }
 
     override fun getProductType(): ProductTypeEnum {

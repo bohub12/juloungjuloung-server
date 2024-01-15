@@ -14,8 +14,8 @@ data class ProductImage(
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
 
-fun List<ProductImage>.toProductImages(): ProductImages {
-    return ProductImages(this)
+fun List<ProductImage>.add(productImages: List<ProductImage>): ProductImages {
+    return ProductImages(this + productImages)
 }
 
 data class ProductImages(
@@ -23,13 +23,6 @@ data class ProductImages(
 ) {
     init {
         requireProperties()
-    }
-
-    companion object {
-        fun combineForValidation(vararg lists: List<ProductImage>): ProductImages {
-            val combinedImages = lists.flatMap { it }
-            return ProductImages(combinedImages)
-        }
     }
 
     private fun requireProperties() {
@@ -46,7 +39,7 @@ data class ProductImages(
         return productImages.first { it.isPrimary }
     }
 
-    fun getProductId(): Long {
-        return productImages[0].productId
+    fun filterNotSaved(): List<ProductImage> {
+        return productImages.filter { it.id == 0L }
     }
 }

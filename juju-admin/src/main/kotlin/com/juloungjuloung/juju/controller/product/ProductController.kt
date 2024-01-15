@@ -1,6 +1,6 @@
 package com.juloungjuloung.juju.controller.product
 
-import com.juloungjuloung.juju.application.facade.product.ProductServiceFacade
+import com.juloungjuloung.juju.application.factory.ProductServiceFactory
 import com.juloungjuloung.juju.dto.product.request.SaveProductRequest
 import com.juloungjuloung.juju.dto.product.request.UpdateProductRequest
 import com.juloungjuloung.juju.dto.product.response.ProductResponse
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/admin/api/v1/products")
 class ProductController(
-    private val productFacade: ProductServiceFacade
+    private val productServiceFactory: ProductServiceFactory
 ) {
 
     @GetMapping
@@ -34,7 +34,7 @@ class ProductController(
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): ApiResponse<List<ProductResponse>> {
         return success(
-            productFacade.readProducts(productType, page, size)
+            productServiceFactory.get(productType).read(page, size)
                 .map { toResponse(it) }
                 .toList()
         )
@@ -45,7 +45,7 @@ class ProductController(
         @RequestBody saveProductRequest: SaveProductRequest
     ): ApiResponse<Long> {
         return success(
-            productFacade.saveProduct(toSaveVO(saveProductRequest))
+            productServiceFactory.get(saveProductRequest.productType).save(toSaveVO(saveProductRequest))
         )
     }
 
@@ -55,7 +55,7 @@ class ProductController(
         updateProductRequest: UpdateProductRequest
     ): ApiResponse<Long> {
         return success(
-            productFacade.updateProduct(toUpdateVO(updateProductRequest))
+            productServiceFactory.get(updateProductRequest.productType).update(toUpdateVO(updateProductRequest))
         )
     }
 }
