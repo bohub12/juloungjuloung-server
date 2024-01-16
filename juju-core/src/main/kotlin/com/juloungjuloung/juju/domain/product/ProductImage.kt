@@ -18,6 +18,10 @@ fun List<ProductImage>.add(productImages: List<ProductImage>): ProductImages {
     return ProductImages(this + productImages)
 }
 
+fun List<ProductImage>.containsPrimary(): Boolean {
+    return this.any { it.isPrimary }
+}
+
 data class ProductImages(
     val productImages: List<ProductImage>
 ) {

@@ -9,6 +9,10 @@ fun productImageFixture(isPrimary: Boolean = false, id: Long = 1L, productId: Lo
     return fixtureMonkey.giveMeBuilder<ProductImage>()
         .setExp(ProductImage::id, id)
         .setExp(ProductImage::productId, productId)
+        .acceptIf(
+            { isPrimary },
+            { builder -> builder.setExp(ProductImage::isPrimary, true) }
+        )
         .sample()
 }
 
