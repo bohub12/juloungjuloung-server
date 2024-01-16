@@ -31,10 +31,6 @@ class ProductImageRepositoryImpl(
             .map { it.id }
     }
 
-    override fun delete(productImageId: Long) {
-        TODO("Not yet implemented")
-    }
-
     override fun deleteAll(productImageIds: List<Long>) {
         jpaQueryFactory.update(productImageEntity)
             .set(productImageEntity.deleted, true)

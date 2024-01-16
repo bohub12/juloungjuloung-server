@@ -11,7 +11,5 @@ interface ProductImageRepository {
 
     fun saveAll(productImages: List<ProductImage>): List<Long>
 
-    fun delete(productImageId: Long)
-
     fun deleteAll(productImageIds: List<Long>)
 }
