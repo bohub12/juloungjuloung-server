@@ -27,4 +27,6 @@ abstract class BaseEntity {
     @LastModifiedDate
     @Column(nullable = false)
     var updatedAt: LocalDateTime = LocalDateTime.now()
+
+    var deleted: Boolean = false
 }

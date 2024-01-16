@@ -3,6 +3,7 @@ package com.juloungjuloung.juju.repository.product.image
 import com.juloungjuloung.juju.domain.product.ProductImage
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.entity.product.ProductImageEntity
+import com.juloungjuloung.juju.entity.product.QProductImageEntity.Companion.productImageEntity
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
 
@@ -12,7 +13,12 @@ class ProductImageRepositoryImpl(
     private val jpaQueryFactory: JPAQueryFactory
 ) : ProductImageRepository {
     override fun findByProduct(productId: Long): List<ProductImage> {
-        return delegate.findByProductId(productId = productId)
+        return delegate.findByProductIdAndDeletedFalse(productId = productId)
+            .map { it.toDomain() }
+    }
+
+    override fun findByIds(productImageIds: List<Long>): List<ProductImage> {
+        return delegate.findAllByIdInAndDeletedFalse(productImageIds)
             .map { it.toDomain() }
     }
 
@@ -25,11 +31,10 @@ class ProductImageRepositoryImpl(
             .map { it.id }
     }
 
-    override fun delete(productImageId: Long) {
-        TODO("Not yet implemented")
-    }
-
     override fun deleteAll(productImageIds: List<Long>) {
-        TODO("Not yet implemented")
+        jpaQueryFactory.update(productImageEntity)
+            .set(productImageEntity.deleted, true)
+            .where(productImageEntity.id.`in`(productImageIds))
+            .execute()
     }
 }

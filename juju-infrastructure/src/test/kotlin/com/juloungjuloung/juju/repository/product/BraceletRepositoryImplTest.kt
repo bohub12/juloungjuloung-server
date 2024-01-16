@@ -6,7 +6,7 @@ import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -21,8 +21,8 @@ class BraceletRepositoryImplTest : SharedMySQLTestContainer() {
     @Autowired
     lateinit var braceletRepositoryImpl: BraceletRepositoryImpl
 
-    @BeforeEach
-    fun setUp() {
+    @AfterEach
+    fun clearPersistenceContext() {
         em.flush()
         em.clear()
     }
