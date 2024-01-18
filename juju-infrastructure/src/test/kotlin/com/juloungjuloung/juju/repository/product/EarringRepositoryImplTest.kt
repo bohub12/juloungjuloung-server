@@ -1,5 +1,6 @@
 package com.juloungjuloung.juju.repository.product
 
+import com.juloungjuloung.juju.RepositoryIntegrationTest
 import com.juloungjuloung.juju.SharedMySQLTestContainer
 import com.juloungjuloung.juju.domain.product.earringFixture
 import io.kotest.matchers.nulls.shouldNotBeNull
@@ -9,11 +10,8 @@ import jakarta.persistence.PersistenceContext
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.test.context.ActiveProfiles
 
-@DataJpaTest
-@ActiveProfiles("test")
+@RepositoryIntegrationTest(EarringRepositoryImpl::class)
 class EarringRepositoryImplTest : SharedMySQLTestContainer() {
 
     @PersistenceContext

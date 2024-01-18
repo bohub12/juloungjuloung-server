@@ -1,16 +1,11 @@
 package com.juloungjuloung.juju
 
-import com.juloungjuloung.juju.repository.product.BraceletRepositoryImpl
-import com.juloungjuloung.juju.repository.product.EarringRepositoryImpl
-import com.juloungjuloung.juju.repository.product.NecklaceRepositoryImpl
-import com.juloungjuloung.juju.repository.product.RingRepositoryImpl
-import com.juloungjuloung.juju.repository.product.image.ProductImageRepositoryImpl
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManager
+import jakarta.persistence.PersistenceContext
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Import
 
 /**
  * SpringBootApplication : 멀티모듈 환경에서의 통합 테스트 위한 어노테이션
@@ -19,17 +14,13 @@ import org.springframework.context.annotation.Import
  */
 @SpringBootApplication
 @TestConfiguration
-@Import(
-    value = [
-        BraceletRepositoryImpl::class, EarringRepositoryImpl::class,
-        NecklaceRepositoryImpl::class, RingRepositoryImpl::class,
-        ProductImageRepositoryImpl::class
-    ]
-)
-class TestConfiguration {
+class TestConfiguration(
+    @PersistenceContext
+    private val entityManager: EntityManager
+) {
 
     @Bean
-    fun jpaQueryFactory(entityManager: EntityManager): JPAQueryFactory {
+    fun jpaQueryFactory(): JPAQueryFactory {
         return JPAQueryFactory(entityManager)
     }
 }
