@@ -5,6 +5,7 @@ import com.juloungjuloung.juju.constants.S3PathPrefixConstant.PRODUCT_IMAGE
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.ProductImage
 import com.juloungjuloung.juju.domain.product.add
+import com.juloungjuloung.juju.domain.product.changePrimary
 import com.juloungjuloung.juju.domain.product.containsPrimary
 import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
@@ -43,7 +44,7 @@ class ProductImageService(
         val totalProductImages = savedProductImages.add(productImages)
 
         if (productImages.containsPrimary()) {
-            changePrimaryProductImage(product, productImages.getPrimary())
+            changeThumbnailImageInProduct(product, productImages.getPrimary())
         }
 
         return productImageRepository.saveAll(totalProductImages.filterNotSaved())
@@ -53,7 +54,7 @@ class ProductImageService(
         return productRepository.findById(productId)
     }
 
-    private fun changePrimaryProductImage(product: Product, primaryProductImage: ProductImage) {
+    private fun changeThumbnailImageInProduct(product: Product, primaryProductImage: ProductImage) {
         product.changePrimaryImage(primaryProductImage.imageUrl)
         productRepository.changePrimaryImage(product)
     }
@@ -79,5 +80,17 @@ class ProductImageService(
 
     private fun findByIds(productImageIds: List<Long>): List<ProductImage> {
         return productImageRepository.findByIds(productImageIds)
+    }
+
+    fun changePrimary(productId: Long, primaryProductImageId: Long): Long {
+        val product = productRepository.findById(productId)
+        val productImages = productImageRepository.findByProduct(productId)
+
+        productImages.changePrimary(primaryProductImageId)
+        productImageRepository.update(productImages)
+
+        changeThumbnailImageInProduct(product, productImages.getPrimary())
+
+        return primaryProductImageId
     }
 }

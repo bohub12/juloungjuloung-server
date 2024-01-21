@@ -1,9 +1,13 @@
 package com.juloungjuloung.juju.repository.product.image
 
 import com.juloungjuloung.juju.domain.product.ProductImage
+import com.juloungjuloung.juju.domain.product.getNonPrimary
+import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.entity.product.ProductImageEntity
 import com.juloungjuloung.juju.entity.product.QProductImageEntity.Companion.productImageEntity
+import com.juloungjuloung.juju.exception.BusinessLogicException
+import com.juloungjuloung.juju.response.ApiResponseCode
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
 
@@ -15,6 +19,11 @@ class ProductImageRepositoryImpl(
     override fun findByProduct(productId: Long): List<ProductImage> {
         return delegate.findByProductIdAndDeletedFalse(productId = productId)
             .map { it.toDomain() }
+    }
+
+    override fun findById(productImageId: Long): ProductImage {
+        return delegate.findById(productImageId).orElseThrow { BusinessLogicException(ApiResponseCode.BAD_REQUEST_ID) }
+            .toDomain()
     }
 
     override fun findByIds(productImageIds: List<Long>): List<ProductImage> {
@@ -35,6 +44,18 @@ class ProductImageRepositoryImpl(
         jpaQueryFactory.update(productImageEntity)
             .set(productImageEntity.deleted, true)
             .where(productImageEntity.id.`in`(productImageIds))
+            .execute()
+    }
+
+    override fun update(productImages: List<ProductImage>) {
+        jpaQueryFactory.update(productImageEntity)
+            .set(productImageEntity.isPrimary, false)
+            .where(productImageEntity.id.`in`(productImages.getNonPrimary().map { it.id }))
+            .execute()
+
+        jpaQueryFactory.update(productImageEntity)
+            .set(productImageEntity.isPrimary, true)
+            .where(productImageEntity.id.eq(productImages.getPrimary().id))
             .execute()
     }
 }

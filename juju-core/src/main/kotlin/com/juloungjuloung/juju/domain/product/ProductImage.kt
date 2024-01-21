@@ -9,7 +9,7 @@ data class ProductImage(
     val id: Long = 0L,
     val productId: Long,
     val imageUrl: String,
-    val isPrimary: Boolean,
+    var isPrimary: Boolean,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
@@ -24,6 +24,15 @@ fun List<ProductImage>.containsPrimary(): Boolean {
 
 fun List<ProductImage>.getPrimary(): ProductImage {
     return this.first { it.isPrimary }
+}
+
+fun List<ProductImage>.getNonPrimary(): List<ProductImage> {
+    return this.filter { !it.isPrimary }
+}
+
+fun List<ProductImage>.changePrimary(primaryProductImageId: Long) {
+    this.filter { it.id != primaryProductImageId }.map { it.isPrimary = false }
+    this.filter { it.id == primaryProductImageId }.map { it.isPrimary = true }
 }
 
 data class ProductImages(
