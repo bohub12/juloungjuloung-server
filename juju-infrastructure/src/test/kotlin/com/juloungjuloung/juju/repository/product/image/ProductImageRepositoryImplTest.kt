@@ -4,6 +4,7 @@ import com.juloungjuloung.juju.RepositoryIntegrationTest
 import com.juloungjuloung.juju.SharedMySQLTestContainer
 import com.juloungjuloung.juju.domain.product.changePrimary
 import com.juloungjuloung.juju.domain.product.containsPrimary
+import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.productImage.productImageCollectionFixture
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager
@@ -96,22 +97,22 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
     @Test
     fun `updatePrimary_성공`() {
         // given
-        val primaryImageId = 1L
-        val notPrimaryImageIds = listOf(2L, 3L)
-        val productImages = productImageCollectionFixture(
-            primaryId = primaryImageId,
-            notPrimaryIds = notPrimaryImageIds
-        )
+        val savedProductImageIds = productImageRepositoryImpl.saveAll(productImageCollectionFixture())
+        val productImages = productImageRepositoryImpl.findByIds(savedProductImageIds)
 
-        productImageRepositoryImpl.saveAll(productImages)
+        em.flush()
+        em.clear()
 
         // when
-        val newPrimaryImageId = notPrimaryImageIds.last()
+        val newPrimaryImageId = productImages.last().id
         productImages.changePrimary(newPrimaryImageId)
-
         productImageRepositoryImpl.updatePrimary(productImages)
 
+        em.flush()
+        em.clear()
+
         // then
-        product
+        val findProductImages = productImageRepositoryImpl.findByIds(savedProductImageIds)
+        findProductImages.getPrimary().id shouldBe newPrimaryImageId
     }
 }
