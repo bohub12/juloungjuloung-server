@@ -36,7 +36,7 @@ class ProductImageRepositoryImpl(
             .execute()
     }
 
-    override fun update(productImages: List<ProductImage>) {
+    override fun updatePrimary(productImages: List<ProductImage>) {
         jpaQueryFactory.update(productImageEntity)
             .set(productImageEntity.isPrimary, false)
             .where(productImageEntity.id.`in`(productImages.getNonPrimary().map { it.id }))

@@ -2,6 +2,7 @@ package com.juloungjuloung.juju.repository.product.image
 
 import com.juloungjuloung.juju.RepositoryIntegrationTest
 import com.juloungjuloung.juju.SharedMySQLTestContainer
+import com.juloungjuloung.juju.domain.product.changePrimary
 import com.juloungjuloung.juju.domain.product.containsPrimary
 import com.juloungjuloung.juju.domain.productImage.productImageCollectionFixture
 import io.kotest.matchers.shouldBe
@@ -90,5 +91,27 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
 
         // then
         emptyProductImages.size shouldBe 0
+    }
+
+    @Test
+    fun `updatePrimary_성공`() {
+        // given
+        val primaryImageId = 1L
+        val notPrimaryImageIds = listOf(2L, 3L)
+        val productImages = productImageCollectionFixture(
+            primaryId = primaryImageId,
+            notPrimaryIds = notPrimaryImageIds
+        )
+
+        productImageRepositoryImpl.saveAll(productImages)
+
+        // when
+        val newPrimaryImageId = notPrimaryImageIds.last()
+        productImages.changePrimary(newPrimaryImageId)
+
+        productImageRepositoryImpl.updatePrimary(productImages)
+
+        // then
+        product
     }
 }

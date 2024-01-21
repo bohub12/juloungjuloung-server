@@ -87,7 +87,7 @@ class ProductImageService(
         val productImages = productImageRepository.findByProduct(productId)
 
         productImages.changePrimary(primaryProductImageId)
-        productImageRepository.update(productImages)
+        productImageRepository.updatePrimary(productImages)
 
         changeThumbnailImageInProduct(product, productImages.getPrimary())
 

@@ -11,5 +11,5 @@ interface ProductImageRepository {
 
     fun deleteAll(productImageIds: List<Long>)
 
-    fun update(productImages: List<ProductImage>)
+    fun updatePrimary(productImages: List<ProductImage>)
 }
