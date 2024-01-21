@@ -2,10 +2,13 @@ package com.juloungjuloung.juju.domain.product.service
 
 import com.juloungjuloung.juju.constants.ImageFileExtension
 import com.juloungjuloung.juju.constants.S3PathPrefixConstant.PRODUCT_IMAGE
+import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.ProductImage
 import com.juloungjuloung.juju.domain.product.add
 import com.juloungjuloung.juju.domain.product.containsPrimary
+import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
+import com.juloungjuloung.juju.domain.product.repository.ProductRepository
 import com.juloungjuloung.juju.domain.product.vo.SaveProductImageVO
 import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode.BAD_REQUEST_ID
@@ -17,6 +20,7 @@ import java.util.*
 @Service
 @Transactional(readOnly = true)
 class ProductImageService(
+    private val productRepository: ProductRepository,
     private val productImageRepository: ProductImageRepository
 ) {
 
@@ -31,12 +35,27 @@ class ProductImageService(
 
     @Transactional
     fun saveAll(saveProductImageVO: SaveProductImageVO): List<Long> {
+        val product = findProductById(saveProductImageVO.productId)
+
         val productImages = saveProductImageVO.toDomain()
 
         val savedProductImages = productImageRepository.findByProduct(saveProductImageVO.productId)
         val totalProductImages = savedProductImages.add(productImages)
 
+        if (productImages.containsPrimary()) {
+            changePrimaryProductImage(product, productImages.getPrimary())
+        }
+
         return productImageRepository.saveAll(totalProductImages.filterNotSaved())
+    }
+
+    private fun findProductById(productId: Long): Product {
+        return productRepository.findById(productId)
+    }
+
+    private fun changePrimaryProductImage(product: Product, primaryProductImage: ProductImage) {
+        product.changePrimaryImage(primaryProductImage.imageUrl)
+        productRepository.changePrimaryImage(product)
     }
 
     @Transactional

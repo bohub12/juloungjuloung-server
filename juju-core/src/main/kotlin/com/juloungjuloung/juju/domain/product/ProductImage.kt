@@ -22,6 +22,10 @@ fun List<ProductImage>.containsPrimary(): Boolean {
     return this.any { it.isPrimary }
 }
 
+fun List<ProductImage>.getPrimary(): ProductImage {
+    return this.first { it.isPrimary }
+}
+
 data class ProductImages(
     val productImages: List<ProductImage>
 ) {
