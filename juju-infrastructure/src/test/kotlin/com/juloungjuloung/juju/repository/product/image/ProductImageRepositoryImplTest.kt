@@ -2,7 +2,9 @@ package com.juloungjuloung.juju.repository.product.image
 
 import com.juloungjuloung.juju.RepositoryIntegrationTest
 import com.juloungjuloung.juju.SharedMySQLTestContainer
+import com.juloungjuloung.juju.domain.product.changePrimary
 import com.juloungjuloung.juju.domain.product.containsPrimary
+import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.productImage.productImageCollectionFixture
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager
@@ -23,18 +25,6 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
     fun clearPersistenceContext() {
         em.flush()
         em.clear()
-    }
-
-    @Test
-    fun `saveAll_성공`() {
-        // given
-        val productImages = productImageCollectionFixture()
-
-        // when
-        val savedImageIds = productImageRepositoryImpl.saveAll(productImages)
-
-        // then
-        savedImageIds.size shouldBe productImages.size
     }
 
     @Test
@@ -73,6 +63,18 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
     }
 
     @Test
+    fun `saveAll_성공`() {
+        // given
+        val productImages = productImageCollectionFixture()
+
+        // when
+        val savedImageIds = productImageRepositoryImpl.saveAll(productImages)
+
+        // then
+        savedImageIds.size shouldBe productImages.size
+    }
+
+    @Test
     fun `deleteAll_성공`() {
         // given
         val primaryImageId = 1L
@@ -90,5 +92,27 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
 
         // then
         emptyProductImages.size shouldBe 0
+    }
+
+    @Test
+    fun `updatePrimary_성공`() {
+        // given
+        val savedProductImageIds = productImageRepositoryImpl.saveAll(productImageCollectionFixture())
+        val productImages = productImageRepositoryImpl.findByIds(savedProductImageIds)
+
+        em.flush()
+        em.clear()
+
+        // when
+        val newPrimaryImageId = productImages.last().id
+        productImages.changePrimary(newPrimaryImageId)
+        productImageRepositoryImpl.updatePrimary(productImages)
+
+        em.flush()
+        em.clear()
+
+        // then
+        val findProductImages = productImageRepositoryImpl.findByIds(savedProductImageIds)
+        findProductImages.getPrimary().id shouldBe newPrimaryImageId
     }
 }

@@ -47,4 +47,8 @@ open class Product(
 
         requireProperties()
     }
+
+    fun changePrimaryImage(imageUrl: String) {
+        this.thumbnailImage = imageUrl
+    }
 }

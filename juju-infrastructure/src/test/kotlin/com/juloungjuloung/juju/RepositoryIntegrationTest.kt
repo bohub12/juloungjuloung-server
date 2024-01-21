@@ -9,5 +9,5 @@ import kotlin.reflect.KClass
 @ActiveProfiles("test")
 @Import(RepositoryImportSelector::class)
 annotation class RepositoryIntegrationTest(
-    val value: KClass<*>
+    vararg val value: KClass<*>
 )

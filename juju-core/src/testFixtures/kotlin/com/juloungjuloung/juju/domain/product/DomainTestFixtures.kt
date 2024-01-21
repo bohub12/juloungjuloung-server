@@ -8,7 +8,21 @@ import com.juloungjuloung.juju.enums.ProductTypeEnum
 import com.juloungjuloung.juju.fixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
 import com.navercorp.fixturemonkey.kotlin.setExp
-import com.navercorp.fixturemonkey.kotlin.setNotNullExp
+
+fun productFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean = false): Product {
+    return fixtureMonkey.giveMeBuilder<Product>()
+        .setExp(Product::productType, ProductTypeEnum.BASE)
+        .setExp(Product::id, 0L)
+        .setExp(Product::price, 10000L)
+        .setExp(Product::weightByMilliGram, 10000L)
+        .setExp(Product::isDisplay, isDisplay)
+        .setExp(Product::thumbnailImage, "https://test.com/test.png")
+        .acceptIf(
+            { updatable },
+            { builder -> builder.setExp(Product::id, id) }
+        )
+        .sample()
+}
 
 fun braceletFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean = false): Bracelet {
     return fixtureMonkey.giveMeBuilder<Bracelet>()
@@ -17,12 +31,9 @@ fun braceletFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolea
         .setExp(Bracelet::price, 10000L)
         .setExp(Bracelet::weightByMilliGram, 10000L)
         .setExp(Bracelet::isDisplay, isDisplay)
+        .setExp(Bracelet::thumbnailImage, "https://test.com/test.png")
         .setExp(Bracelet::minimumLength, 10)
         .setExp(Bracelet::maximumLength, 100)
-        .acceptIf(
-            { isDisplay },
-            { builder -> builder.setNotNullExp(Bracelet::thumbnailImage) }
-        )
         .acceptIf(
             { updatable },
             { builder -> builder.setExp(Bracelet::id, id) }
@@ -37,10 +48,7 @@ fun earringFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean
         .setExp(Earring::price, 10000L)
         .setExp(Earring::weightByMilliGram, 10000L)
         .setExp(Earring::isDisplay, isDisplay)
-        .acceptIf(
-            { isDisplay },
-            { builder -> builder.setNotNullExp(Earring::thumbnailImage) }
-        )
+        .setExp(Earring::thumbnailImage, "https://test.com/test.png")
         .acceptIf(
             { updatable },
             { builder -> builder.setExp(Earring::id, id) }
@@ -57,10 +65,7 @@ fun necklaceFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolea
         .setExp(Necklace::isDisplay, isDisplay)
         .setExp(Necklace::minimumLength, 10)
         .setExp(Necklace::maximumLength, 100)
-        .acceptIf(
-            { isDisplay },
-            { builder -> builder.setNotNullExp(Necklace::thumbnailImage) }
-        )
+        .setExp(Necklace::thumbnailImage, "https://test.com/test.png")
         .acceptIf(
             { updatable },
             { builder -> builder.setExp(Necklace::id, id) }
@@ -75,10 +80,7 @@ fun ringFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolean = 
         .setExp(Ring::price, 10000L)
         .setExp(Ring::weightByMilliGram, 10000L)
         .setExp(Ring::isDisplay, isDisplay)
-        .acceptIf(
-            { isDisplay },
-            { builder -> builder.setNotNullExp(Ring::thumbnailImage) }
-        )
+        .setExp(Ring::thumbnailImage, "https://test.com/test.png")
         .acceptIf(
             { updatable },
             { builder -> builder.setExp(Ring::id, id) }

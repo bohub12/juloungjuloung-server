@@ -7,11 +7,12 @@ import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
 import com.navercorp.fixturemonkey.kotlin.setExp
 
 fun saveProductImageVOFixture(
+    productId: Long = 1L,
     isMultiplePrimaryImage: Boolean = false,
     exceedMaxSize: Boolean = false
 ): SaveProductImageVO {
     return fixtureMonkey.giveMeBuilder<SaveProductImageVO>()
-        .setExp(SaveProductImageVO::productId, 1L)
+        .setExp(SaveProductImageVO::productId, productId)
         .setExp(
             SaveProductImageVO::saveProductImageInternalVOs,
             saveProductImageInternalVOFixture(isMultiplePrimaryImage, exceedMaxSize)

@@ -7,9 +7,9 @@ interface ProductImageRepository {
 
     fun findByIds(productImageIds: List<Long>): List<ProductImage>
 
-    fun save(productImage: ProductImage): Long
-
     fun saveAll(productImages: List<ProductImage>): List<Long>
 
     fun deleteAll(productImageIds: List<Long>)
+
+    fun updatePrimary(productImages: List<ProductImage>)
 }
