@@ -26,18 +26,6 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
     }
 
     @Test
-    fun `saveAll_성공`() {
-        // given
-        val productImages = productImageCollectionFixture()
-
-        // when
-        val savedImageIds = productImageRepositoryImpl.saveAll(productImages)
-
-        // then
-        savedImageIds.size shouldBe productImages.size
-    }
-
-    @Test
     fun `findByProduct_성공`() {
         // given
         val primaryImageId = 1L
@@ -70,6 +58,18 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
 
         // then
         findProductImages.size shouldBe savedProductImageIds.size
+    }
+
+    @Test
+    fun `saveAll_성공`() {
+        // given
+        val productImages = productImageCollectionFixture()
+
+        // when
+        val savedImageIds = productImageRepositoryImpl.saveAll(productImages)
+
+        // then
+        savedImageIds.size shouldBe productImages.size
     }
 
     @Test

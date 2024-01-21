@@ -6,8 +6,6 @@ import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.entity.product.ProductImageEntity
 import com.juloungjuloung.juju.entity.product.QProductImageEntity.Companion.productImageEntity
-import com.juloungjuloung.juju.exception.BusinessLogicException
-import com.juloungjuloung.juju.response.ApiResponseCode
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
 
@@ -21,18 +19,9 @@ class ProductImageRepositoryImpl(
             .map { it.toDomain() }
     }
 
-    override fun findById(productImageId: Long): ProductImage {
-        return delegate.findById(productImageId).orElseThrow { BusinessLogicException(ApiResponseCode.BAD_REQUEST_ID) }
-            .toDomain()
-    }
-
     override fun findByIds(productImageIds: List<Long>): List<ProductImage> {
         return delegate.findAllByIdInAndDeletedFalse(productImageIds)
             .map { it.toDomain() }
-    }
-
-    override fun save(productImage: ProductImage): Long {
-        return delegate.save(ProductImageEntity.of(productImage)).id
     }
 
     override fun saveAll(productImages: List<ProductImage>): List<Long> {
