@@ -1,9 +1,10 @@
-package com.juloungjuloung.juju.domain.product.service
+package com.juloungjuloung.juju.domain.product.service.image
 
 import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.product.productFixture
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.domain.product.repository.ProductRepository
+import com.juloungjuloung.juju.domain.product.service.ProductImageService
 import com.juloungjuloung.juju.domain.productimage.productImageCollectionFixture
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
