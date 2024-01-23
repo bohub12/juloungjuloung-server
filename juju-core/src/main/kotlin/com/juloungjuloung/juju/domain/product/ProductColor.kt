@@ -12,3 +12,21 @@ data class ProductColor(
         require(additionalPrice >= 0)
     }
 }
+
+fun List<ProductColor>.combineForValidation(productColors: List<ProductColor>): ProductColors {
+    return ProductColors(this + productColors)
+}
+
+data class ProductColors(
+    val productColors: List<ProductColor>
+) {
+    init {
+        require(productColors.size <= ProductColorEnum.entries.size)
+        requireNoDuplicateColors(productColors)
+    }
+
+    private fun requireNoDuplicateColors(productColors: List<ProductColor>) {
+        val uniqueColors = productColors.map(ProductColor::color).toSet()
+        require(productColors.size == uniqueColors.size) { "Duplicate colors" }
+    }
+}
