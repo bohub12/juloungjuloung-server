@@ -4,7 +4,7 @@ import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.product.productFixture
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.domain.product.repository.ProductRepository
-import com.juloungjuloung.juju.domain.productImage.productImageCollectionFixture
+import com.juloungjuloung.juju.domain.productimage.productImageCollectionFixture
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.Runs

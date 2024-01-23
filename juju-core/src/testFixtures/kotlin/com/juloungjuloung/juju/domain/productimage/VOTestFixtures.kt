@@ -1,4 +1,4 @@
-package com.juloungjuloung.juju.domain.productImage
+package com.juloungjuloung.juju.domain.productimage
 
 import com.juloungjuloung.juju.domain.product.vo.SaveProductImageInternalVO
 import com.juloungjuloung.juju.domain.product.vo.SaveProductImageVO

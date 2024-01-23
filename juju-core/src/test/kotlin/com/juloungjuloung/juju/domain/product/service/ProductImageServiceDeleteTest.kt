@@ -2,7 +2,7 @@ package com.juloungjuloung.juju.domain.product.service
 
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.domain.product.repository.ProductRepository
-import com.juloungjuloung.juju.domain.productImage.productImageFixture
+import com.juloungjuloung.juju.domain.productimage.productImageFixture
 import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode
 import io.kotest.assertions.throwables.shouldThrow
