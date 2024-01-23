@@ -13,13 +13,13 @@ fun saveProductColorVOFixture(productId: Long = 1L, duplicatedColor: Boolean = f
 }
 
 fun saveProductColorInternalVOFixtures(duplicatedColor: Boolean = false): List<SaveProductColorInternalVO> {
-    if (duplicatedColor) {
-        return listOf(
+    return if (duplicatedColor) {
+        listOf(
             SaveProductColorInternalVO(color = GOLD),
             SaveProductColorInternalVO(color = GOLD)
         )
     } else {
-        return listOf(
+        listOf(
             SaveProductColorInternalVO(color = GOLD),
             SaveProductColorInternalVO(color = ROSE_GOLD)
         )

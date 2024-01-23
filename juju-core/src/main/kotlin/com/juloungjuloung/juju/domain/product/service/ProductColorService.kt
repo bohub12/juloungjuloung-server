@@ -15,6 +15,12 @@ class ProductColorService(
     private val productColorRepository: ProductColorRepository
 ) {
 
+    fun findByProduct(productId: Long): List<ProductColor> {
+        findProductOrException(productId)
+
+        return productColorRepository.findByProduct(productId)
+    }
+
     @Transactional
     fun saveAll(saveProductColorVO: SaveProductColorVO): List<Long> {
         validateSaveCondition(saveProductColorVO)
@@ -29,10 +35,6 @@ class ProductColorService(
         val productColorsForSave = saveProductColorVO.toDomain()
 
         productColors.combineForValidation(productColorsForSave)
-    }
-
-    fun findByProduct(productId: Long): List<ProductColor> {
-        return productColorRepository.findByProduct(productId)
     }
 
     private fun findProductOrException(productId: Long) {
