@@ -5,7 +5,7 @@ import com.juloungjuloung.juju.SharedMySQLTestContainer
 import com.juloungjuloung.juju.domain.product.changePrimary
 import com.juloungjuloung.juju.domain.product.containsPrimary
 import com.juloungjuloung.juju.domain.product.getPrimary
-import com.juloungjuloung.juju.domain.productImage.productImageCollectionFixture
+import com.juloungjuloung.juju.domain.productimage.productImageCollectionFixture
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext

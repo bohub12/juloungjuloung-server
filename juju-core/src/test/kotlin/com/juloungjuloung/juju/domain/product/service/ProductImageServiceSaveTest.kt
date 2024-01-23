@@ -3,8 +3,8 @@ package com.juloungjuloung.juju.domain.product.service
 import com.juloungjuloung.juju.domain.product.productFixture
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.domain.product.repository.ProductRepository
-import com.juloungjuloung.juju.domain.productImage.productImageCollectionFixture
-import com.juloungjuloung.juju.domain.productImage.saveProductImageVOFixture
+import com.juloungjuloung.juju.domain.productimage.productImageCollectionFixture
+import com.juloungjuloung.juju.domain.productimage.saveProductImageVOFixture
 import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode
 import io.kotest.assertions.throwables.shouldNotThrow
