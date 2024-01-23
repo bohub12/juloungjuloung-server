@@ -25,6 +25,12 @@ class ProductImageService(
     private val productImageRepository: ProductImageRepository
 ) {
 
+    fun read(productId: Long): List<ProductImage> {
+        findProductById(productId)
+
+        return productImageRepository.findByProduct(productId)
+    }
+
     fun createUniquePath(): String {
         return PRODUCT_IMAGE.prefix + UUID.randomUUID().toString()
     }

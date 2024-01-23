@@ -7,7 +7,9 @@ import com.juloungjuloung.juju.domain.product.repository.ProductRepository
 import com.juloungjuloung.juju.domain.productImage.productImageCollectionFixture
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 
@@ -31,7 +33,7 @@ class ProductImageServiceChangePrimaryTest : BehaviorSpec({
         every { productRepository.findById(productId) } returns product
         every { productImageRepository.findByProduct(productId) } returns productImages
         every { productRepository.changePrimaryImage(any()) } returns productId
-        every { productImageRepository.update(any()) } returns Unit
+        every { productImageRepository.updatePrimary(any()) } just Runs
 
         When("기본이미지를 변경하면") {
             val newPrimaryProductImageId = 3L
@@ -42,7 +44,7 @@ class ProductImageServiceChangePrimaryTest : BehaviorSpec({
                 product.thumbnailImage shouldBe productImages.first { it.id == 3L }.imageUrl
 
                 verify { productRepository.changePrimaryImage(any()) }
-                verify { productImageRepository.update(any()) }
+                verify { productImageRepository.updatePrimary(any()) }
             }
         }
     }
