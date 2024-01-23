@@ -5,10 +5,10 @@ import com.juloungjuloung.juju.enums.ProductColorEnum
 
 data class SaveProductColorVO(
     val productId: Long,
-    val saveProductImageInternalRequests: List<SaveProductColorInternalVO>
+    val saveProductColorInternalVOs: List<SaveProductColorInternalVO>
 ) {
     fun toDomain(): List<ProductColor> {
-        return saveProductImageInternalRequests.map {
+        return saveProductColorInternalVOs.map {
             ProductColor(productId = productId, color = it.color, additionalPrice = it.additionalPrice)
         }
     }

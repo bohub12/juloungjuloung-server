@@ -11,6 +11,11 @@ class ProductColorRepositoryImpl(
     private val delegate: ProductColorJpaRepository,
     private val jpaQueryFactory: JPAQueryFactory
 ) : ProductColorRepository {
+    override fun findByProduct(productId: Long): List<ProductColor> {
+        return delegate.findAllByProductIdAndDeletedFalse(productId)
+            .map { it.toDomain() }
+    }
+
     override fun saveAll(productColors: List<ProductColor>): List<Long> {
         return delegate.saveAll(productColors.map { ProductColorEntity.of(it) })
             .map { it.id }

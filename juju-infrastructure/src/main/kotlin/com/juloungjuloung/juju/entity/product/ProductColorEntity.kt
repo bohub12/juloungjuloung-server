@@ -14,6 +14,15 @@ class ProductColorEntity(
     val color: ProductColorEnum,
     val additionalPrice: Int = 0
 ) : BaseEntity() {
+    fun toDomain(): ProductColor {
+        return ProductColor(
+            id = id,
+            productId = productId,
+            color = color,
+            additionalPrice = additionalPrice
+        )
+    }
+
     companion object {
         fun of(productColor: ProductColor): ProductColorEntity {
             return ProductColorEntity(

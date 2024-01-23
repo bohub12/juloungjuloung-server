@@ -14,7 +14,7 @@ data class ProductImage(
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
 
-fun List<ProductImage>.add(productImages: List<ProductImage>): ProductImages {
+fun List<ProductImage>.combineForValidation(productImages: List<ProductImage>): ProductImages {
     return ProductImages(this + productImages)
 }
 
