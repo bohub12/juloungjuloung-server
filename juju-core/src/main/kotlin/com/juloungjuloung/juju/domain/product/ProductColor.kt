@@ -1,6 +1,8 @@
 package com.juloungjuloung.juju.domain.product
 
 import com.juloungjuloung.juju.enums.ProductColorEnum
+import com.juloungjuloung.juju.exception.BusinessLogicException
+import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_COLOR_DUPLICATE_CODE_IN_SAME_PRODUCT
 
 data class ProductColor(
     val id: Long = 0L,
@@ -21,12 +23,14 @@ data class ProductColors(
     val productColors: List<ProductColor>
 ) {
     init {
-        require(productColors.size <= ProductColorEnum.entries.size)
         requireNoDuplicateColors(productColors)
     }
 
     private fun requireNoDuplicateColors(productColors: List<ProductColor>) {
         val uniqueColors = productColors.map(ProductColor::color).toSet()
-        require(productColors.size == uniqueColors.size) { "Duplicate colors" }
+
+        if (productColors.size != uniqueColors.size) {
+            throw BusinessLogicException(PRODUCT_COLOR_DUPLICATE_CODE_IN_SAME_PRODUCT)
+        }
     }
 }

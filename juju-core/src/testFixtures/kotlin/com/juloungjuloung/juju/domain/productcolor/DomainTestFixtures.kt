@@ -27,7 +27,7 @@ fun productColorCollectionFixture(
         ProductColorEnum.GOLD,
         ProductColorEnum.ROSE_GOLD
     ),
-    additionalPrices: Array<Int> = arrayOf(0, 1000)
+    additionalPrices: List<Int> = listOf(0, 1000)
 ): List<ProductColor> {
     return ids.mapIndexed { index, it ->
         productColorFixture(

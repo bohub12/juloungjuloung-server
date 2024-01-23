@@ -4,7 +4,7 @@ import com.juloungjuloung.juju.enums.ProductColorEnum
 
 data class SaveProductColorRequest(
     val productId: Long,
-    val saveProductImageInternalRequests: List<SaveProductColorInternalRequest>
+    val saveProductColorInternalRequests: List<SaveProductColorInternalRequest>
 )
 
 data class SaveProductColorInternalRequest(
