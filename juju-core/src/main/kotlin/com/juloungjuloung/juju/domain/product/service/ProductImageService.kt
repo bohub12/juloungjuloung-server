@@ -4,8 +4,8 @@ import com.juloungjuloung.juju.constants.ImageFileExtension
 import com.juloungjuloung.juju.constants.S3PathPrefixConstant.PRODUCT_IMAGE
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.ProductImage
-import com.juloungjuloung.juju.domain.product.add
 import com.juloungjuloung.juju.domain.product.changePrimary
+import com.juloungjuloung.juju.domain.product.combineForValidation
 import com.juloungjuloung.juju.domain.product.containsPrimary
 import com.juloungjuloung.juju.domain.product.getPrimary
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
@@ -26,7 +26,7 @@ class ProductImageService(
 ) {
 
     fun read(productId: Long): List<ProductImage> {
-        findProductById(productId)
+        findProductOrException(productId)
 
         return productImageRepository.findByProduct(productId)
     }
@@ -42,12 +42,12 @@ class ProductImageService(
 
     @Transactional
     fun saveAll(saveProductImageVO: SaveProductImageVO): List<Long> {
-        val product = findProductById(saveProductImageVO.productId)
+        val product = findProductOrException(saveProductImageVO.productId)
 
         val productImages = saveProductImageVO.toDomain()
 
         val savedProductImages = productImageRepository.findByProduct(saveProductImageVO.productId)
-        val totalProductImages = savedProductImages.add(productImages)
+        val totalProductImages = savedProductImages.combineForValidation(productImages)
 
         if (productImages.containsPrimary()) {
             changeThumbnailImageInProduct(product, productImages.getPrimary())
@@ -56,7 +56,7 @@ class ProductImageService(
         return productImageRepository.saveAll(totalProductImages.filterNotSaved())
     }
 
-    private fun findProductById(productId: Long): Product {
+    private fun findProductOrException(productId: Long): Product {
         return productRepository.findById(productId)
     }
 
