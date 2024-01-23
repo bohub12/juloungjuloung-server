@@ -6,16 +6,19 @@ import com.juloungjuloung.juju.dto.product.request.ChangePrimaryProductImageRequ
 import com.juloungjuloung.juju.dto.product.request.DeleteProductImageRequest
 import com.juloungjuloung.juju.dto.product.request.SaveProductImageRequest
 import com.juloungjuloung.juju.dto.product.response.GetPreSignedUrlResponse
+import com.juloungjuloung.juju.dto.product.response.ProductImageResponse
 import com.juloungjuloung.juju.objectmapper.toResponse
 import com.juloungjuloung.juju.objectmapper.toSaveVO
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @Tag(name = "상품 이미지 컨트롤러")
@@ -26,9 +29,9 @@ class ProductImageController(
     private val productImageService: ProductImageService
 ) {
 
-    @PostMapping("/pre-signed-url")
-    fun createPreSignedUrl(): ApiResponse<GetPreSignedUrlResponse> {
-        return success(toResponse(createPreSignedUrlServiceFacade.getPreSignedUrl()))
+    @GetMapping
+    fun readProductImages(@RequestParam productId: Long): ApiResponse<List<ProductImageResponse>> {
+        return success(productImageService.read(productId).map { toResponse(it) })
     }
 
     @PostMapping
@@ -38,17 +41,22 @@ class ProductImageController(
         return success(productImageService.saveAll(toSaveVO(saveProductImageRequest)))
     }
 
-    @PutMapping("change-primary")
-    fun changePrimaryImage(
-        @RequestBody request: ChangePrimaryProductImageRequest
-    ): ApiResponse<Long> {
-        return success(productImageService.changePrimary(request.productId, request.primaryProductImageId))
-    }
-
     @DeleteMapping
     fun delete(
         @RequestBody deleteProductImageRequest: DeleteProductImageRequest
     ): ApiResponse<Boolean> {
         return success(productImageService.delete(deleteProductImageRequest.productImageIds))
+    }
+
+    @PostMapping("/pre-signed-url")
+    fun createPreSignedUrl(): ApiResponse<GetPreSignedUrlResponse> {
+        return success(toResponse(createPreSignedUrlServiceFacade.getPreSignedUrl()))
+    }
+
+    @PutMapping("change-primary")
+    fun changePrimaryImage(
+        @RequestBody request: ChangePrimaryProductImageRequest
+    ): ApiResponse<Long> {
+        return success(productImageService.changePrimary(request.productId, request.primaryProductImageId))
     }
 }
