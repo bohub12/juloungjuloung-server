@@ -14,7 +14,7 @@ class ProductImageEntity(
     fun toDomain(): ProductImage {
         return ProductImage(
             id = this.id,
-            productId = productId,
+            productId = this.productId,
             imageUrl = this.imageUrl,
             isPrimary = this.isPrimary,
             createdAt = this.createdAt,

@@ -35,4 +35,9 @@ class AwsS3Service(
 
         return s3PreSigner.presignPutObject(preSignRequest).url().toString()
     }
+
+    fun getVirtualImagePath(uniquePath: String, fileExtension: ImageFileExtension): String {
+        // TODO: CloudFront URL 로 대체 예정 (ConfigurationProperties)
+        return "https://test.com/" + uniquePath + fileExtension.extension
+    }
 }
