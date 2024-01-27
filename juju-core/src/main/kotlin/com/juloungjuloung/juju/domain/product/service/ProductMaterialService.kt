@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ProductMaterialService(
-    private val productMaterialRepository: ProductMaterialRepository,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val productMaterialRepository: ProductMaterialRepository
 ) {
 
     @Transactional
