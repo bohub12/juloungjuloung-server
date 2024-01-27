@@ -7,7 +7,7 @@ import com.juloungjuloung.juju.dto.product.request.SaveProductColorRequest
 fun toSaveVO(request: SaveProductColorRequest): SaveProductColorVO {
     return SaveProductColorVO(
         productId = request.productId,
-        saveProductColorInternalVOs = request.saveProductImageInternalRequests.map {
+        saveProductColorInternalVOs = request.saveProductColorInternalRequests.map {
             SaveProductColorInternalVO(
                 color = it.color,
                 additionalPrice = it.additionalPrice

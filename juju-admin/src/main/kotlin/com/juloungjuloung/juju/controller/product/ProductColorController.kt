@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.controller.product
 
 import com.juloungjuloung.juju.domain.product.service.ProductColorService
+import com.juloungjuloung.juju.dto.product.request.DeleteProductColorRequest
 import com.juloungjuloung.juju.dto.product.request.SaveProductColorRequest
 import com.juloungjuloung.juju.dto.product.response.ProductColorResponse
 import com.juloungjuloung.juju.objectmapper.toResponse
@@ -8,6 +9,7 @@ import com.juloungjuloung.juju.objectmapper.toSaveVO
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -32,5 +34,12 @@ class ProductColorController(
         @RequestBody saveProductColorRequest: SaveProductColorRequest
     ): ApiResponse<List<Long>> {
         return success(productColorService.saveAll(toSaveVO(saveProductColorRequest)))
+    }
+
+    @DeleteMapping
+    fun deleteAll(
+        @RequestBody deleteProductColorRequest: DeleteProductColorRequest
+    ): ApiResponse<Boolean> {
+        return success(productColorService.deleteAll(deleteProductColorRequest.productColorIds))
     }
 }

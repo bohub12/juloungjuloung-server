@@ -52,6 +52,7 @@ class ProductColorRepositoryImplTest {
         val findProductColors = productColorRepositoryImpl.findByProduct(productId)
         findProductColors.size shouldBe savedProductColorIds.size
         findProductColors.map { it.color } shouldContainExactlyInAnyOrder productColors.map { it.color }
-        findProductColors.map { it.additionalPrice } shouldContainExactlyInAnyOrder productColors.map { it.additionalPrice }
+        findProductColors.map { it.additionalPrice }
+            .shouldContainExactlyInAnyOrder(productColors.map { it.additionalPrice })
     }
 }
