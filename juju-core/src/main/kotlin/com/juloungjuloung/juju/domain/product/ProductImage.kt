@@ -51,12 +51,4 @@ data class ProductImages(
             throw BusinessLogicException(PRODUCT_IMAGE_PRIMARY_NOT_ONE)
         }
     }
-
-    fun getPrimaryImage(): ProductImage {
-        return productImages.first { it.isPrimary }
-    }
-
-    fun filterNotSaved(): List<ProductImage> {
-        return productImages.filter { it.id == 0L }
-    }
 }

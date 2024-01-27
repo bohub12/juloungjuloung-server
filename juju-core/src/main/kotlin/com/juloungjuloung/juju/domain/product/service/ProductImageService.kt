@@ -1,7 +1,5 @@
 package com.juloungjuloung.juju.domain.product.service
 
-import com.juloungjuloung.juju.constants.ImageFileExtension
-import com.juloungjuloung.juju.constants.S3PathPrefixConstant.PRODUCT_IMAGE
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.ProductImage
 import com.juloungjuloung.juju.domain.product.changePrimary
@@ -16,7 +14,6 @@ import com.juloungjuloung.juju.response.ApiResponseCode.BAD_REQUEST_ID
 import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_REMOVE_CONDITION_PRIMARY
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.*
 
 @Service
 @Transactional(readOnly = true)
@@ -31,29 +28,27 @@ class ProductImageService(
         return productImageRepository.findByProduct(productId)
     }
 
-    fun createUniquePath(): String {
-        return PRODUCT_IMAGE.prefix + UUID.randomUUID().toString()
-    }
-
-    fun getVirtualImagePath(uniquePath: String, fileExtension: ImageFileExtension): String {
-        // TODO: CloudFront URL 로 대체 예정 (ConfigurationProperties)
-        return "https://test.com/" + uniquePath + fileExtension.extension
-    }
-
     @Transactional
     fun saveAll(saveProductImageVO: SaveProductImageVO): List<Long> {
+        validateSaveCondition(saveProductImageVO)
+
         val product = findProductOrException(saveProductImageVO.productId)
-
         val productImages = saveProductImageVO.toDomain()
-
-        val savedProductImages = productImageRepository.findByProduct(saveProductImageVO.productId)
-        val totalProductImages = savedProductImages.combineForValidation(productImages)
 
         if (productImages.containsPrimary()) {
             changeThumbnailImageInProduct(product, productImages.getPrimary())
         }
 
-        return productImageRepository.saveAll(totalProductImages.filterNotSaved())
+        return productImageRepository.saveAll(productImages)
+    }
+
+    private fun validateSaveCondition(saveProductImageVO: SaveProductImageVO) {
+        findProductOrException(saveProductImageVO.productId)
+
+        val productImages = saveProductImageVO.toDomain()
+        val savedProductImages = productImageRepository.findByProduct(saveProductImageVO.productId)
+
+        savedProductImages.combineForValidation(productImages)
     }
 
     private fun findProductOrException(productId: Long): Product {
