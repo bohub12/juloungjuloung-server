@@ -4,6 +4,7 @@ import com.juloungjuloung.juju.RepositoryIntegrationTest
 import com.juloungjuloung.juju.domain.productmaterial.productMaterialCollectionFixture
 import com.juloungjuloung.juju.enums.ProductMaterialEnum.K18
 import com.juloungjuloung.juju.enums.ProductMaterialEnum.K22
+import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager
@@ -58,5 +59,24 @@ class ProductMaterialRepositoryImplTest {
         val savedProductMaterials = productMaterialRepositoryImpl.findByProduct(productId)
         savedProductMaterials.size shouldBe productMaterials.size
         savedProductMaterials.map { it.id } shouldContainExactlyInAnyOrder savedProductMaterialIds
+    }
+
+    @Test
+    fun `deleteAll_성공`() {
+        // given
+        val productId = 1L
+        val savedProductMaterialIds = productMaterialRepositoryImpl.saveAll(
+            productMaterialCollectionFixture(
+                productId = productId,
+                materials = listOf(K18, K22)
+            )
+        )
+
+        // when
+        productMaterialRepositoryImpl.deleteAll(savedProductMaterialIds)
+
+        // then
+        val findProductMaterials = productMaterialRepositoryImpl.findByIds(savedProductMaterialIds)
+        findProductMaterials.shouldBeEmpty()
     }
 }

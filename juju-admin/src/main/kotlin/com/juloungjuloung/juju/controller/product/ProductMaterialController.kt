@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.controller.product
 
 import com.juloungjuloung.juju.domain.product.service.ProductMaterialService
+import com.juloungjuloung.juju.dto.product.request.DeleteProductMaterialRequest
 import com.juloungjuloung.juju.dto.product.request.SaveProductMaterialRequest
 import com.juloungjuloung.juju.dto.product.response.ProductMaterialResponse
 import com.juloungjuloung.juju.objectmapper.toResponse
@@ -8,6 +9,7 @@ import com.juloungjuloung.juju.objectmapper.toSaveVO
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import io.swagger.v3.oas.annotations.tags.Tag
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -34,5 +36,12 @@ class ProductMaterialController(
         @RequestBody saveProductMaterialRequest: SaveProductMaterialRequest
     ): ApiResponse<List<Long>> {
         return success(productMaterialService.saveAll(toSaveVO(saveProductMaterialRequest)))
+    }
+
+    @DeleteMapping
+    fun deleteAll(
+        @RequestBody deleteProductMaterialRequest: DeleteProductMaterialRequest
+    ): ApiResponse<Boolean> {
+        return success(productMaterialService.deleteAll(deleteProductMaterialRequest.productMaterialIds))
     }
 }
