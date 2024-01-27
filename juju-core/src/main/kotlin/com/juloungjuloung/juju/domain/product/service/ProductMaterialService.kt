@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.domain.product.service
 
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.domain.product.ProductMaterial
 import com.juloungjuloung.juju.domain.product.combineForValidation
 import com.juloungjuloung.juju.domain.product.repository.ProductMaterialRepository
 import com.juloungjuloung.juju.domain.product.repository.ProductRepository
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional(readOnly = true)
 class ProductMaterialService(
     private val productRepository: ProductRepository,
     private val productMaterialRepository: ProductMaterialRepository
@@ -32,5 +34,9 @@ class ProductMaterialService(
 
     private fun findProductOrException(productId: Long): Product {
         return productRepository.findById(productId)
+    }
+
+    fun readProductMaterials(productId: Long): List<ProductMaterial> {
+        return productMaterialRepository.findByProduct(productId)
     }
 }
