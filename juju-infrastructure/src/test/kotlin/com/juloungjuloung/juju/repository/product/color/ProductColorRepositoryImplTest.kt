@@ -2,6 +2,7 @@ package com.juloungjuloung.juju.repository.product.color
 
 import com.juloungjuloung.juju.RepositoryIntegrationTest
 import com.juloungjuloung.juju.domain.productcolor.productColorCollectionFixture
+import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager
@@ -52,6 +53,21 @@ class ProductColorRepositoryImplTest {
         val findProductColors = productColorRepositoryImpl.findByProduct(productId)
         findProductColors.size shouldBe savedProductColorIds.size
         findProductColors.map { it.color } shouldContainExactlyInAnyOrder productColors.map { it.color }
-        findProductColors.map { it.additionalPrice } shouldContainExactlyInAnyOrder productColors.map { it.additionalPrice }
+        findProductColors.map { it.additionalPrice }
+            .shouldContainExactlyInAnyOrder(productColors.map { it.additionalPrice })
+    }
+
+    @Test
+    fun `deleteAll_성공`() {
+        // given
+        val productId = 1L
+        val productColorIds = productColorRepositoryImpl.saveAll(productColorCollectionFixture(productId = productId))
+
+        // when
+        productColorRepositoryImpl.deleteAll(productColorIds)
+
+        // then
+        val findProductColors = productColorRepositoryImpl.findByIds(productColorIds)
+        findProductColors.shouldBeEmpty()
     }
 }
