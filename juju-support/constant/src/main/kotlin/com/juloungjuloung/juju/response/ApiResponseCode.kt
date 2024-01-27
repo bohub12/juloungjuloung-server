@@ -23,5 +23,8 @@ enum class ApiResponseCode(
     PRODUCT_IMAGE_REMOVE_CONDITION_PRIMARY(1102, "기본 이미지는 삭제할 수 없습니다"),
 
     // 1200 [Product Color]
-    PRODUCT_COLOR_DUPLICATE_CODE_IN_SAME_PRODUCT(1200, "한 상품에 대한 적용 가능 색상이 중복되었습니다")
+    PRODUCT_COLOR_DUPLICATE_CODE_IN_SAME_PRODUCT(1200, "한 상품에 대한 적용 가능 색상이 중복되었습니다"),
+
+    // 1300 [Product Material]
+    PRODUCT_MATERIAL_DUPLICATE_CODE_IN_SAME_PRODUCT(1300, "한 상품에 대한 적용 가능 재질이 중복되었습니다")
 }
