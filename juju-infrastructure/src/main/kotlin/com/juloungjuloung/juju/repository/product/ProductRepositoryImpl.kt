@@ -6,6 +6,7 @@ import com.juloungjuloung.juju.entity.product.QProductEntity.Companion.productEn
 import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode
 import com.querydsl.jpa.impl.JPAQueryFactory
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -17,6 +18,12 @@ class ProductRepositoryImpl(
     override fun findById(productId: Long): Product {
         return delegate.findById(productId).orElseThrow { BusinessLogicException(ApiResponseCode.BAD_REQUEST_ID) }
             .toDomain()
+    }
+
+    override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Product> {
+        return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
+            .map { it.toDomain() }
+            .toList()
     }
 
     override fun changePrimaryImage(product: Product): Long {

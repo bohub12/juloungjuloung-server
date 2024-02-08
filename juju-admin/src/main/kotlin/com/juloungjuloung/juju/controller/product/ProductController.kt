@@ -30,16 +30,20 @@ class ProductController(
 
     @GetMapping
     fun readProducts(
-        @RequestParam productType: ProductTypeEnum,
+        @RequestParam(required = false, defaultValue = "BASE") productType: ProductTypeEnum,
         @RequestParam(value = "page", required = false, defaultValue = "0") page: Int,
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): ApiResponse<List<ProductResponse>> {
         val productsWithCount = productServiceFacade.read(productType, page, size)
         val totalPageCount =
-            if (productsWithCount.totalElementCount % size == 0L) {
-                productsWithCount.totalElementCount / size
-            } else {
+            if (productsWithCount.totalElementCount % size != 0L) {
                 productsWithCount.totalElementCount / size + 1
+            } else {
+                if (productsWithCount.totalElementCount == 0L) {
+                    1
+                } else {
+                    productsWithCount.totalElementCount / size
+                }
             }
 
         return success(

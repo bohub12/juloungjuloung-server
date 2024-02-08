@@ -15,7 +15,7 @@ class ProductServiceImpl(
     private val productRepository: ProductRepository
 ) : ProductService {
     override fun read(page: Int, size: Int): List<Product> {
-        TODO("Not yet implemented")
+        return productRepository.findAllByOrderByCreatedAt(page, size)
     }
 
     override fun readById(id: Long): Product {
