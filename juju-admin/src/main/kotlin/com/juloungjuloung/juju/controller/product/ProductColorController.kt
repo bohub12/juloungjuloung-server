@@ -30,14 +30,14 @@ class ProductColorController(
     }
 
     @PostMapping
-    fun saveAll(
+    fun saveProductColors(
         @RequestBody saveProductColorRequest: SaveProductColorRequest
     ): ApiResponse<List<Long>> {
         return success(productColorService.saveAll(toSaveVO(saveProductColorRequest)))
     }
 
     @DeleteMapping
-    fun deleteAll(
+    fun deleteProductColors(
         @RequestBody deleteProductColorRequest: DeleteProductColorRequest
     ): ApiResponse<Boolean> {
         return success(productColorService.deleteAll(deleteProductColorRequest.productColorIds))
