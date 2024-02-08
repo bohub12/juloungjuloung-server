@@ -23,6 +23,10 @@ class NecklaceService(
         return necklaceRepository.findById(id)
     }
 
+    override fun count(): Long {
+        return necklaceRepository.count()
+    }
+
     @Transactional
     override fun save(saveProductVO: SaveProductVO): Long {
         return necklaceRepository.save(saveProductVO.toDomain() as Necklace)

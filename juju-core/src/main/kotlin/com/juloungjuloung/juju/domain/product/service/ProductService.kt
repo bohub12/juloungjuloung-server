@@ -11,6 +11,8 @@ interface ProductService {
 
     fun readById(id: Long): Product
 
+    fun count(): Long
+
     fun save(saveProductVO: SaveProductVO): Long
 
     fun update(updateProductVO: UpdateProductVO): Long

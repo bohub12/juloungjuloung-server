@@ -22,6 +22,10 @@ class ProductServiceImpl(
         return productRepository.findById(id)
     }
 
+    override fun count(): Long {
+        return productRepository.count()
+    }
+
     override fun save(saveProductVO: SaveProductVO): Long {
         TODO("Not yet implemented")
     }

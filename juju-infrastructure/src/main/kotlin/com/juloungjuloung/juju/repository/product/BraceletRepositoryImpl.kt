@@ -15,15 +15,22 @@ class BraceletRepositoryImpl(
     private val delegate: BraceletJpaRepository,
     private val jpaQueryFactory: JPAQueryFactory
 ) : BraceletRepository {
+    // TODO : 삭제 기능 추가될 때, 논리적으로 삭제되지 않은 로우만 조회하도록 수정
     override fun findById(id: Long): Bracelet {
         return delegate.findById(id).orElseThrow { BusinessLogicException(ApiResponseCode.BAD_REQUEST_ID) }
             .toDomain()
     }
 
+    // TODO : 삭제 기능 추가될 때, 논리적으로 삭제되지 않은 로우만 조회하도록 수정
     override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Bracelet> {
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()
+    }
+
+    // TODO : 삭제 기능 추가될 때, 논리적으로 삭제되지 않은 로우만 조회하도록 수정
+    override fun count(): Long {
+        return delegate.count()
     }
 
     override fun save(bracelet: Bracelet): Long {

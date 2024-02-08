@@ -15,6 +15,7 @@ class EarringRepositoryImpl(
     private val delegate: EarringJpaRepository,
     private val jpaQueryFactory: JPAQueryFactory
 ) : EarringRepository {
+    // TODO : 삭제 기능 추가될 때, 논리적으로 삭제되지 않은 로우만 조회하도록 수정
     override fun findById(id: Long): Earring {
         return delegate.findById(id).orElseThrow { BusinessLogicException(ApiResponseCode.BAD_REQUEST_ID) }
             .toDomain()
@@ -24,6 +25,10 @@ class EarringRepositoryImpl(
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()
+    }
+
+    override fun count(): Long {
+        return delegate.count()
     }
 
     override fun save(earring: Earring): Long {

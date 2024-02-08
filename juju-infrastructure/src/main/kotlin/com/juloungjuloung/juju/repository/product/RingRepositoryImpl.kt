@@ -15,6 +15,7 @@ class RingRepositoryImpl(
     private val delegate: RingJpaRepository,
     private val jpaQueryFactory: JPAQueryFactory
 ) : RingRepository {
+    // TODO : 삭제 기능 추가될 때, 논리적으로 삭제되지 않은 로우만 조회하도록 수정
     override fun findById(id: Long): Ring {
         return delegate.findById(id).orElseThrow { BusinessLogicException(ApiResponseCode.BAD_REQUEST_ID) }
             .toDomain()
@@ -24,6 +25,10 @@ class RingRepositoryImpl(
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()
+    }
+
+    override fun count(): Long {
+        return delegate.count()
     }
 
     override fun save(ring: Ring): Long {
