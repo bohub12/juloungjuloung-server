@@ -35,10 +35,16 @@ class ProductController(
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): ApiResponse<List<ProductResponse>> {
         val productsWithCount = productServiceFacade.read(productType, page, size)
+        val totalPageCount =
+            if (productsWithCount.totalElementCount % size == 0L) {
+                productsWithCount.totalElementCount / size
+            } else {
+                productsWithCount.totalElementCount / size + 1
+            }
 
         return success(
             productsWithCount.products.map { toResponse(it) }.toList(),
-            PageResponse(page, size, (productsWithCount.totalElementCount / size + 1).toInt())
+            PageResponse(page, size, totalPageCount.toInt())
         )
     }
 
