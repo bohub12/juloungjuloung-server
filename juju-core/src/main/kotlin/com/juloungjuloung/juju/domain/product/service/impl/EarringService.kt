@@ -23,6 +23,10 @@ class EarringService(
         return earringRepository.findById(id)
     }
 
+    override fun count(): Long {
+        return earringRepository.count()
+    }
+
     @Transactional
     override fun save(saveProductVO: SaveProductVO): Long {
         return earringRepository.save(saveProductVO.toDomain() as Earring)

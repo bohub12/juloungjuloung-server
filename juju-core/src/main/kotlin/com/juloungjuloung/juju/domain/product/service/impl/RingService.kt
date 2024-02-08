@@ -24,6 +24,10 @@ class RingService(
         return ringRepository.findById(id)
     }
 
+    override fun count(): Long {
+        return ringRepository.count()
+    }
+
     @Transactional
     override fun save(saveProductVO: SaveProductVO): Long {
         return ringRepository.save(saveProductVO.toDomain() as Ring)

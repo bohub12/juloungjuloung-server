@@ -13,6 +13,7 @@ class ProductRepositoryImpl(
     private val delegate: ProductJpaRepository,
     private val jpaQueryFactory: JPAQueryFactory
 ) : ProductRepository {
+    // TODO : 삭제 기능 추가될 때, 논리적으로 삭제되지 않은 로우만 조회하도록 수정
     override fun findById(productId: Long): Product {
         return delegate.findById(productId).orElseThrow { BusinessLogicException(ApiResponseCode.BAD_REQUEST_ID) }
             .toDomain()
@@ -25,5 +26,9 @@ class ProductRepositoryImpl(
             .execute()
 
         return product.id
+    }
+
+    override fun count(): Long {
+        return delegate.count()
     }
 }

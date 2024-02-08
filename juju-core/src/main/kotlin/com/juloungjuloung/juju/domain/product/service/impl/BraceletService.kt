@@ -24,6 +24,10 @@ class BraceletService(
         return braceletRepository.findById(id)
     }
 
+    override fun count(): Long {
+        return braceletRepository.count()
+    }
+
     @Transactional
     override fun save(saveProductVO: SaveProductVO): Long {
         return braceletRepository.save(saveProductVO.toDomain() as Bracelet)
