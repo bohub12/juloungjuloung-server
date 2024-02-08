@@ -52,3 +52,8 @@ open class Product(
         this.thumbnailImage = imageUrl
     }
 }
+
+data class ProductsWithCount(
+    val products: List<Product>,
+    val totalElementCount: Long
+)
