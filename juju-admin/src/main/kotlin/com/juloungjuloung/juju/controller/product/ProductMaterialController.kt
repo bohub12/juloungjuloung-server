@@ -32,14 +32,14 @@ class ProductMaterialController(
     }
 
     @PostMapping
-    fun saveAll(
+    fun saveProductMaterials(
         @RequestBody saveProductMaterialRequest: SaveProductMaterialRequest
     ): ApiResponse<List<Long>> {
         return success(productMaterialService.saveAll(toSaveVO(saveProductMaterialRequest)))
     }
 
     @DeleteMapping
-    fun deleteAll(
+    fun deleteProductMaterials(
         @RequestBody deleteProductMaterialRequest: DeleteProductMaterialRequest
     ): ApiResponse<Boolean> {
         return success(productMaterialService.deleteAll(deleteProductMaterialRequest.productMaterialIds))

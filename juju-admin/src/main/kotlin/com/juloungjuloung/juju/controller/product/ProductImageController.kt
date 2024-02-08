@@ -35,14 +35,14 @@ class ProductImageController(
     }
 
     @PostMapping
-    fun saveAll(
+    fun saveProductImages(
         @RequestBody saveProductImageRequest: SaveProductImageRequest
     ): ApiResponse<List<Long>> {
         return success(productImageService.saveAll(toSaveVO(saveProductImageRequest)))
     }
 
     @DeleteMapping
-    fun delete(
+    fun deleteProductImages(
         @RequestBody deleteProductImageRequest: DeleteProductImageRequest
     ): ApiResponse<Boolean> {
         return success(productImageService.delete(deleteProductImageRequest.productImageIds))
@@ -54,7 +54,7 @@ class ProductImageController(
     }
 
     @PutMapping("change-primary")
-    fun changePrimaryImage(
+    fun changePrimaryImageOfProduct(
         @RequestBody request: ChangePrimaryProductImageRequest
     ): ApiResponse<Long> {
         return success(productImageService.changePrimary(request.productId, request.primaryProductImageId))
