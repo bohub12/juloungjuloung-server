@@ -1,15 +1,15 @@
 package com.juloungjuloung.juju.domain.product
 
 import com.juloungjuloung.juju.exception.BusinessLogicException
-import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_PRIMARY_NOT_ONE
 import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_SIZE_EXCEED_MAX
+import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_THUMBNAIL_NOT_ONE
 import java.time.LocalDateTime
 
 data class ProductImage(
     val id: Long = 0L,
     val productId: Long,
     val imageUrl: String,
-    var isPrimary: Boolean,
+    var isThumbnail: Boolean,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
@@ -18,21 +18,21 @@ fun List<ProductImage>.combineForValidation(productImages: List<ProductImage>): 
     return ProductImages(this + productImages)
 }
 
-fun List<ProductImage>.containsPrimary(): Boolean {
-    return this.any { it.isPrimary }
+fun List<ProductImage>.containsThumbnail(): Boolean {
+    return this.any { it.isThumbnail }
 }
 
-fun List<ProductImage>.getPrimary(): ProductImage {
-    return this.first { it.isPrimary }
+fun List<ProductImage>.getThumbnail(): ProductImage {
+    return this.first { it.isThumbnail }
 }
 
-fun List<ProductImage>.getNonPrimary(): List<ProductImage> {
-    return this.filter { !it.isPrimary }
+fun List<ProductImage>.getNonThumbnails(): List<ProductImage> {
+    return this.filter { !it.isThumbnail }
 }
 
-fun List<ProductImage>.changePrimary(primaryProductImageId: Long) {
-    this.filter { it.id != primaryProductImageId }.map { it.isPrimary = false }
-    this.filter { it.id == primaryProductImageId }.map { it.isPrimary = true }
+fun List<ProductImage>.changeThumbnail(productThumbnailImageId: Long) {
+    this.filter { it.id != productThumbnailImageId }.map { it.isThumbnail = false }
+    this.filter { it.id == productThumbnailImageId }.map { it.isThumbnail = true }
 }
 
 data class ProductImages(
@@ -47,8 +47,8 @@ data class ProductImages(
             throw BusinessLogicException(PRODUCT_IMAGE_SIZE_EXCEED_MAX)
         }
 
-        if (productImages.filter { it.isPrimary }.size != 1) {
-            throw BusinessLogicException(PRODUCT_IMAGE_PRIMARY_NOT_ONE)
+        if (productImages.filter { it.isThumbnail }.size != 1) {
+            throw BusinessLogicException(PRODUCT_IMAGE_THUMBNAIL_NOT_ONE)
         }
     }
 }

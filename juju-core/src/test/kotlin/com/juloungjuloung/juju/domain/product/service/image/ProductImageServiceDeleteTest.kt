@@ -23,7 +23,7 @@ class ProductImageServiceDeleteTest : BehaviorSpec({
 
         Then("정상요청이라면, 정상 실행") {
             every { productImageRepository.findByIds(productImageIdsForDelete) } returns productImageIdsForDelete
-                .map { productImageFixture(isPrimary = false, id = it) }
+                .map { productImageFixture(isThumbnail = false, id = it) }
 
             productImageService.delete(productImageIdsForDelete)
 
@@ -41,12 +41,12 @@ class ProductImageServiceDeleteTest : BehaviorSpec({
 
         Then("삭제하려는 이미지가 기본 이미지라면 예외 발생") {
             every { productImageRepository.findByIds(productImageIdsForDelete) } returns productImageIdsForDelete
-                .mapIndexed { index, id -> productImageFixture(isPrimary = index == 0, id = id) }
+                .mapIndexed { index, id -> productImageFixture(isThumbnail = index == 0, id = id) }
 
             val exception = shouldThrow<BusinessLogicException> {
                 productImageService.delete(productImageIdsForDelete)
             }
-            exception.code shouldBe ApiResponseCode.PRODUCT_IMAGE_REMOVE_CONDITION_PRIMARY
+            exception.code shouldBe ApiResponseCode.PRODUCT_IMAGE_REMOVE_CONDITION_THUMBNAIL
         }
     }
 })

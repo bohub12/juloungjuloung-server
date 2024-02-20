@@ -1,6 +1,6 @@
 package com.juloungjuloung.juju.domain.product.service.image
 
-import com.juloungjuloung.juju.domain.product.getPrimary
+import com.juloungjuloung.juju.domain.product.getThumbnail
 import com.juloungjuloung.juju.domain.product.productFixture
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.domain.product.repository.ProductRepository
@@ -14,7 +14,7 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 
-class ProductImageServiceChangePrimaryTest : BehaviorSpec({
+class ProductImageServiceChangeThumbnailTest : BehaviorSpec({
     val productRepository = mockk<ProductRepository>()
     val productImageRepository = mockk<ProductImageRepository>()
     val productImageService = ProductImageService(productRepository, productImageRepository)
@@ -23,29 +23,29 @@ class ProductImageServiceChangePrimaryTest : BehaviorSpec({
         val productId = 1L
         val product = productFixture(id = productId)
 
-        val primaryProductImageId = 1L
-        val notPrimaryProductImageIds = listOf(2L, 3L)
+        val thumbnailProductImageId = 1L
+        val notThumbnailProductImageIds = listOf(2L, 3L)
         val productImages = productImageCollectionFixture(
-            primaryId = primaryProductImageId,
-            notPrimaryIds = notPrimaryProductImageIds,
+            thumbnailId = thumbnailProductImageId,
+            notThumbnailIds = notThumbnailProductImageIds,
             productId = productId
         )
 
         every { productRepository.findById(productId) } returns product
         every { productImageRepository.findByProduct(productId) } returns productImages
-        every { productRepository.changePrimaryImage(any()) } returns productId
-        every { productImageRepository.updatePrimary(any()) } just Runs
+        every { productRepository.changeThumbnailImage(any()) } returns productId
+        every { productImageRepository.changeThumbnail(any()) } just Runs
 
         When("기본이미지를 변경하면") {
-            val newPrimaryProductImageId = 3L
-            productImageService.changePrimary(productId, newPrimaryProductImageId)
+            val newthumbnailProductImageId = 3L
+            productImageService.changeThumbnail(productId, newthumbnailProductImageId)
 
             Then("상품 썸네일 이미지와 상품 기본 이미지가 변경된다") {
-                productImages.getPrimary().id shouldBe newPrimaryProductImageId
+                productImages.getThumbnail().id shouldBe newthumbnailProductImageId
                 product.thumbnailImage shouldBe productImages.first { it.id == 3L }.imageUrl
 
-                verify { productRepository.changePrimaryImage(any()) }
-                verify { productImageRepository.updatePrimary(any()) }
+                verify { productRepository.changeThumbnailImage(any()) }
+                verify { productImageRepository.changeThumbnail(any()) }
             }
         }
     }

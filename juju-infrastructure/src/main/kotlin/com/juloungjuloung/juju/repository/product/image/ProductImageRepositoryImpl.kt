@@ -1,8 +1,8 @@
 package com.juloungjuloung.juju.repository.product.image
 
 import com.juloungjuloung.juju.domain.product.ProductImage
-import com.juloungjuloung.juju.domain.product.getNonPrimary
-import com.juloungjuloung.juju.domain.product.getPrimary
+import com.juloungjuloung.juju.domain.product.getNonThumbnails
+import com.juloungjuloung.juju.domain.product.getThumbnail
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.entity.product.ProductImageEntity
 import com.juloungjuloung.juju.entity.product.QProductImageEntity.Companion.productImageEntity
@@ -36,15 +36,15 @@ class ProductImageRepositoryImpl(
             .execute()
     }
 
-    override fun updatePrimary(productImages: List<ProductImage>) {
+    override fun changeThumbnail(productImages: List<ProductImage>) {
         jpaQueryFactory.update(productImageEntity)
-            .set(productImageEntity.isPrimary, false)
-            .where(productImageEntity.id.`in`(productImages.getNonPrimary().map { it.id }))
+            .set(productImageEntity.isThumbnail, false)
+            .where(productImageEntity.id.`in`(productImages.getNonThumbnails().map { it.id }))
             .execute()
 
         jpaQueryFactory.update(productImageEntity)
-            .set(productImageEntity.isPrimary, true)
-            .where(productImageEntity.id.eq(productImages.getPrimary().id))
+            .set(productImageEntity.isThumbnail, true)
+            .where(productImageEntity.id.eq(productImages.getThumbnail().id))
             .execute()
     }
 }

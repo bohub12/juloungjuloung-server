@@ -14,7 +14,6 @@ fun saveProductVOFixture(productType: ProductTypeEnum): SaveProductVO {
         .setExp(SaveProductVO::price, 10000L)
         .setExp(SaveProductVO::weightByMilliGram, 10000L)
         .setExp(SaveProductVO::isDisplay, true)
-        .setNotNullExp(SaveProductVO::thumbnailImage)
         .setExp(SaveProductVO::isDiamond, false)
         .sample()
 }

@@ -2,16 +2,16 @@ package com.juloungjuloung.juju.domain.product.service
 
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.ProductImage
-import com.juloungjuloung.juju.domain.product.changePrimary
+import com.juloungjuloung.juju.domain.product.changeThumbnail
 import com.juloungjuloung.juju.domain.product.combineForValidation
-import com.juloungjuloung.juju.domain.product.containsPrimary
-import com.juloungjuloung.juju.domain.product.getPrimary
+import com.juloungjuloung.juju.domain.product.containsThumbnail
+import com.juloungjuloung.juju.domain.product.getThumbnail
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.domain.product.repository.ProductRepository
 import com.juloungjuloung.juju.domain.product.vo.SaveProductImageVO
 import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode.BAD_REQUEST_ID
-import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_REMOVE_CONDITION_PRIMARY
+import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_REMOVE_CONDITION_THUMBNAIL
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -35,8 +35,8 @@ class ProductImageService(
         val product = findProductOrException(saveProductImageVO.productId)
         val productImages = saveProductImageVO.toDomain()
 
-        if (productImages.containsPrimary()) {
-            changeThumbnailImageInProduct(product, productImages.getPrimary())
+        if (productImages.containsThumbnail()) {
+            changeThumbnailImageInProduct(product, productImages.getThumbnail())
         }
 
         return productImageRepository.saveAll(productImages)
@@ -55,9 +55,9 @@ class ProductImageService(
         return productRepository.findById(productId)
     }
 
-    private fun changeThumbnailImageInProduct(product: Product, primaryProductImage: ProductImage) {
-        product.changePrimaryImage(primaryProductImage.imageUrl)
-        productRepository.changePrimaryImage(product)
+    private fun changeThumbnailImageInProduct(product: Product, productThumbnailImage: ProductImage) {
+        product.changeThumbnailImage(productThumbnailImage.imageUrl)
+        productRepository.changeThumbnailImage(product)
     }
 
     @Transactional
@@ -74,8 +74,8 @@ class ProductImageService(
             throw BusinessLogicException(BAD_REQUEST_ID)
         }
 
-        if (productImages.containsPrimary()) {
-            throw BusinessLogicException(PRODUCT_IMAGE_REMOVE_CONDITION_PRIMARY)
+        if (productImages.containsThumbnail()) {
+            throw BusinessLogicException(PRODUCT_IMAGE_REMOVE_CONDITION_THUMBNAIL)
         }
     }
 
@@ -83,15 +83,16 @@ class ProductImageService(
         return productImageRepository.findByIds(productImageIds)
     }
 
-    fun changePrimary(productId: Long, primaryProductImageId: Long): Long {
+    @Transactional
+    fun changeThumbnail(productId: Long, productThumbnailImageId: Long): Long {
         val product = productRepository.findById(productId)
         val productImages = productImageRepository.findByProduct(productId)
 
-        productImages.changePrimary(primaryProductImageId)
-        productImageRepository.updatePrimary(productImages)
+        productImages.changeThumbnail(productThumbnailImageId)
+        productImageRepository.changeThumbnail(productImages)
 
-        changeThumbnailImageInProduct(product, productImages.getPrimary())
+        changeThumbnailImageInProduct(product, productImages.getThumbnail())
 
-        return primaryProductImageId
+        return productThumbnailImageId
     }
 }

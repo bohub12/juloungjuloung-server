@@ -27,7 +27,7 @@ class ProductImageServiceSaveTest : BehaviorSpec({
     Given("상품 이미지들을 저장할 때") {
         val productId = 1L
         every { productRepository.findById(any()) } returns productFixture(id = productId)
-        every { productRepository.changePrimaryImage(any()) } returns productId
+        every { productRepository.changeThumbnailImage(any()) } returns productId
 
         When("저장되어 있는 이미지가 없고") {
             every { productImageRepository.findByProduct(productId = productId) } returns listOf()
@@ -42,12 +42,13 @@ class ProductImageServiceSaveTest : BehaviorSpec({
             }
 
             Then("기본 이미지가 2개 이상이라면 예외 발생") {
-                val saveProductImageVO = saveProductImageVOFixture(isMultiplePrimaryImage = true, productId = productId)
+                val saveProductImageVO =
+                    saveProductImageVOFixture(isMultipleThumbnailImage = true, productId = productId)
 
                 val exception = shouldThrow<BusinessLogicException> {
                     productImageService.saveAll(saveProductImageVO)
                 }
-                exception.code shouldBe ApiResponseCode.PRODUCT_IMAGE_PRIMARY_NOT_ONE
+                exception.code shouldBe ApiResponseCode.PRODUCT_IMAGE_THUMBNAIL_NOT_ONE
             }
 
             Then("최대 이미지 개수를 넘기는 요청이라면 예외 발생") {
@@ -64,12 +65,12 @@ class ProductImageServiceSaveTest : BehaviorSpec({
                 productImageCollectionFixture(productId = productId)
 
             Then("새로운 요청 중 기본 이미지가 있다면 예외가 발생한다") {
-                val saveProductImageVOIncludePrimary = saveProductImageVOFixture(productId = productId)
+                val saveProductImageVOIncludeThumbnail = saveProductImageVOFixture(productId = productId)
 
                 val exception = shouldThrow<BusinessLogicException> {
-                    productImageService.saveAll(saveProductImageVOIncludePrimary)
+                    productImageService.saveAll(saveProductImageVOIncludeThumbnail)
                 }
-                exception.code shouldBe ApiResponseCode.PRODUCT_IMAGE_PRIMARY_NOT_ONE
+                exception.code shouldBe ApiResponseCode.PRODUCT_IMAGE_THUMBNAIL_NOT_ONE
             }
 
             Then("새로운 요청과 저장된 이미지들이 최대 개수를 넘기면 예외가 발생한다") {

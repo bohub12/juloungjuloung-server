@@ -7,5 +7,5 @@ data class SaveProductImageRequest(
 
 data class SaveProductImageInternalRequest(
     val imageUrl: String,
-    val isPrimary: Boolean
+    val isThumbnail: Boolean
 )

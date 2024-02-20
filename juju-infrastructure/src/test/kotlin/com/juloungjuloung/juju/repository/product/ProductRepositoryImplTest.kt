@@ -30,7 +30,7 @@ class ProductRepositoryImplTest : SharedMySQLTestContainer() {
     }
 
     @Test
-    fun `changePrimaryImage_성공`() {
+    fun `changeThumbnailImage_성공`() {
         // given
         val ring = ringFixture()
         val savedProductId = ringRepositoryImpl.save(ring)
@@ -40,7 +40,7 @@ class ProductRepositoryImplTest : SharedMySQLTestContainer() {
 
         // when
         val updatedProduct = productFixture(id = savedProductId, isDisplay = true)
-        productRepositoryImpl.changePrimaryImage(updatedProduct)
+        productRepositoryImpl.changeThumbnailImage(updatedProduct)
 
         em.flush()
         em.clear()

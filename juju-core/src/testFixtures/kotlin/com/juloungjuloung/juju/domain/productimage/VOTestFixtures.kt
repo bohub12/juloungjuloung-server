@@ -8,28 +8,28 @@ import com.navercorp.fixturemonkey.kotlin.setExp
 
 fun saveProductImageVOFixture(
     productId: Long = 1L,
-    isMultiplePrimaryImage: Boolean = false,
+    isMultipleThumbnailImage: Boolean = false,
     exceedMaxSize: Boolean = false
 ): SaveProductImageVO {
     return fixtureMonkey.giveMeBuilder<SaveProductImageVO>()
         .setExp(SaveProductImageVO::productId, productId)
         .setExp(
             SaveProductImageVO::saveProductImageInternalVOs,
-            saveProductImageInternalVOFixture(isMultiplePrimaryImage, exceedMaxSize)
+            saveProductImageInternalVOFixture(isMultipleThumbnailImage, exceedMaxSize)
         )
         .sample()
 }
 
 private fun saveProductImageInternalVOFixture(
-    isMultiplePrimaryImage: Boolean = false,
+    isMultipleThumbnailImage: Boolean = false,
     exceedMaxSize: Boolean = false
 ): List<SaveProductImageInternalVO> {
-    val dummyPrimaryImageVO = SaveProductImageInternalVO("primary.png", true)
+    val dummyPrimaryImageVO = SaveProductImageInternalVO("thumbnail.png", true)
     val dummyNormalImageVO = SaveProductImageInternalVO("normal.png", false)
 
-    return if (!isMultiplePrimaryImage && !exceedMaxSize) {
+    return if (!isMultipleThumbnailImage && !exceedMaxSize) {
         listOf(dummyPrimaryImageVO, dummyNormalImageVO)
-    } else if (isMultiplePrimaryImage) {
+    } else if (isMultipleThumbnailImage) {
         listOf(dummyPrimaryImageVO, dummyPrimaryImageVO)
     } else {
         listOf(

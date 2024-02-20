@@ -13,7 +13,7 @@ data class SaveProductImageVO(
                 saveProductImageInternalVOs = listOf(
                     SaveProductImageInternalVO(
                         imageUrl = imageUrl,
-                        isPrimary = true
+                        isThumbnail = true
                     )
                 )
             )
@@ -25,7 +25,7 @@ data class SaveProductImageVO(
             ProductImage(
                 productId = productId,
                 imageUrl = it.imageUrl,
-                isPrimary = it.isPrimary
+                isThumbnail = it.isThumbnail
             )
         }
     }
@@ -33,5 +33,5 @@ data class SaveProductImageVO(
 
 data class SaveProductImageInternalVO(
     val imageUrl: String,
-    val isPrimary: Boolean
+    val isThumbnail: Boolean
 )

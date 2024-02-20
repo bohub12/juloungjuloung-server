@@ -8,7 +8,7 @@ import jakarta.persistence.Entity
 class ProductImageEntity(
     val productId: Long,
     val imageUrl: String,
-    val isPrimary: Boolean
+    val isThumbnail: Boolean
 ) : BaseEntity() {
 
     fun toDomain(): ProductImage {
@@ -16,7 +16,7 @@ class ProductImageEntity(
             id = this.id,
             productId = this.productId,
             imageUrl = this.imageUrl,
-            isPrimary = this.isPrimary,
+            isThumbnail = this.isThumbnail,
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
@@ -27,7 +27,7 @@ class ProductImageEntity(
             return ProductImageEntity(
                 productId = productImage.productId,
                 imageUrl = productImage.imageUrl,
-                isPrimary = productImage.isPrimary
+                isThumbnail = productImage.isThumbnail
             )
         }
     }

@@ -38,7 +38,6 @@ open class Product(
         updateProductVO.name?.let { this.name = updateProductVO.name }
         updateProductVO.price?.let { this.price = updateProductVO.price }
         updateProductVO.weightByMilliGram?.let { this.weightByMilliGram = updateProductVO.weightByMilliGram }
-        updateProductVO.thumbnailImage?.let { this.thumbnailImage = updateProductVO.thumbnailImage }
         updateProductVO.isDiamond?.let { this.isDiamond = updateProductVO.isDiamond }
         updateProductVO.totalDiamondCaratX100?.let {
             this.totalDiamondCaratX100 = updateProductVO.totalDiamondCaratX100
@@ -48,7 +47,7 @@ open class Product(
         requireProperties()
     }
 
-    fun changePrimaryImage(imageUrl: String) {
+    fun changeThumbnailImage(imageUrl: String) {
         this.thumbnailImage = imageUrl
     }
 }

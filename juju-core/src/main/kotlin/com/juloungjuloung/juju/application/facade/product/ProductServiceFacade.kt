@@ -2,8 +2,6 @@ package com.juloungjuloung.juju.application.facade.product
 
 import com.juloungjuloung.juju.application.factory.ProductServiceFactory
 import com.juloungjuloung.juju.domain.product.ProductsWithCount
-import com.juloungjuloung.juju.domain.product.service.ProductImageService
-import com.juloungjuloung.juju.domain.product.vo.SaveProductImageVO
 import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
 import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
@@ -13,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class ProductServiceFacade(
-    private val productServiceFactory: ProductServiceFactory,
-    private val productImageService: ProductImageService
+    private val productServiceFactory: ProductServiceFactory
 ) {
 
     fun read(productType: ProductTypeEnum, page: Int, size: Int): ProductsWithCount {
@@ -28,25 +25,11 @@ class ProductServiceFacade(
 
     @Transactional
     fun save(saveProductVO: SaveProductVO): Long {
-        val savedProductId = productServiceFactory.get(saveProductVO.productType)
-            .save(saveProductVO)
-
-        if (saveProductVO.hasThumbnailImage()) {
-            productImageService.saveAll(
-                SaveProductImageVO.buildForThumbnail(
-                    savedProductId,
-                    saveProductVO.thumbnailImage
-                )
-            )
-        }
-
-        return savedProductId
+        return productServiceFactory.get(saveProductVO.productType).save(saveProductVO)
     }
 
     @Transactional
     fun update(updateProductVO: UpdateProductVO): Long {
-        val service = productServiceFactory.get(updateProductVO.productType)
-
-        return service.update(updateProductVO)
+        return productServiceFactory.get(updateProductVO.productType).update(updateProductVO)
     }
 }

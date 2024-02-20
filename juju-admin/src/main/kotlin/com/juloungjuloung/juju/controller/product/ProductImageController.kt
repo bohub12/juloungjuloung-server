@@ -2,7 +2,7 @@ package com.juloungjuloung.juju.controller.product
 
 import com.juloungjuloung.juju.application.facade.product.CreatePreSignedUrlServiceFacade
 import com.juloungjuloung.juju.domain.product.service.ProductImageService
-import com.juloungjuloung.juju.dto.product.request.ChangePrimaryProductImageRequest
+import com.juloungjuloung.juju.dto.product.request.ChangeProductThumbnailImageRequest
 import com.juloungjuloung.juju.dto.product.request.DeleteProductImageRequest
 import com.juloungjuloung.juju.dto.product.request.SaveProductImageRequest
 import com.juloungjuloung.juju.dto.product.response.GetPreSignedUrlResponse
@@ -53,10 +53,10 @@ class ProductImageController(
         return success(toResponse(createPreSignedUrlServiceFacade.getPreSignedUrl()))
     }
 
-    @PutMapping("change-primary")
-    fun changePrimaryImageOfProduct(
-        @RequestBody request: ChangePrimaryProductImageRequest
+    @PutMapping("change-thumbnail")
+    fun changeThumbnailImageOfProduct(
+        @RequestBody request: ChangeProductThumbnailImageRequest
     ): ApiResponse<Long> {
-        return success(productImageService.changePrimary(request.productId, request.primaryProductImageId))
+        return success(productImageService.changeThumbnail(request.productId, request.thumbnailImageId))
     }
 }

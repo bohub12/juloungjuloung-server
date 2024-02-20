@@ -15,6 +15,6 @@ fun toSaveVO(request: SaveProductImageRequest): SaveProductImageVO {
 fun toInternalSaveVO(request: SaveProductImageInternalRequest): SaveProductImageInternalVO {
     return SaveProductImageInternalVO(
         imageUrl = request.imageUrl,
-        isPrimary = request.isPrimary
+        isThumbnail = request.isThumbnail
     )
 }

@@ -1,6 +1,5 @@
 package com.juloungjuloung.juju.dto.product.request
 
-import com.juloungjuloung.juju.enums.ProductImageEnum.PRODUCT_DEFAULT_IMAGE
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode.BAD_REQUEST_ENUM
@@ -20,8 +19,6 @@ data class SaveProductRequest(
 
     @PositiveOrZero
     val weightByMilliGram: Long,
-
-    val thumbnailImage: String = PRODUCT_DEFAULT_IMAGE.url,
 
     val isDiamond: Boolean,
 
