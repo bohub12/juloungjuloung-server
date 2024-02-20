@@ -36,6 +36,10 @@ data class SaveProductVO(
         }
     }
 
+    fun hasThumbnailImage(): Boolean {
+        return thumbnailImage.isNotBlank()
+    }
+
     private fun toBracelet(): Bracelet {
         return Bracelet(
             name = name,

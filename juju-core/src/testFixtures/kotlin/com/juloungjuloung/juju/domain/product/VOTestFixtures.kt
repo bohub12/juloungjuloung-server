@@ -7,9 +7,9 @@ import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
 import com.navercorp.fixturemonkey.kotlin.setExp
 import com.navercorp.fixturemonkey.kotlin.setNotNullExp
 
-fun saveRingVOFixture(): SaveProductVO {
+fun saveProductVOFixture(productType: ProductTypeEnum): SaveProductVO {
     return fixtureMonkey.giveMeBuilder<SaveProductVO>()
-        .setExp(SaveProductVO::productType, ProductTypeEnum.RING)
+        .setExp(SaveProductVO::productType, productType)
         .setNotNullExp(SaveProductVO::name)
         .setExp(SaveProductVO::price, 10000L)
         .setExp(SaveProductVO::weightByMilliGram, 10000L)
