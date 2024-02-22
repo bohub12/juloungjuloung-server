@@ -46,11 +46,4 @@ class ProductImageRepositoryImpl(
             .where(productImageEntity.id.`in`(productImageIds))
             .execute()
     }
-
-    override fun deleteByProduct(productId: Long) {
-        jpaQueryFactory.update(productImageEntity)
-            .set(productImageEntity.deleted, true)
-            .where(productImageEntity.productId.eq(productId))
-            .execute()
-    }
 }
