@@ -9,7 +9,9 @@ interface ProductImageRepository {
 
     fun saveAll(productImages: List<ProductImage>): List<Long>
 
+    fun updateAll(productImages: List<ProductImage>): List<Long>
+
     fun deleteAll(productImageIds: List<Long>)
 
-    fun changeThumbnail(productImages: List<ProductImage>)
+    fun deleteByProduct(productId: Long)
 }

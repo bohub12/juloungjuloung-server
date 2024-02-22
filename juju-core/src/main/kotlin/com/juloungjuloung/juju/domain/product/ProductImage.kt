@@ -14,25 +14,16 @@ data class ProductImage(
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
 
-fun List<ProductImage>.combineForValidation(productImages: List<ProductImage>): ProductImages {
-    return ProductImages(this + productImages)
+fun List<ProductImage>.validate(): ProductImages {
+    return ProductImages(this)
 }
 
-fun List<ProductImage>.containsThumbnail(): Boolean {
-    return this.any { it.isThumbnail }
+fun List<ProductImage>.filterPersisted(): List<ProductImage> {
+    return this.filter { it.id == 0L }
 }
 
-fun List<ProductImage>.getThumbnail(): ProductImage {
-    return this.first { it.isThumbnail }
-}
-
-fun List<ProductImage>.getNonThumbnails(): List<ProductImage> {
-    return this.filter { !it.isThumbnail }
-}
-
-fun List<ProductImage>.changeThumbnail(productThumbnailImageId: Long) {
-    this.filter { it.id != productThumbnailImageId }.map { it.isThumbnail = false }
-    this.filter { it.id == productThumbnailImageId }.map { it.isThumbnail = true }
+fun List<ProductImage>.filterNotPersisted(): List<ProductImage> {
+    return this.filter { it.id != 0L }
 }
 
 data class ProductImages(
@@ -47,8 +38,20 @@ data class ProductImages(
             throw BusinessLogicException(PRODUCT_IMAGE_SIZE_EXCEED_MAX)
         }
 
-        if (productImages.filter { it.isThumbnail }.size != 1) {
+        if (productImages.isNotEmpty() && productImages.filter { it.isThumbnail }.size != 1) {
             throw BusinessLogicException(PRODUCT_IMAGE_THUMBNAIL_NOT_ONE)
         }
+    }
+
+    fun containsThumbnail(): Boolean {
+        return productImages.any { it.isThumbnail }
+    }
+
+    fun getThumbnail(): ProductImage {
+        return productImages.first { it.isThumbnail }
+    }
+
+    fun getProductImageIds(): List<Long> {
+        return productImages.map { it.id }
     }
 }

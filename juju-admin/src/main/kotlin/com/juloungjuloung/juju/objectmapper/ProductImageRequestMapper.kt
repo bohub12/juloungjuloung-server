@@ -1,19 +1,20 @@
 package com.juloungjuloung.juju.objectmapper
 
-import com.juloungjuloung.juju.domain.product.vo.SaveProductImageInternalVO
-import com.juloungjuloung.juju.domain.product.vo.SaveProductImageVO
-import com.juloungjuloung.juju.dto.product.request.SaveProductImageInternalRequest
-import com.juloungjuloung.juju.dto.product.request.SaveProductImageRequest
+import com.juloungjuloung.juju.domain.product.vo.UpsertProductImageInternalVO
+import com.juloungjuloung.juju.domain.product.vo.UpsertProductImageVO
+import com.juloungjuloung.juju.dto.product.request.UpsertProductImageInternalRequest
+import com.juloungjuloung.juju.dto.product.request.UpsertProductImageRequest
 
-fun toSaveVO(request: SaveProductImageRequest): SaveProductImageVO {
-    return SaveProductImageVO(
+fun toUpsertVO(request: UpsertProductImageRequest): UpsertProductImageVO {
+    return UpsertProductImageVO(
         productId = request.productId,
-        saveProductImageInternalVOs = request.saveProductImageInternalRequests.map { toInternalSaveVO(it) }
+        upsertProductImageInternalVOs = request.upsertProductImageInternalRequests.map { toUpsertInternalVO(it) }
     )
 }
 
-fun toInternalSaveVO(request: SaveProductImageInternalRequest): SaveProductImageInternalVO {
-    return SaveProductImageInternalVO(
+fun toUpsertInternalVO(request: UpsertProductImageInternalRequest): UpsertProductImageInternalVO {
+    return UpsertProductImageInternalVO(
+        id = request.id,
         imageUrl = request.imageUrl,
         isThumbnail = request.isThumbnail
     )

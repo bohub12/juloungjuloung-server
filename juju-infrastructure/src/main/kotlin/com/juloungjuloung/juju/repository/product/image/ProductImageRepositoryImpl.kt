@@ -1,8 +1,6 @@
 package com.juloungjuloung.juju.repository.product.image
 
 import com.juloungjuloung.juju.domain.product.ProductImage
-import com.juloungjuloung.juju.domain.product.getNonThumbnails
-import com.juloungjuloung.juju.domain.product.getThumbnail
 import com.juloungjuloung.juju.domain.product.repository.ProductImageRepository
 import com.juloungjuloung.juju.entity.product.ProductImageEntity
 import com.juloungjuloung.juju.entity.product.QProductImageEntity.Companion.productImageEntity
@@ -29,6 +27,18 @@ class ProductImageRepositoryImpl(
             .map { it.id }
     }
 
+    override fun updateAll(productImages: List<ProductImage>): List<Long> {
+        for (productImage in productImages) {
+            jpaQueryFactory.update(productImageEntity)
+                .set(productImageEntity.imageUrl, productImage.imageUrl)
+                .set(productImageEntity.isThumbnail, productImage.isThumbnail)
+                .where(productImageEntity.id.eq(productImage.id))
+                .execute()
+        }
+
+        return productImages.map { it.id }
+    }
+
     override fun deleteAll(productImageIds: List<Long>) {
         jpaQueryFactory.update(productImageEntity)
             .set(productImageEntity.deleted, true)
@@ -36,15 +46,10 @@ class ProductImageRepositoryImpl(
             .execute()
     }
 
-    override fun changeThumbnail(productImages: List<ProductImage>) {
+    override fun deleteByProduct(productId: Long) {
         jpaQueryFactory.update(productImageEntity)
-            .set(productImageEntity.isThumbnail, false)
-            .where(productImageEntity.id.`in`(productImages.getNonThumbnails().map { it.id }))
-            .execute()
-
-        jpaQueryFactory.update(productImageEntity)
-            .set(productImageEntity.isThumbnail, true)
-            .where(productImageEntity.id.eq(productImages.getThumbnail().id))
+            .set(productImageEntity.deleted, true)
+            .where(productImageEntity.productId.eq(productId))
             .execute()
     }
 }

@@ -37,4 +37,11 @@ class ProductServiceImpl(
     override fun getProductType(): ProductTypeEnum {
         return ProductTypeEnum.BASE
     }
+
+    fun changeThumbnailImage(productId: Long, thumbnailImageUrl: String) {
+        val product = readById(productId)
+
+        product.changeThumbnailImage(thumbnailImageUrl)
+        productRepository.changeThumbnailImage(product)
+    }
 }
