@@ -32,6 +32,7 @@ class ProductImageRepositoryImpl(
             jpaQueryFactory.update(productImageEntity)
                 .set(productImageEntity.imageUrl, productImage.imageUrl)
                 .set(productImageEntity.isThumbnail, productImage.isThumbnail)
+                .set(productImageEntity.deleted, false)
                 .where(productImageEntity.id.eq(productImage.id))
                 .execute()
         }
