@@ -2,9 +2,7 @@ package com.juloungjuloung.juju.repository.product.image
 
 import com.juloungjuloung.juju.RepositoryIntegrationTest
 import com.juloungjuloung.juju.SharedMySQLTestContainer
-import com.juloungjuloung.juju.domain.product.changeThumbnail
-import com.juloungjuloung.juju.domain.product.containsThumbnail
-import com.juloungjuloung.juju.domain.product.getThumbnail
+import com.juloungjuloung.juju.domain.product.ProductImages
 import com.juloungjuloung.juju.domain.productimage.productImageCollectionFixture
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager
@@ -43,10 +41,10 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
         productImageRepositoryImpl.saveAll(productImages)
 
         // when
-        val findProductImages = productImageRepositoryImpl.findByProduct(productId = productId)
+        val findProductImages = ProductImages(productImageRepositoryImpl.findByProduct(productId = productId))
 
         // then
-        findProductImages.size shouldBe notThumbnailImageIds.size + 1
+        findProductImages.getProductImageIds().size shouldBe notThumbnailImageIds.size + 1
         findProductImages.containsThumbnail() shouldBe true
     }
 
@@ -75,6 +73,18 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
     }
 
     @Test
+    fun `updateAll_성공`() {
+        // given
+        val productImages = productImageCollectionFixture()
+
+        // when
+        val upsertImageIds = productImageRepositoryImpl.updateAll(productImages)
+
+        // then
+        upsertImageIds.size shouldBe productImages.size
+    }
+
+    @Test
     fun `deleteAll_성공`() {
         // given
         val thumbnailImageId = 1L
@@ -92,27 +102,5 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
 
         // then
         emptyProductImages.size shouldBe 0
-    }
-
-    @Test
-    fun `changeThumbnail_성공`() {
-        // given
-        val savedProductImageIds = productImageRepositoryImpl.saveAll(productImageCollectionFixture())
-        val productImages = productImageRepositoryImpl.findByIds(savedProductImageIds)
-
-        em.flush()
-        em.clear()
-
-        // when
-        val newThumbnailImageId = productImages.last().id
-        productImages.changeThumbnail(newThumbnailImageId)
-        productImageRepositoryImpl.changeThumbnail(productImages)
-
-        em.flush()
-        em.clear()
-
-        // then
-        val findProductImages = productImageRepositoryImpl.findByIds(savedProductImageIds)
-        findProductImages.getThumbnail().id shouldBe newThumbnailImageId
     }
 }
