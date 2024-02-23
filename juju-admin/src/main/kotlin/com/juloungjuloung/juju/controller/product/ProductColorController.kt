@@ -3,6 +3,7 @@ package com.juloungjuloung.juju.controller.product
 import com.juloungjuloung.juju.domain.product.service.ProductColorService
 import com.juloungjuloung.juju.dto.product.request.DeleteProductColorRequest
 import com.juloungjuloung.juju.dto.product.request.SaveProductColorRequest
+import com.juloungjuloung.juju.dto.product.request.UpsertProductColorRequest
 import com.juloungjuloung.juju.dto.product.response.ProductColorResponse
 import com.juloungjuloung.juju.objectmapper.toResponse
 import com.juloungjuloung.juju.objectmapper.toSaveVO
@@ -12,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -27,6 +29,13 @@ class ProductColorController(
     @GetMapping
     fun readProductColors(@RequestParam productId: Long): ApiResponse<List<ProductColorResponse>> {
         return success(productColorService.findByProduct(productId).map { toResponse(it) })
+    }
+
+    @PutMapping
+    fun upsertProductColors(
+        @RequestBody upsertProductColorRequest: UpsertProductColorRequest
+    ): ApiResponse<List<Long>> {
+        TODO()
     }
 
     @PostMapping
