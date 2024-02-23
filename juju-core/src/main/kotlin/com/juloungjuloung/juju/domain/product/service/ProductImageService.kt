@@ -26,8 +26,8 @@ class ProductImageService(
 
         validateProductImageIds(productImages.filterPersisted().map { it.id })
 
-        return productImageRepository.saveAll(productImages.filterNotPersisted())
-            .plus(productImageRepository.updateAll(productImages.filterPersisted()))
+        return productImageRepository.updateAll(productImages.filterPersisted())
+            .plus(productImageRepository.saveAll(productImages.filterNotPersisted()))
     }
 
     private fun validateProductImageIds(productImageIds: List<Long>) {

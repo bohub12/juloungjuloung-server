@@ -19,11 +19,11 @@ fun List<ProductImage>.validate(): ProductImages {
 }
 
 fun List<ProductImage>.filterPersisted(): List<ProductImage> {
-    return this.filter { it.id == 0L }
+    return this.filter { it.id != 0L }
 }
 
 fun List<ProductImage>.filterNotPersisted(): List<ProductImage> {
-    return this.filter { it.id != 0L }
+    return this.filter { it.id == 0L }
 }
 
 data class ProductImages(
