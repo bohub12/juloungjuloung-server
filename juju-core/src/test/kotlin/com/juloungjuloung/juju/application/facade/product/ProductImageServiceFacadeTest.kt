@@ -55,7 +55,9 @@ class ProductImageServiceFacadeTest : BehaviorSpec({
 
             every { productImageService.deleteUnassociatedProductImages(any(), any()) } returns Unit
             every { productService.changeThumbnailImage(any(), any()) } returns Unit
-            every { productImageService.upsert(request) } returns List(request.upsertProductImageInternalVOs.size) { it.toLong() }
+            every { productImageService.upsert(request) } returns List(request.upsertProductImageInternalVOs.size) {
+                it.toLong()
+            }
 
             Then("정상 실행") {
                 shouldNotThrow<Exception> {
