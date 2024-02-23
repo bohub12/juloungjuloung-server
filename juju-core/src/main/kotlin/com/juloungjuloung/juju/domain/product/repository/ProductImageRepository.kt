@@ -9,7 +9,7 @@ interface ProductImageRepository {
 
     fun saveAll(productImages: List<ProductImage>): List<Long>
 
-    fun deleteAll(productImageIds: List<Long>)
+    fun updateAll(productImages: List<ProductImage>): List<Long>
 
-    fun updatePrimary(productImages: List<ProductImage>)
+    fun deleteAll(productImageIds: List<Long>)
 }

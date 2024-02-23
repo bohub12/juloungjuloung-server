@@ -26,7 +26,7 @@ class ProductRepositoryImpl(
             .toList()
     }
 
-    override fun changePrimaryImage(product: Product): Long {
+    override fun changeThumbnailImage(product: Product): Long {
         jpaQueryFactory.update(productEntity)
             .set(productEntity.thumbnailImage, product.thumbnailImage)
             .where(productEntity.id.eq(product.id))

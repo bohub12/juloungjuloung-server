@@ -40,7 +40,6 @@ class NecklaceRepositoryImpl(
             .set(necklaceEntity.name, necklace.name)
             .set(necklaceEntity.price, necklace.price)
             .set(necklaceEntity.weightByMilliGram, necklace.weightByMilliGram)
-            .set(necklaceEntity.thumbnailImage, necklace.thumbnailImage)
             .set(necklaceEntity.isDiamond, necklace.isDiamond)
             .set(necklaceEntity.totalDiamondCaratX100, necklace.totalDiamondCaratX100)
             .set(necklaceEntity.isDisplay, necklace.isDisplay)

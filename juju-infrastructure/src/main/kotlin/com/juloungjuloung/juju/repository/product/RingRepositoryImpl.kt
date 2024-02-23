@@ -40,7 +40,6 @@ class RingRepositoryImpl(
             .set(ringEntity.name, ring.name)
             .set(ringEntity.price, ring.price)
             .set(ringEntity.weightByMilliGram, ring.weightByMilliGram)
-            .set(ringEntity.thumbnailImage, ring.thumbnailImage)
             .set(ringEntity.isDiamond, ring.isDiamond)
             .set(ringEntity.totalDiamondCaratX100, ring.totalDiamondCaratX100)
             .set(ringEntity.isDisplay, ring.isDisplay)

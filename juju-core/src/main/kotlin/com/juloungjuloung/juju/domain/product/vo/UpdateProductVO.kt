@@ -8,7 +8,6 @@ data class UpdateProductVO(
     val name: String? = null,
     val price: Long? = null,
     val weightByMilliGram: Long? = null,
-    val thumbnailImage: String?,
     val isDiamond: Boolean? = null,
     val totalDiamondCaratX100: Int? = null,
     val isDisplay: Boolean? = null,

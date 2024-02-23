@@ -25,15 +25,11 @@ class ProductServiceFacade(
 
     @Transactional
     fun save(saveProductVO: SaveProductVO): Long {
-        val service = productServiceFactory.get(saveProductVO.productType)
-
-        return service.save(saveProductVO)
+        return productServiceFactory.get(saveProductVO.productType).save(saveProductVO)
     }
 
     @Transactional
     fun update(updateProductVO: UpdateProductVO): Long {
-        val service = productServiceFactory.get(updateProductVO.productType)
-
-        return service.update(updateProductVO)
+        return productServiceFactory.get(updateProductVO.productType).update(updateProductVO)
     }
 }

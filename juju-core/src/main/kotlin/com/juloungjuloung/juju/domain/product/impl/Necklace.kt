@@ -11,7 +11,7 @@ class Necklace(
     productCode: String,
     price: Long,
     weightByMilliGram: Long,
-    thumbnailImage: String?,
+    thumbnailImage: String? = null,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int,
     isDisplay: Boolean,

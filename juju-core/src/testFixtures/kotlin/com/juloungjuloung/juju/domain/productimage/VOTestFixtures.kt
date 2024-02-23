@@ -1,49 +1,55 @@
 package com.juloungjuloung.juju.domain.productimage
 
-import com.juloungjuloung.juju.domain.product.vo.SaveProductImageInternalVO
-import com.juloungjuloung.juju.domain.product.vo.SaveProductImageVO
+import com.juloungjuloung.juju.domain.product.vo.UpsertProductImageInternalVO
+import com.juloungjuloung.juju.domain.product.vo.UpsertProductImageVO
 import com.juloungjuloung.juju.fixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
 import com.navercorp.fixturemonkey.kotlin.setExp
 
-fun saveProductImageVOFixture(
+fun upsertProductImageVOFixture(
     productId: Long = 1L,
-    isMultiplePrimaryImage: Boolean = false,
-    exceedMaxSize: Boolean = false
-): SaveProductImageVO {
-    return fixtureMonkey.giveMeBuilder<SaveProductImageVO>()
-        .setExp(SaveProductImageVO::productId, productId)
+    isMultipleThumbnailImage: Boolean = false,
+    exceedMaxSize: Boolean = false,
+    includedPersistedRequest: Boolean = true
+): UpsertProductImageVO {
+    return fixtureMonkey.giveMeBuilder<UpsertProductImageVO>()
+        .setExp(UpsertProductImageVO::productId, productId)
         .setExp(
-            SaveProductImageVO::saveProductImageInternalVOs,
-            saveProductImageInternalVOFixture(isMultiplePrimaryImage, exceedMaxSize)
+            UpsertProductImageVO::upsertProductImageInternalVOs,
+            upsertProductImageInternalVOFixture(isMultipleThumbnailImage, exceedMaxSize, includedPersistedRequest)
         )
         .sample()
 }
 
-private fun saveProductImageInternalVOFixture(
-    isMultiplePrimaryImage: Boolean = false,
-    exceedMaxSize: Boolean = false
-): List<SaveProductImageInternalVO> {
-    val dummyPrimaryImageVO = SaveProductImageInternalVO("primary.png", true)
-    val dummyNormalImageVO = SaveProductImageInternalVO("normal.png", false)
+private fun upsertProductImageInternalVOFixture(
+    isMultipleThumbnailImage: Boolean = false,
+    exceedMaxSize: Boolean = false,
+    includedPersistedRequest: Boolean = true
+): List<UpsertProductImageInternalVO> {
+    val dummyThumbnailImageVO = if (includedPersistedRequest) {
+        UpsertProductImageInternalVO(1L, "thumbnail.png", true)
+    } else {
+        UpsertProductImageInternalVO(0L, "thumbnail.png", true)
+    }
+    val dummyNonThumbnailImageVO = UpsertProductImageInternalVO(0L, "normal.png", false)
 
-    return if (!isMultiplePrimaryImage && !exceedMaxSize) {
-        listOf(dummyPrimaryImageVO, dummyNormalImageVO)
-    } else if (isMultiplePrimaryImage) {
-        listOf(dummyPrimaryImageVO, dummyPrimaryImageVO)
+    return if (!isMultipleThumbnailImage && !exceedMaxSize) {
+        listOf(dummyThumbnailImageVO, dummyNonThumbnailImageVO)
+    } else if (isMultipleThumbnailImage) {
+        listOf(dummyThumbnailImageVO, dummyThumbnailImageVO)
     } else {
         listOf(
-            dummyPrimaryImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO,
-            dummyNormalImageVO
+            dummyThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO,
+            dummyNonThumbnailImageVO
         )
     }
 }

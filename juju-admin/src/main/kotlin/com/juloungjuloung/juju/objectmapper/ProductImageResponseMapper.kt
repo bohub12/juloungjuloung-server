@@ -17,6 +17,6 @@ fun toResponse(productImage: ProductImage): ProductImageResponse {
         id = productImage.id,
         productId = productImage.productId,
         imageUrl = productImage.imageUrl,
-        isPrimary = productImage.isPrimary
+        isThumbnail = productImage.isThumbnail
     )
 }

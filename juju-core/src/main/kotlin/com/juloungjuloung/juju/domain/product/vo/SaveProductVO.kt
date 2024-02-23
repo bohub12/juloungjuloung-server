@@ -18,7 +18,6 @@ data class SaveProductVO(
     val name: String,
     val price: Long,
     val weightByMilliGram: Long,
-    val thumbnailImage: String,
     val isDiamond: Boolean,
     val totalDiamondCaratX100: Int,
     val isDisplay: Boolean,
@@ -42,7 +41,6 @@ data class SaveProductVO(
             productCode = "dd", // TODO : productCode
             price = price,
             weightByMilliGram = weightByMilliGram,
-            thumbnailImage = thumbnailImage,
             isDiamond = isDiamond,
             totalDiamondCaratX100 = totalDiamondCaratX100,
             isDisplay = isDisplay,
@@ -57,7 +55,6 @@ data class SaveProductVO(
             productCode = "dd", // TODO : productCode
             price = price,
             weightByMilliGram = weightByMilliGram,
-            thumbnailImage = thumbnailImage,
             isDiamond = isDiamond,
             totalDiamondCaratX100 = totalDiamondCaratX100,
             isDisplay = isDisplay
@@ -70,7 +67,6 @@ data class SaveProductVO(
             productCode = "dd", // TODO : productCode
             price = price,
             weightByMilliGram = weightByMilliGram,
-            thumbnailImage = thumbnailImage,
             isDiamond = isDiamond,
             totalDiamondCaratX100 = totalDiamondCaratX100,
             isDisplay = isDisplay,
@@ -85,7 +81,6 @@ data class SaveProductVO(
             productCode = "dd", // TODO : productCode
             price = price,
             weightByMilliGram = weightByMilliGram,
-            thumbnailImage = thumbnailImage,
             isDiamond = isDiamond,
             totalDiamondCaratX100 = totalDiamondCaratX100,
             isDisplay = isDisplay

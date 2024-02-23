@@ -13,7 +13,6 @@ data class UpdateProductRequest(
     val name: String?,
     val price: Long?,
     val weightByMilliGram: Long?,
-    val thumbnailImage: String?,
     val isDiamond: Boolean?,
     val totalDiamondCaratX100: Int?,
     val isDisplay: Boolean?,

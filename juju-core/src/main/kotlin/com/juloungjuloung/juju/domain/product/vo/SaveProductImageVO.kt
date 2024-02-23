@@ -6,12 +6,26 @@ data class SaveProductImageVO(
     val productId: Long,
     val saveProductImageInternalVOs: List<SaveProductImageInternalVO>
 ) {
+    companion object {
+        fun buildForThumbnail(productId: Long, imageUrl: String): SaveProductImageVO {
+            return SaveProductImageVO(
+                productId = productId,
+                saveProductImageInternalVOs = listOf(
+                    SaveProductImageInternalVO(
+                        imageUrl = imageUrl,
+                        isThumbnail = true
+                    )
+                )
+            )
+        }
+    }
+
     fun toDomain(): List<ProductImage> {
         return saveProductImageInternalVOs.map {
             ProductImage(
                 productId = productId,
                 imageUrl = it.imageUrl,
-                isPrimary = it.isPrimary
+                isThumbnail = it.isThumbnail
             )
         }
     }
@@ -19,5 +33,5 @@ data class SaveProductImageVO(
 
 data class SaveProductImageInternalVO(
     val imageUrl: String,
-    val isPrimary: Boolean
+    val isThumbnail: Boolean
 )
