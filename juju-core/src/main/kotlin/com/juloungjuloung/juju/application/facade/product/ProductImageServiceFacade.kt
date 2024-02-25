@@ -31,7 +31,7 @@ class ProductImageServiceFacade(
     fun upsertProductImages(upsertProductImageVO: UpsertProductImageVO): List<Long> {
         val productImages = upsertProductImageVO.toDomain().validate()
 
-        deleteUnassociatedProductImages(upsertProductImageVO.productId, productImages.getProductImageIds())
+        deletePersistedProductImagesExcludeRequest(upsertProductImageVO.productId, productImages.getProductImageIds())
 
         if (productImages.containsThumbnail()) {
             productService.changeThumbnailImage(upsertProductImageVO.productId, productImages.getThumbnail().imageUrl)
@@ -40,7 +40,9 @@ class ProductImageServiceFacade(
         return productImageService.upsert(upsertProductImageVO)
     }
 
-    private fun deleteUnassociatedProductImages(productId: Long, associatedProductImageIds: List<Long>) {
-        productImageService.deleteUnassociatedProductImages(productId, associatedProductImageIds)
+    private fun deletePersistedProductImagesExcludeRequest(productId: Long, requestedProductImageIds: List<Long>) {
+        val persistedProductImages = readByProduct(productId).map { it.id }
+
+        productImageService.deleteAll(persistedProductImages.filterNot { requestedProductImageIds.contains(it) })
     }
 }

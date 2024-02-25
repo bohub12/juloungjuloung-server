@@ -39,9 +39,23 @@ class ProductImageService(
     }
 
     @Transactional
-    fun deleteUnassociatedProductImages(productId: Long, associatedProductImageIds: List<Long>) {
-        val productImageIds = readByProduct(productId).map { it.id }
+    fun deleteAll(productImageIds: List<Long>): Boolean {
+        validateDeleteCondition(productImageIds)
 
-        productImageRepository.deleteAll(productImageIds.filterNot { associatedProductImageIds.contains(it) })
+        productImageRepository.deleteAll(productImageIds)
+        return true
+    }
+
+    private fun validateDeleteCondition(productImageIds: List<Long>) {
+        readByIdsOrException(productImageIds)
+    }
+
+    private fun readByIdsOrException(productImageIds: List<Long>): List<ProductImage> {
+        val productImages = productImageRepository.findByIds(productImageIds)
+        if (productImages.size != productImageIds.size) {
+            throw BusinessLogicException(BAD_REQUEST_ID)
+        }
+
+        return productImages
     }
 }
