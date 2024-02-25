@@ -1,27 +1,27 @@
 package com.juloungjuloung.juju.domain.productcolor
 
-import com.juloungjuloung.juju.domain.product.vo.SaveProductColorInternalVO
-import com.juloungjuloung.juju.domain.product.vo.SaveProductColorVO
+import com.juloungjuloung.juju.domain.product.vo.UpsertProductColorInternalVO
+import com.juloungjuloung.juju.domain.product.vo.UpsertProductColorVO
 import com.juloungjuloung.juju.enums.ProductColorEnum.GOLD
 import com.juloungjuloung.juju.enums.ProductColorEnum.ROSE_GOLD
 
-fun saveProductColorVOFixture(productId: Long = 1L, duplicatedColor: Boolean = false): SaveProductColorVO {
-    return SaveProductColorVO(
+fun upsertProductColorVOFixture(productId: Long = 1L, duplicatedColor: Boolean = false): UpsertProductColorVO {
+    return UpsertProductColorVO(
         productId = productId,
-        saveProductColorInternalVOs = saveProductColorInternalVOFixtures(duplicatedColor = duplicatedColor)
+        upsertProductColorInternalVOs = upsertProductColorInternalVOFixture(duplicatedColor = duplicatedColor)
     )
 }
 
-fun saveProductColorInternalVOFixtures(duplicatedColor: Boolean = false): List<SaveProductColorInternalVO> {
+fun upsertProductColorInternalVOFixture(duplicatedColor: Boolean = false): List<UpsertProductColorInternalVO> {
     return if (duplicatedColor) {
         listOf(
-            SaveProductColorInternalVO(color = GOLD),
-            SaveProductColorInternalVO(color = GOLD)
+            UpsertProductColorInternalVO(color = GOLD),
+            UpsertProductColorInternalVO(color = GOLD)
         )
     } else {
         listOf(
-            SaveProductColorInternalVO(color = GOLD),
-            SaveProductColorInternalVO(color = ROSE_GOLD)
+            UpsertProductColorInternalVO(color = GOLD),
+            UpsertProductColorInternalVO(color = ROSE_GOLD)
         )
     }
 }
