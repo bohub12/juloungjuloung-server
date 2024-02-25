@@ -3,6 +3,7 @@ package com.juloungjuloung.juju.repository.product.color
 import com.juloungjuloung.juju.RepositoryIntegrationTest
 import com.juloungjuloung.juju.domain.productcolor.productColorCollectionFixture
 import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
 import io.kotest.matchers.shouldBe
 import jakarta.persistence.EntityManager
@@ -38,6 +39,26 @@ class ProductColorRepositoryImplTest {
         // then
         productColors.size shouldBe productColorIds.size
         productColors.map { it.id } shouldContainExactlyInAnyOrder productColorIds
+    }
+
+    @Test
+    fun `updateAll_성공`() {
+        // given
+        val productId = 1L
+        val persistedProductColorIds =
+            productColorRepositoryImpl.saveAll(productColorCollectionFixture(productId = productId))
+
+        // when
+        val updatedProductColors = productColorCollectionFixture(ids = persistedProductColorIds)
+        productColorRepositoryImpl.updateAll(updatedProductColors)
+
+        em.flush()
+        em.clear()
+
+        // then
+        val findProductColors = productColorRepositoryImpl.findByProduct(productId)
+        findProductColors.size shouldBe updatedProductColors.size
+        findProductColors shouldContainExactly updatedProductColors
     }
 
     @Test
