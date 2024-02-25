@@ -36,8 +36,8 @@ class ProductColorServiceFacade(
     }
 
     private fun deletePersistedProductColorsExcludeRequest(productId: Long, requestedProductColorIds: List<Long>) {
-        val persistedProductColors = findByProduct(productId).map { it.id }
+        val persistedProductColorIds = findByProduct(productId).map { it.id }
 
-        productColorService.deleteAll(persistedProductColors.filterNot { requestedProductColorIds.contains(it) })
+        productColorService.deleteAll(persistedProductColorIds.filterNot { requestedProductColorIds.contains(it) })
     }
 }

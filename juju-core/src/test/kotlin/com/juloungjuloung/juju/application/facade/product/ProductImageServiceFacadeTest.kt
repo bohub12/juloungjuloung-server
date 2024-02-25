@@ -1,5 +1,7 @@
 package com.juloungjuloung.juju.application.facade.product
 
+import com.juloungjuloung.juju.domain.product.filterPersisted
+import com.juloungjuloung.juju.domain.product.productFixture
 import com.juloungjuloung.juju.domain.product.service.ProductImageService
 import com.juloungjuloung.juju.domain.product.service.impl.ProductServiceImpl
 import com.juloungjuloung.juju.domain.product.vo.UpsertProductImageVO
@@ -51,10 +53,14 @@ class ProductImageServiceFacadeTest : BehaviorSpec({
         }
 
         When("정상 요청이 온다면") {
-            val request = upsertProductImageVOFixture()
+            val productId = 1L
+            val request = upsertProductImageVOFixture(productId = productId)
 
-            every { productImageService.deleteUnassociatedProductImages(any(), any()) } returns Unit
+            every { productService.readById(productId) } returns productFixture(id = productId)
             every { productService.changeThumbnailImage(any(), any()) } returns Unit
+
+            every { productImageService.readByProduct(productId) } returns listOf()
+            every { productImageService.deleteAll(any()) } returns true
             every { productImageService.upsert(request) } returns List(request.upsertProductImageInternalVOs.size) {
                 it.toLong()
             }
@@ -73,17 +79,21 @@ class ProductImageServiceFacadeTest : BehaviorSpec({
 
     Given("상품 이미지를 모두 삭제하기 위해") {
         When("요청바디를 빈 배열로 보내면") {
-            val request = UpsertProductImageVO(productId = 1L, upsertProductImageInternalVOs = listOf())
+            val productId = 1L
+            val request = UpsertProductImageVO(productId = productId, upsertProductImageInternalVOs = listOf())
 
-            every { productImageService.deleteUnassociatedProductImages(any(), any()) } returns Unit
+            every { productService.readById(productId) } returns productFixture(id = productId)
             every { productService.changeThumbnailImage(any(), any()) } returns Unit
+
+            every { productImageService.deleteAll(request.toDomain().filterPersisted().map { it.id }) } returns true
+            every { productImageService.readByProduct(productId) } returns listOf()
             every { productImageService.upsert(request) } returns listOf()
 
             Then("정상 실행") {
                 shouldNotThrow<Exception> {
                     productImageServiceFacade.upsertProductImages(request)
                 }
-                verify { productImageService.deleteUnassociatedProductImages(any(), any()) }
+                verify { productImageService.deleteAll(request.toDomain().filterPersisted().map { it.id }) }
                 verify { productImageService.upsert(request) }
             }
         }
