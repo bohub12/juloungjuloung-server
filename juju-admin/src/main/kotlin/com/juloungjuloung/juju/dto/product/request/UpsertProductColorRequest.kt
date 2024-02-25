@@ -8,6 +8,7 @@ data class UpsertProductColorRequest(
 )
 
 data class UpsertProductColorInternalRequest(
+    val id: Long = 0,
     val color: ProductColorEnum,
     val additionalPrice: Int = 0
 )

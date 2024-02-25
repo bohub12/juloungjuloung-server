@@ -1,18 +1,14 @@
 package com.juloungjuloung.juju.controller.product
 
-import com.juloungjuloung.juju.domain.product.service.ProductColorService
-import com.juloungjuloung.juju.dto.product.request.DeleteProductColorRequest
-import com.juloungjuloung.juju.dto.product.request.SaveProductColorRequest
+import com.juloungjuloung.juju.application.facade.product.ProductColorServiceFacade
 import com.juloungjuloung.juju.dto.product.request.UpsertProductColorRequest
 import com.juloungjuloung.juju.dto.product.response.ProductColorResponse
 import com.juloungjuloung.juju.objectmapper.toResponse
-import com.juloungjuloung.juju.objectmapper.toSaveVO
+import com.juloungjuloung.juju.objectmapper.toUpsertVO
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -23,32 +19,18 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/admin/api/v1/products/colors")
 class ProductColorController(
-    private val productColorService: ProductColorService
+    private val productColorServiceFacade: ProductColorServiceFacade
 ) {
 
     @GetMapping
     fun readProductColors(@RequestParam productId: Long): ApiResponse<List<ProductColorResponse>> {
-        return success(productColorService.findByProduct(productId).map { toResponse(it) })
+        return success(productColorServiceFacade.findByProduct(productId).map { toResponse(it) })
     }
 
     @PutMapping
     fun upsertProductColors(
         @RequestBody upsertProductColorRequest: UpsertProductColorRequest
     ): ApiResponse<List<Long>> {
-        TODO()
-    }
-
-    @PostMapping
-    fun saveProductColors(
-        @RequestBody saveProductColorRequest: SaveProductColorRequest
-    ): ApiResponse<List<Long>> {
-        return success(productColorService.saveAll(toSaveVO(saveProductColorRequest)))
-    }
-
-    @DeleteMapping
-    fun deleteProductColors(
-        @RequestBody deleteProductColorRequest: DeleteProductColorRequest
-    ): ApiResponse<Boolean> {
-        return success(productColorService.deleteAll(deleteProductColorRequest.productColorIds))
+        return success(productColorServiceFacade.upsertProductColors(toUpsertVO(upsertProductColorRequest)))
     }
 }

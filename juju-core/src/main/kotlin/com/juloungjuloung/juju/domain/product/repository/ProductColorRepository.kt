@@ -9,5 +9,7 @@ interface ProductColorRepository {
 
     fun saveAll(productColors: List<ProductColor>): List<Long>
 
+    fun updateAll(productColors: List<ProductColor>): List<Long>
+
     fun deleteAll(productColorIds: List<Long>)
 }
