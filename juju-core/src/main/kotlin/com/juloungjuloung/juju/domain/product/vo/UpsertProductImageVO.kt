@@ -9,8 +9,8 @@ data class UpsertProductImageVO(
     fun toDomain(): List<ProductImage> {
         return upsertProductImageInternalVOs.map {
             ProductImage(
-                productId = productId,
                 id = it.id,
+                productId = productId,
                 imageUrl = it.imageUrl,
                 isThumbnail = it.isThumbnail
             )

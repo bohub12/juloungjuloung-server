@@ -27,6 +27,19 @@ class ProductColorRepositoryImpl(
             .map { it.id }
     }
 
+    override fun updateAll(productColors: List<ProductColor>): List<Long> {
+        for (productColor in productColors) {
+            jpaQueryFactory.update(productColorEntity)
+                .set(productColorEntity.color, productColor.color)
+                .set(productColorEntity.additionalPrice, productColor.additionalPrice)
+                .set(productColorEntity.deleted, false)
+                .where(productColorEntity.id.eq(productColor.id))
+                .execute()
+        }
+
+        return productColors.map { it.id }
+    }
+
     override fun deleteAll(productColorIds: List<Long>) {
         jpaQueryFactory.update(productColorEntity)
             .set(productColorEntity.deleted, true)

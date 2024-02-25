@@ -15,8 +15,16 @@ data class ProductColor(
     }
 }
 
-fun List<ProductColor>.combineForValidation(productColors: List<ProductColor>): ProductColors {
-    return ProductColors(this + productColors)
+fun List<ProductColor>.validate(): ProductColors {
+    return ProductColors(this)
+}
+
+fun List<ProductColor>.filterPersisted(): List<ProductColor> {
+    return this.filter { it.id != 0L }
+}
+
+fun List<ProductColor>.filterNotPersisted(): List<ProductColor> {
+    return this.filter { it.id == 0L }
 }
 
 data class ProductColors(
@@ -32,5 +40,9 @@ data class ProductColors(
         if (productColors.size != uniqueColors.size) {
             throw BusinessLogicException(PRODUCT_COLOR_DUPLICATE_CODE_IN_SAME_PRODUCT)
         }
+    }
+
+    fun getProductColorIds(): List<Long> {
+        return productColors.map { it.id }
     }
 }

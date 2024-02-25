@@ -22,7 +22,7 @@ class ProductImageServiceFacadeTest : BehaviorSpec({
     val productImageServiceFacade = ProductImageServiceFacade(productImageService, productService)
 
     Given("상품 이미지들을 저장 및 수정할 때") {
-        When("썸네일 이미지가 아닌 기본 이미지를 등록하려하면") {
+        When("썸네일 이미지가 아닌 기본 이미지만 등록하려하면") {
             Then("예외 발생") {
                 // TODO 추후 검증로직 추가예정
             }

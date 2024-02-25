@@ -2,12 +2,13 @@ package com.juloungjuloung.juju.dto.product.request
 
 import com.juloungjuloung.juju.enums.ProductColorEnum
 
-data class SaveProductColorRequest(
+data class UpsertProductColorRequest(
     val productId: Long,
-    val saveProductColorInternalRequests: List<SaveProductColorInternalRequest>
+    val upsertProductColorInternalRequests: List<UpsertProductColorInternalRequest>
 )
 
-data class SaveProductColorInternalRequest(
+data class UpsertProductColorInternalRequest(
+    val id: Long = 0,
     val color: ProductColorEnum,
     val additionalPrice: Int = 0
 )
