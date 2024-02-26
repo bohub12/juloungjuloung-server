@@ -14,8 +14,16 @@ data class ProductMaterial(
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
 
-fun List<ProductMaterial>.combineForValidation(productMaterials: List<ProductMaterial>): ProductMaterials {
-    return ProductMaterials(this + productMaterials)
+fun List<ProductMaterial>.validate(): ProductMaterials {
+    return ProductMaterials(this)
+}
+
+fun List<ProductMaterial>.filterPersisted(): List<ProductMaterial> {
+    return this.filter { it.id != 0L }
+}
+
+fun List<ProductMaterial>.filterNotPersisted(): List<ProductMaterial> {
+    return this.filter { it.id == 0L }
 }
 
 data class ProductMaterials(
@@ -31,5 +39,9 @@ data class ProductMaterials(
         if (productMaterials.size != uniqueMaterials.size) {
             throw BusinessLogicException(PRODUCT_MATERIAL_DUPLICATE_CODE_IN_SAME_PRODUCT)
         }
+    }
+
+    fun getProductMaterialIds(): List<Long> {
+        return productMaterials.map { it.id }
     }
 }
