@@ -1,14 +1,15 @@
 package com.juloungjuloung.juju.objectmapper
 
-import com.juloungjuloung.juju.domain.product.vo.SaveProductMaterialInternalVO
-import com.juloungjuloung.juju.domain.product.vo.SaveProductMaterialVO
-import com.juloungjuloung.juju.dto.product.request.SaveProductMaterialRequest
+import com.juloungjuloung.juju.domain.product.vo.UpsertProductMaterialInternalVO
+import com.juloungjuloung.juju.domain.product.vo.UpsertProductMaterialVO
+import com.juloungjuloung.juju.dto.product.request.UpsertProductMaterialRequest
 
-fun toSaveVO(request: SaveProductMaterialRequest): SaveProductMaterialVO {
-    return SaveProductMaterialVO(
+fun toUpsertVO(request: UpsertProductMaterialRequest): UpsertProductMaterialVO {
+    return UpsertProductMaterialVO(
         productId = request.productId,
-        saveProductMaterialInternalVOs = request.saveProductMaterialInternalRequest.map {
-            SaveProductMaterialInternalVO(
+        upsertProductMaterialInternalVOs = request.upsertProductMaterialInternalRequest.map {
+            UpsertProductMaterialInternalVO(
+                id = it.id,
                 material = it.material,
                 additionalPrice = it.additionalPrice
             )

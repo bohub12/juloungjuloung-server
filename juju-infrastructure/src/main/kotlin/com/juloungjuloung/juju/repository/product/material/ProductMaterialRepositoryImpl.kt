@@ -33,4 +33,16 @@ class ProductMaterialRepositoryImpl(
             .where(productMaterialEntity.id.`in`(productMaterialIds))
             .execute()
     }
+
+    override fun updateAll(productMaterials: List<ProductMaterial>): List<Long> {
+        for (productMaterial in productMaterials) {
+            jpaQueryFactory.update(productMaterialEntity)
+                .set(productMaterialEntity.additionalPrice, productMaterial.additionalPrice)
+                .set(productMaterialEntity.deleted, false)
+                .where(productMaterialEntity.id.eq(productMaterial.id))
+                .execute()
+        }
+
+        return productMaterials.map { it.id }
+    }
 }

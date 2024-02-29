@@ -8,19 +8,32 @@ import com.juloungjuloung.juju.fixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
 import com.navercorp.fixturemonkey.kotlin.setExp
 
-fun productMaterialFixture(id: Long = 1L, productId: Long = 1L, material: ProductMaterialEnum): ProductMaterial {
+fun productMaterialFixture(
+    id: Long = 1L,
+    productId: Long = 1L,
+    material: ProductMaterialEnum,
+    additionalPrice: Int = 0
+): ProductMaterial {
     return fixtureMonkey.giveMeBuilder<ProductMaterial>()
         .setExp(ProductMaterial::id, id)
         .setExp(ProductMaterial::productId, productId)
         .setExp(ProductMaterial::material, material)
+        .setExp(ProductMaterial::additionalPrice, additionalPrice)
         .sample()
 }
 
 fun productMaterialCollectionFixture(
+    ids: List<Long> = listOf(1L, 2L),
     productId: Long = 1L,
-    materials: List<ProductMaterialEnum> = listOf(K18, K22)
+    materials: List<ProductMaterialEnum> = listOf(K18, K22),
+    additionalPrices: List<Int> = listOf(0, 0)
 ): List<ProductMaterial> {
-    return materials.mapIndexed { index, it ->
-        productMaterialFixture(id = index + 1L, productId = productId, material = it)
+    return ids.mapIndexed { index, it ->
+        productMaterialFixture(
+            id = it,
+            productId = productId,
+            material = materials[index],
+            additionalPrice = additionalPrices[index]
+        )
     }
 }

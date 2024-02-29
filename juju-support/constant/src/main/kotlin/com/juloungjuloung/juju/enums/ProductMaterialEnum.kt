@@ -5,6 +5,5 @@ enum class ProductMaterialEnum(val desc: String) {
     K14("14K"),
     K18("18K"),
     K22("22K"),
-    K24("24K"),
-    WHITE_GOLD("백금");
+    K24("24K");
 }

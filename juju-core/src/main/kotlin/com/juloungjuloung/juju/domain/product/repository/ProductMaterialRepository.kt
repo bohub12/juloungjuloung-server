@@ -11,4 +11,6 @@ interface ProductMaterialRepository {
     fun saveAll(productMaterials: List<ProductMaterial>): List<Long>
 
     fun deleteAll(productMaterialIds: List<Long>)
+
+    fun updateAll(productMaterials: List<ProductMaterial>): List<Long>
 }
