@@ -62,6 +62,33 @@ class ProductMaterialRepositoryImplTest {
     }
 
     @Test
+    fun `updateAll_성공`() {
+        // given
+        val productId = 1L
+        val savedProductMaterialIds = productMaterialRepositoryImpl.saveAll(
+            productMaterialCollectionFixture(
+                productId = productId,
+                materials = listOf(K18, K22)
+            )
+        )
+
+        // when
+        val additionalPriceForUpdate = 10000
+        val productMaterialsForUpdate = productMaterialCollectionFixture(
+            ids = savedProductMaterialIds,
+            additionalPrices = List(savedProductMaterialIds.size) { additionalPriceForUpdate }
+        )
+        productMaterialRepositoryImpl.updateAll(productMaterialsForUpdate)
+
+        em.flush()
+        em.clear()
+
+        // then
+        val updatedProductMaterials = productMaterialRepositoryImpl.findByProduct(productId)
+        updatedProductMaterials.forEach { it.additionalPrice shouldBe additionalPriceForUpdate }
+    }
+
+    @Test
     fun `deleteAll_성공`() {
         // given
         val productId = 1L
