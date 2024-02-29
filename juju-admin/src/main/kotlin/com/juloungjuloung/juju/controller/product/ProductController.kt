@@ -11,6 +11,7 @@ import com.juloungjuloung.juju.objectmapper.ProductResponseMapper.Companion.toRe
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import com.juloungjuloung.juju.response.PageResponse
+import com.juloungjuloung.juju.utils.getTotalPageCount
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
@@ -35,20 +36,11 @@ class ProductController(
         @RequestParam(value = "size", required = false, defaultValue = "10") size: Int
     ): ApiResponse<List<ProductResponse>> {
         val productsWithCount = productServiceFacade.read(productType, page, size)
-        val totalPageCount =
-            if (productsWithCount.totalElementCount % size != 0L) {
-                productsWithCount.totalElementCount / size + 1
-            } else {
-                if (productsWithCount.totalElementCount == 0L) {
-                    1
-                } else {
-                    productsWithCount.totalElementCount / size
-                }
-            }
+        val totalPageCount = getTotalPageCount(totalElementCount = productsWithCount.totalElementCount, pageSize = size)
 
         return success(
             productsWithCount.products.map { toResponse(it) }.toList(),
-            PageResponse(page, size, totalPageCount.toInt())
+            PageResponse(page, size, totalPageCount)
         )
     }
 
