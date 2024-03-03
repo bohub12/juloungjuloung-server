@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ProductOptionServiceFacade(
-    private val productService: ProductServiceImpl,
     private val productOptionService: ProductOptionService,
-    private val productOptionCategoryService: ProductOptionCategoryService
+    private val productOptionCategoryService: ProductOptionCategoryService,
+    private val productService: ProductServiceImpl
 ) {
 
     @Transactional
