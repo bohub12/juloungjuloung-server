@@ -26,5 +26,8 @@ enum class ApiResponseCode(
     PRODUCT_COLOR_DUPLICATE_CODE_IN_SAME_PRODUCT(1200, "한 상품에 대한 적용 가능 색상이 중복되었습니다"),
 
     // 1300 [Product Material]
-    PRODUCT_MATERIAL_DUPLICATE_CODE_IN_SAME_PRODUCT(1300, "한 상품에 대한 적용 가능 재질이 중복되었습니다")
+    PRODUCT_MATERIAL_DUPLICATE_CODE_IN_SAME_PRODUCT(1300, "한 상품에 대한 적용 가능 재질이 중복되었습니다"),
+
+    // 1200 [Product Option]
+    PRODUCT_OPTION_REQUIRES_AT_LEAST_ONE_OPTION(1200, "옵션 카테고리 안에는 최소 한 개 이상의 옵션이 필요합니다")
 }
