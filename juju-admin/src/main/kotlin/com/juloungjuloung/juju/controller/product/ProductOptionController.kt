@@ -1,9 +1,12 @@
 package com.juloungjuloung.juju.controller.product
 
+import com.juloungjuloung.juju.application.facade.product.ProductOptionServiceFacade
 import com.juloungjuloung.juju.dto.product.request.UpsertProductOptionRequest
+import com.juloungjuloung.juju.objectmapper.toUpsertVO
 import com.juloungjuloung.juju.response.ApiResponse
+import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -15,12 +18,18 @@ class ProductOptionController(
     private val productOptionServiceFacade: ProductOptionServiceFacade
 ) {
 
-    @PutMapping
+    @PostMapping
     fun upsertProductOptions(
-        @RequestBody upsertProductOptionRequest: UpsertProductOptionRequest
-    ): ApiResponse<List<Long>> {
-        return ApiResponse.Companion.success(
-            productOptionServiceFacade.upsertProductOptions(upsertProductOptionRequest)
-        )
+        @RequestBody request: UpsertProductOptionRequest
+    ): ApiResponse<Long> {
+        return success(productOptionServiceFacade.upsertProductOptions(toUpsertVO(request)))
     }
+
+//    @DeleteMapping
+//    fun deleteProductOption(
+//        @RequestBody request: DeleteProductOptionRequest
+//    ): ApiResponse<Boolean> {
+//        TODO()
+//        return success(productOptionServiceFacade.deleteProductOptions())
+//    }
 }
