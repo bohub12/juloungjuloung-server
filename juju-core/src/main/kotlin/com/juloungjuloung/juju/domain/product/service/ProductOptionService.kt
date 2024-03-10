@@ -16,6 +16,11 @@ class ProductOptionService(
         return productOptionRepository.findByIds(productOptionIds)
     }
 
+    @Transactional(readOnly = true)
+    fun readAllByOptionCategoryIds(productOptionCategoryIds: List<Long>): List<ProductOption> {
+        return productOptionRepository.findAllByProductOptionCategoryIds(productOptionCategoryIds)
+    }
+
     @Transactional
     fun upsert(productOptions: ProductOptions): List<Long> {
         return productOptionRepository.updateAll(productOptions.filterPersisted())

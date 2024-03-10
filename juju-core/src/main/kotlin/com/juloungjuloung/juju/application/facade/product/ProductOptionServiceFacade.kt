@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.application.facade.product
 
 import com.juloungjuloung.juju.domain.product.ProductOptionInfo
+import com.juloungjuloung.juju.domain.product.getByProductOptionCategoryId
 import com.juloungjuloung.juju.domain.product.service.ProductOptionCategoryService
 import com.juloungjuloung.juju.domain.product.service.ProductOptionService
 import com.juloungjuloung.juju.domain.product.service.impl.ProductServiceImpl
@@ -16,6 +17,18 @@ class ProductOptionServiceFacade(
     private val productOptionCategoryService: ProductOptionCategoryService,
     private val productService: ProductServiceImpl
 ) {
+
+    @Transactional(readOnly = true)
+    fun readAllByProductId(productId: Long): List<ProductOptionInfo> {
+        validateProductId(productId)
+
+        val productOptionCategories = productOptionCategoryService.readAllByProductId(productId)
+        val productOptions = productOptionService.readAllByOptionCategoryIds(productOptionCategories.map { it.id })
+
+        return productOptionCategories.map {
+            ProductOptionInfo.from(it, productOptions.getByProductOptionCategoryId(it.id))
+        }
+    }
 
     @Transactional
     fun upsertProductOptions(upsertProductOptionVO: UpsertProductOptionVO): Long {

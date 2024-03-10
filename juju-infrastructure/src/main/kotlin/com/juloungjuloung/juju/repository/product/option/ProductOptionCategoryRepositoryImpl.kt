@@ -19,6 +19,10 @@ class ProductOptionCategoryRepositoryImpl(
             .toDomain()
     }
 
+    override fun findAllByProductId(productId: Long): List<ProductOptionCategory> {
+        return delegate.findAllByProductIdAndDeletedFalse(productId).map { it.toDomain() }
+    }
+
     override fun save(productOptionCategory: ProductOptionCategory): Long {
         return delegate.save(ProductOptionCategoryEntity.of(productOptionCategory)).id
     }
