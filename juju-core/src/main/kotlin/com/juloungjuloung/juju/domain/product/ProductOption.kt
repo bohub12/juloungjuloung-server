@@ -13,6 +13,10 @@ data class ProductOption(
     val updatedAt: LocalDateTime = LocalDateTime.now()
 )
 
+fun List<ProductOption>.getByProductOptionCategoryId(productOptionCategoryId: Long): List<ProductOption> {
+    return this.filter { it.productOptionCategoryId == productOptionCategoryId }
+}
+
 data class ProductOptions(
     val options: List<ProductOption>
 ) {

@@ -4,6 +4,7 @@ import com.juloungjuloung.juju.domain.product.Product
 import java.time.LocalDateTime
 
 open class ProductResponse(
+    val id: Long,
     val productType: String,
     val name: String,
     val productCode: String,
@@ -14,8 +15,7 @@ open class ProductResponse(
     val totalDiamondCaratX100: Int,
     val isDisplay: Boolean,
     val createdAt: LocalDateTime,
-    val updatedAt: LocalDateTime,
-    val id: Long = 0L
+    val updatedAt: LocalDateTime
 ) {
     companion object {
         fun of(product: Product): ProductResponse {
