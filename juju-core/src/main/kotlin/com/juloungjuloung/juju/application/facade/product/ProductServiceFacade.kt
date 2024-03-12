@@ -3,8 +3,6 @@ package com.juloungjuloung.juju.application.facade.product
 import com.juloungjuloung.juju.application.factory.ProductServiceFactory
 import com.juloungjuloung.juju.domain.product.Product
 import com.juloungjuloung.juju.domain.product.ProductsWithCount
-import com.juloungjuloung.juju.domain.product.service.ProductOptionCategoryService
-import com.juloungjuloung.juju.domain.product.service.ProductOptionService
 import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
 import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
@@ -14,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(readOnly = true)
 class ProductServiceFacade(
-    private val productServiceFactory: ProductServiceFactory,
-    private val productOptionCategoryService: ProductOptionCategoryService,
-    private val productOptionService: ProductOptionService
+    private val productServiceFactory: ProductServiceFactory
 ) {
 
     fun read(productType: ProductTypeEnum, page: Int, size: Int): ProductsWithCount {

@@ -29,7 +29,7 @@ class NecklaceService(
 
     @Transactional
     override fun save(saveProductVO: SaveProductVO): Long {
-        return necklaceRepository.save(saveProductVO.toDomain() as Necklace)
+        return necklaceRepository.save(Necklace.create(saveProductVO))
     }
 
     @Transactional

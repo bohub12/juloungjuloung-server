@@ -3,7 +3,6 @@ package com.juloungjuloung.juju.entity.product.impl
 import com.juloungjuloung.juju.domain.product.impl.Necklace
 import com.juloungjuloung.juju.entity.product.ProductEntity
 import com.juloungjuloung.juju.enums.TYPE_NECKLACE
-import jakarta.persistence.Column
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
 
@@ -17,12 +16,7 @@ class NecklaceEntity(
     thumbnailImage: String?,
     isDiamond: Boolean,
     totalDiamondCaratX100: Int,
-    isDisplay: Boolean,
-    @Column(name = "necklace_maximum_length")
-    val maximumLength: Int,
-
-    @Column(name = "necklace_minimum_length")
-    val minimumLength: Int
+    isDisplay: Boolean
 ) : ProductEntity(
     name = name,
     productCode = productCode,
@@ -44,8 +38,6 @@ class NecklaceEntity(
             isDiamond = this.isDiamond,
             totalDiamondCaratX100 = this.totalDiamondCaratX100,
             isDisplay = this.isDisplay,
-            maximumLength = this.maximumLength,
-            minimumLength = this.minimumLength,
             createdAt = this.createdAt,
             updatedAt = this.updatedAt
         )
@@ -61,9 +53,7 @@ class NecklaceEntity(
                 thumbnailImage = necklace.thumbnailImage,
                 isDiamond = necklace.isDiamond,
                 totalDiamondCaratX100 = necklace.totalDiamondCaratX100,
-                isDisplay = necklace.isDisplay,
-                maximumLength = necklace.maximumLength,
-                minimumLength = necklace.minimumLength
+                isDisplay = necklace.isDisplay
             )
         }
     }

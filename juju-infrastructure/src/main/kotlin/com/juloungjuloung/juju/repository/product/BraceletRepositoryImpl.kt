@@ -45,8 +45,6 @@ class BraceletRepositoryImpl(
             .set(braceletEntity.isDiamond, bracelet.isDiamond)
             .set(braceletEntity.totalDiamondCaratX100, bracelet.totalDiamondCaratX100)
             .set(braceletEntity.isDisplay, bracelet.isDisplay)
-            .set(braceletEntity.maximumLength, bracelet.maximumLength)
-            .set(braceletEntity.minimumLength, bracelet.minimumLength)
             .where(braceletEntity.id.eq(bracelet.id))
             .execute()
 

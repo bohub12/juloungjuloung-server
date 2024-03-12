@@ -32,8 +32,6 @@ fun braceletFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolea
         .setExp(Bracelet::weightByMilliGram, 10000L)
         .setExp(Bracelet::isDisplay, isDisplay)
         .setExp(Bracelet::thumbnailImage, "https://test.com/test.png")
-        .setExp(Bracelet::minimumLength, 10)
-        .setExp(Bracelet::maximumLength, 100)
         .acceptIf(
             { updatable },
             { builder -> builder.setExp(Bracelet::id, id) }
@@ -63,8 +61,6 @@ fun necklaceFixture(updatable: Boolean = false, id: Long = 0L, isDisplay: Boolea
         .setExp(Necklace::price, 10000L)
         .setExp(Necklace::weightByMilliGram, 10000L)
         .setExp(Necklace::isDisplay, isDisplay)
-        .setExp(Necklace::minimumLength, 10)
-        .setExp(Necklace::maximumLength, 100)
         .setExp(Necklace::thumbnailImage, "https://test.com/test.png")
         .acceptIf(
             { updatable },

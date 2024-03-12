@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.domain.product.impl
 
 import com.juloungjuloung.juju.domain.product.Product
-import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
+import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
@@ -16,10 +16,7 @@ class Necklace(
     totalDiamondCaratX100: Int,
     isDisplay: Boolean,
     createdAt: LocalDateTime = LocalDateTime.now(),
-    updatedAt: LocalDateTime = LocalDateTime.now(),
-
-    var maximumLength: Int,
-    var minimumLength: Int
+    updatedAt: LocalDateTime = LocalDateTime.now()
 ) : Product(
     id = id,
     productType = ProductTypeEnum.NECKLACE,
@@ -34,17 +31,17 @@ class Necklace(
     createdAt = createdAt,
     updatedAt = updatedAt
 ) {
-    init {
-        require(minimumLength >= 0)
-        require(maximumLength > minimumLength)
-    }
-
-    override fun update(updateProductVO: UpdateProductVO) {
-        super.update(updateProductVO)
-
-        updateProductVO.additionalNecklaceVO?.let {
-            this.maximumLength = updateProductVO.additionalNecklaceVO.maximumLength
-            this.minimumLength = updateProductVO.additionalNecklaceVO.minimumLength
+    companion object {
+        fun create(saveProductVO: SaveProductVO): Necklace {
+            return Necklace(
+                name = saveProductVO.name,
+                productCode = "dd", // TODO : productCode
+                price = saveProductVO.price,
+                weightByMilliGram = saveProductVO.weightByMilliGram,
+                isDiamond = saveProductVO.isDiamond,
+                totalDiamondCaratX100 = saveProductVO.totalDiamondCaratX100,
+                isDisplay = saveProductVO.isDisplay
+            )
         }
     }
 }

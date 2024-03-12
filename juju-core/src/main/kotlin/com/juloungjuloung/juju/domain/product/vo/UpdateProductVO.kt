@@ -10,18 +10,5 @@ data class UpdateProductVO(
     val weightByMilliGram: Long? = null,
     val isDiamond: Boolean? = null,
     val totalDiamondCaratX100: Int? = null,
-    val isDisplay: Boolean? = null,
-
-    val additionalBraceletVO: UpdateBraceletAdditionalVO? = null,
-    val additionalNecklaceVO: UpdateNecklaceAdditionalVO? = null
-)
-
-data class UpdateBraceletAdditionalVO(
-    val maximumLength: Int,
-    val minimumLength: Int
-)
-
-data class UpdateNecklaceAdditionalVO(
-    val maximumLength: Int,
-    val minimumLength: Int
+    val isDisplay: Boolean? = null
 )

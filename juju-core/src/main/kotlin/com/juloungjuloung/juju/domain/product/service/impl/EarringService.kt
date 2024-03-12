@@ -29,7 +29,7 @@ class EarringService(
 
     @Transactional
     override fun save(saveProductVO: SaveProductVO): Long {
-        return earringRepository.save(saveProductVO.toDomain() as Earring)
+        return earringRepository.save(Earring.create(saveProductVO))
     }
 
     @Transactional
