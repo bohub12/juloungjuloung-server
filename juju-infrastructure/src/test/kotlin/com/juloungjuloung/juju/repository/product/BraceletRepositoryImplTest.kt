@@ -72,7 +72,5 @@ class BraceletRepositoryImplTest : SharedMySQLTestContainer() {
         updatedBracelet.isDiamond shouldBe givenBracelet.isDiamond
         updatedBracelet.totalDiamondCaratX100 shouldBe givenBracelet.totalDiamondCaratX100
         updatedBracelet.isDisplay shouldBe givenBracelet.isDisplay
-        updatedBracelet.maximumLength shouldBe givenBracelet.maximumLength
-        updatedBracelet.minimumLength shouldBe givenBracelet.minimumLength
     }
 }

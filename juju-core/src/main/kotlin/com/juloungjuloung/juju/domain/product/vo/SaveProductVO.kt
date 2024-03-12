@@ -20,10 +20,7 @@ data class SaveProductVO(
     val weightByMilliGram: Long,
     val isDiamond: Boolean,
     val totalDiamondCaratX100: Int,
-    val isDisplay: Boolean,
-
-    val saveBraceletAdditionalVO: SaveBraceletAdditionalVO?,
-    val saveNecklaceAdditionalVO: SaveNecklaceAdditionalVO?
+    val isDisplay: Boolean
 ) {
     fun toDomain(): Product {
         return when (productType) {
@@ -43,9 +40,7 @@ data class SaveProductVO(
             weightByMilliGram = weightByMilliGram,
             isDiamond = isDiamond,
             totalDiamondCaratX100 = totalDiamondCaratX100,
-            isDisplay = isDisplay,
-            maximumLength = saveBraceletAdditionalVO!!.maximumLength,
-            minimumLength = saveBraceletAdditionalVO.minimumLength
+            isDisplay = isDisplay
         )
     }
 
@@ -69,9 +64,7 @@ data class SaveProductVO(
             weightByMilliGram = weightByMilliGram,
             isDiamond = isDiamond,
             totalDiamondCaratX100 = totalDiamondCaratX100,
-            isDisplay = isDisplay,
-            maximumLength = saveNecklaceAdditionalVO!!.maximumLength,
-            minimumLength = saveNecklaceAdditionalVO.minimumLength
+            isDisplay = isDisplay
         )
     }
 
@@ -87,13 +80,3 @@ data class SaveProductVO(
         )
     }
 }
-
-data class SaveBraceletAdditionalVO(
-    val maximumLength: Int,
-    val minimumLength: Int
-)
-
-data class SaveNecklaceAdditionalVO(
-    val maximumLength: Int,
-    val minimumLength: Int
-)

@@ -43,8 +43,6 @@ class NecklaceRepositoryImpl(
             .set(necklaceEntity.isDiamond, necklace.isDiamond)
             .set(necklaceEntity.totalDiamondCaratX100, necklace.totalDiamondCaratX100)
             .set(necklaceEntity.isDisplay, necklace.isDisplay)
-            .set(necklaceEntity.maximumLength, necklace.maximumLength)
-            .set(necklaceEntity.minimumLength, necklace.minimumLength)
             .where(necklaceEntity.id.eq(necklace.id))
             .execute()
 

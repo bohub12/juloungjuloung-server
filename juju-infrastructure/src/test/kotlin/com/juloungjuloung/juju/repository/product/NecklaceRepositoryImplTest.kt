@@ -73,7 +73,5 @@ class NecklaceRepositoryImplTest : SharedMySQLTestContainer() {
         updatedNecklace.isDiamond shouldBe givenNecklace.isDiamond
         updatedNecklace.totalDiamondCaratX100 shouldBe givenNecklace.totalDiamondCaratX100
         updatedNecklace.isDisplay shouldBe givenNecklace.isDisplay
-        updatedNecklace.maximumLength shouldBe givenNecklace.maximumLength
-        updatedNecklace.minimumLength shouldBe givenNecklace.minimumLength
     }
 }

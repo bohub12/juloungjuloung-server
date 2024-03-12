@@ -16,10 +16,7 @@ class BraceletResponse(
     totalDiamondCaratX100: Int,
     isDisplay: Boolean,
     createdAt: LocalDateTime,
-    updatedAt: LocalDateTime,
-
-    val maximumLength: Int,
-    val minimumLength: Int
+    updatedAt: LocalDateTime
 ) : ProductResponse(
     id = id,
     productType = type,
@@ -47,8 +44,6 @@ class BraceletResponse(
                 isDiamond = result.isDiamond,
                 totalDiamondCaratX100 = result.totalDiamondCaratX100,
                 isDisplay = result.isDisplay,
-                maximumLength = result.maximumLength,
-                minimumLength = result.minimumLength,
                 createdAt = result.createdAt,
                 updatedAt = result.updatedAt
             )

@@ -25,32 +25,11 @@ data class SaveProductRequest(
     @PositiveOrZero
     val totalDiamondCaratX100: Int,
 
-    val isDisplay: Boolean,
-
-    val saveBraceletAdditionalRequest: SaveBraceletAdditionalRequest?,
-    val saveNecklaceAdditionalRequest: SaveNecklaceAdditionalRequest?
+    val isDisplay: Boolean
 ) {
     init {
         if (ProductTypeEnum.BASE == productType) {
             throw BusinessLogicException(BAD_REQUEST_ENUM)
         }
-
-        if (ProductTypeEnum.BRACELET == productType) {
-            requireNotNull(saveBraceletAdditionalRequest)
-        }
-
-        if (ProductTypeEnum.NECKLACE == productType) {
-            requireNotNull(saveNecklaceAdditionalRequest)
-        }
     }
 }
-
-data class SaveBraceletAdditionalRequest(
-    val maximumLength: Int,
-    val minimumLength: Int
-)
-
-data class SaveNecklaceAdditionalRequest(
-    val maximumLength: Int,
-    val minimumLength: Int
-)
