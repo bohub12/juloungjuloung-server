@@ -30,7 +30,7 @@ class RingService(
 
     @Transactional
     override fun save(saveProductVO: SaveProductVO): Long {
-        return ringRepository.save(saveProductVO.toDomain() as Ring)
+        return ringRepository.save(Ring.create(saveProductVO))
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.domain.product.impl
 
 import com.juloungjuloung.juju.domain.product.Product
+import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import java.time.LocalDateTime
 
@@ -29,4 +30,18 @@ class Necklace(
     isDisplay = isDisplay,
     createdAt = createdAt,
     updatedAt = updatedAt
-)
+) {
+    companion object {
+        fun create(saveProductVO: SaveProductVO): Necklace {
+            return Necklace(
+                name = saveProductVO.name,
+                productCode = "dd", // TODO : productCode
+                price = saveProductVO.price,
+                weightByMilliGram = saveProductVO.weightByMilliGram,
+                isDiamond = saveProductVO.isDiamond,
+                totalDiamondCaratX100 = saveProductVO.totalDiamondCaratX100,
+                isDisplay = saveProductVO.isDisplay
+            )
+        }
+    }
+}

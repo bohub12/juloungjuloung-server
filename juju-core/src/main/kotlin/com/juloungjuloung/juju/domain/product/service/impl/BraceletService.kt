@@ -30,7 +30,7 @@ class BraceletService(
 
     @Transactional
     override fun save(saveProductVO: SaveProductVO): Long {
-        return braceletRepository.save(saveProductVO.toDomain() as Bracelet)
+        return braceletRepository.save(Bracelet.create(saveProductVO))
     }
 
     @Transactional
