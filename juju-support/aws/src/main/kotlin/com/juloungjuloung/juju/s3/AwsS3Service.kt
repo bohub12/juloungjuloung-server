@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.s3
 
 import com.juloungjuloung.juju.constants.ImageFileExtension
+import com.juloungjuloung.juju.properties.AwsCloudFrontProperties
 import com.juloungjuloung.juju.properties.AwsS3Properties
 import org.springframework.stereotype.Service
 import software.amazon.awssdk.services.s3.model.PutObjectRequest
@@ -11,6 +12,7 @@ import java.time.Duration
 @Service
 class AwsS3Service(
     private val awsS3Properties: AwsS3Properties,
+    private val awsCloudFrontProperties: AwsCloudFrontProperties,
     private val s3PreSigner: S3Presigner
 ) {
 
@@ -37,7 +39,6 @@ class AwsS3Service(
     }
 
     fun getVirtualImagePath(uniquePath: String, fileExtension: ImageFileExtension): String {
-        // TODO: CloudFront URL 로 대체 예정 (ConfigurationProperties)
-        return "https://test.com/" + uniquePath + fileExtension.extension
+        return awsCloudFrontProperties.imageDistributionDomain + "/" + uniquePath + fileExtension.extension
     }
 }

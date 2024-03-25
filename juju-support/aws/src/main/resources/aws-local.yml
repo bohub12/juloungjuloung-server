@@ -9,7 +9,8 @@ spring:
 aws:
     s3:
         bucket: ENC(ItrMamuoaBij/4OqW2iXS+jZN3V9HT+jmdxrSXPVHv0=)
-
+    cloudfront:
+        image-distribution-domain: ENC(lq45rWUv1E9jCHRlzpXvuiQvKZn6+FlHHIHidEql+14o0AY+pqMBv7V1sTDeq4bL)
 jasypt:
     encryptor:
         algorithm: PBEWithMD5AndDES
