@@ -1,6 +1,7 @@
 package com.juloungjuloung.juju.s3
 
 import com.juloungjuloung.juju.constants.ImageFileExtension
+import com.juloungjuloung.juju.properties.AwsCloudFrontProperties
 import com.juloungjuloung.juju.properties.AwsS3Properties
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
@@ -14,8 +15,13 @@ import java.util.*
 class AwsS3ServiceTest : BehaviorSpec({
 
     val awsS3Properties: AwsS3Properties = mockk<AwsS3Properties>()
+    val awsCloudFrontProperties = mockk<AwsCloudFrontProperties>()
     val s3PreSigner: S3Presigner = mockk<S3Presigner>()
-    val awsS3Service = AwsS3Service(awsS3Properties, s3PreSigner)
+    val awsS3Service = AwsS3Service(
+        awsS3Properties = awsS3Properties,
+        awsCloudFrontProperties = awsCloudFrontProperties,
+        s3PreSigner = s3PreSigner
+    )
 
     every { awsS3Properties.bucket } returns "test-s3"
     every {
