@@ -2,7 +2,7 @@ package com.juloungjuloung.juju.dto.product.request
 
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 import com.juloungjuloung.juju.exception.BusinessLogicException
-import com.juloungjuloung.juju.response.ApiResponseCode.BAD_REQUEST_ENUM
+import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_VALID_BAD_PRODUCT_TYPE_ENUM_IN_SAVE_CONDITION
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.PositiveOrZero
@@ -29,7 +29,7 @@ data class SaveProductRequest(
 ) {
     init {
         if (ProductTypeEnum.BASE == productType) {
-            throw BusinessLogicException(BAD_REQUEST_ENUM)
+            throw BusinessLogicException(PRODUCT_VALID_BAD_PRODUCT_TYPE_ENUM_IN_SAVE_CONDITION)
         }
     }
 }
