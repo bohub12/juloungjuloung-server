@@ -1,8 +1,8 @@
 package com.juloungjuloung.juju.domain.product
 
-import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_SIZE_EXCEED_MAX
 import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_THUMBNAIL_NOT_ONE
+import com.juloungjuloung.juju.utils.require
 import java.time.LocalDateTime
 
 data class ProductImage(
@@ -34,13 +34,11 @@ data class ProductImages(
     }
 
     private fun requireProperties() {
-        if (productImages.size >= 10) {
-            throw BusinessLogicException(PRODUCT_IMAGE_SIZE_EXCEED_MAX)
-        }
-
-        if (productImages.isNotEmpty() && productImages.filter { it.isThumbnail }.size != 1) {
-            throw BusinessLogicException(PRODUCT_IMAGE_THUMBNAIL_NOT_ONE)
-        }
+        require(productImages.size < 10, errorResponseCode = PRODUCT_IMAGE_SIZE_EXCEED_MAX)
+        require(
+            productImages.isEmpty() || productImages.filter { it.isThumbnail }.size == 1,
+            errorResponseCode = PRODUCT_IMAGE_THUMBNAIL_NOT_ONE
+        )
     }
 
     fun containsThumbnail(): Boolean {

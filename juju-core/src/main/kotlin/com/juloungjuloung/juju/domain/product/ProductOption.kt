@@ -1,7 +1,7 @@
 package com.juloungjuloung.juju.domain.product
 
-import com.juloungjuloung.juju.exception.BusinessLogicException
 import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_OPTION_REQUIRES_AT_LEAST_ONE_OPTION
+import com.juloungjuloung.juju.utils.require
 import java.time.LocalDateTime
 
 data class ProductOption(
@@ -25,9 +25,7 @@ data class ProductOptions(
     }
 
     private fun requireProperties() {
-        if (options.isEmpty()) {
-            throw BusinessLogicException(PRODUCT_OPTION_REQUIRES_AT_LEAST_ONE_OPTION)
-        }
+        require(options.isNotEmpty(), PRODUCT_OPTION_REQUIRES_AT_LEAST_ONE_OPTION)
     }
 
     fun updateProductOptionCategoryId(productOptionCategoryId: Long) {
