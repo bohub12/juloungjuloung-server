@@ -26,19 +26,11 @@ class ExceptionHandler {
         return fail(e.code)
     }
 
-    @ExceptionHandler(IllegalArgumentException::class)
-    @ResponseStatus(BAD_REQUEST)
-    fun exceptionHandle(e: IllegalArgumentException): ApiResponse<Boolean> {
-        // TODO : loggin stack trace
-        e.printStackTrace()
-        return fail(ApiResponseCode.ILLEGAL_ARGUMENT)
-    }
-
     @ExceptionHandler(value = [MethodArgumentTypeMismatchException::class, ConversionFailedException::class])
     @ResponseStatus(BAD_REQUEST)
     fun exceptionHandle(): ApiResponse<Boolean> {
         // TODO : logging stack trace
-        return fail(ApiResponseCode.BAD_REQUEST_ENUM)
+        return fail(ApiResponseCode.PRODUCT_VALID_BAD_PRODUCT_TYPE_ENUM_IN_SAVE_CONDITION)
     }
 
     @ExceptionHandler(Exception::class)
