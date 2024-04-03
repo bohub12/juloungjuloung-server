@@ -6,7 +6,7 @@ import com.juloungjuloung.juju.objectmapper.toUpsertVO
 import com.juloungjuloung.juju.response.ApiResponse
 import com.juloungjuloung.juju.response.ApiResponse.Companion.success
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -18,7 +18,7 @@ class ProductOptionController(
     private val productOptionServiceFacade: ProductOptionServiceFacade
 ) {
 
-    @PutMapping
+    @PostMapping
     fun upsertProductOptions(
         @RequestBody request: UpsertProductOptionRequest
     ): ApiResponse<Long> {
