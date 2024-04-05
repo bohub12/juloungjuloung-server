@@ -7,7 +7,9 @@ include(
     ":juju-core",
     ":juju-infrastructure",
     ":juju-support:aws",
-    ":juju-support:constant"
+    ":juju-support:constant",
+    ":juju-support:logging:admin-logging",
+    ":juju-support:logging:public-logging"
 )
 
 pluginManagement {
