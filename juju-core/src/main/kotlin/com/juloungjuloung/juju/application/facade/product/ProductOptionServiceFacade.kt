@@ -17,7 +17,6 @@ class ProductOptionServiceFacade(
     private val productOptionCategoryService: ProductOptionCategoryService,
     private val productService: ProductServiceImpl
 ) {
-
     @Transactional(readOnly = true)
     fun readAllByProductId(productId: Long): List<ProductOptionInfo> {
         validateProductId(productId)

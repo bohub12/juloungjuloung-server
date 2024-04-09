@@ -4,11 +4,9 @@ import org.springframework.core.convert.converter.Converter
 import org.springframework.core.convert.converter.ConverterFactory
 
 class StringToEnumConverterFactory : ConverterFactory<String, Enum<*>> {
-
     class StringToEnumConverter<T : Enum<*>>(
         private val enumClass: Class<T>
     ) : Converter<String, T> {
-
         override fun convert(source: String): T {
             if (source.isEmpty()) {
                 throw IllegalArgumentException()

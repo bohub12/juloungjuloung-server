@@ -6,8 +6,10 @@ import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
 
 interface ProductService {
-
-    fun read(page: Int, size: Int): List<Product>
+    fun read(
+        page: Int,
+        size: Int
+    ): List<Product>
 
     fun readById(id: Long): Product
 

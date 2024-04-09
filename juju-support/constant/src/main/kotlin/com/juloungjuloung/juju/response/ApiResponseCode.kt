@@ -4,7 +4,6 @@ enum class ApiResponseCode(
     val code: Int,
     val message: String
 ) {
-
     // success
     SUCCESS(200, "성공"),
 

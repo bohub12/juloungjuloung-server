@@ -38,9 +38,7 @@ open class Product(
         }
     }
 
-    open fun update(
-        updateProductVO: UpdateProductVO
-    ) {
+    open fun update(updateProductVO: UpdateProductVO) {
         updateProductVO.name?.let { this.name = updateProductVO.name }
         updateProductVO.price?.let { this.price = updateProductVO.price }
         updateProductVO.weightByMilliGram?.let { this.weightByMilliGram = updateProductVO.weightByMilliGram }

@@ -34,9 +34,10 @@ class ProductImageServiceFacadeTest : BehaviorSpec({
             val request = upsertProductImageVOFixture(exceedMaxSize = true)
 
             Then("예외 발생") {
-                val exception = shouldThrow<BusinessLogicException> {
-                    productImageServiceFacade.upsertProductImages(request)
-                }
+                val exception =
+                    shouldThrow<BusinessLogicException> {
+                        productImageServiceFacade.upsertProductImages(request)
+                    }
                 exception.code shouldBe PRODUCT_IMAGE_SIZE_EXCEED_MAX
             }
         }
@@ -45,9 +46,10 @@ class ProductImageServiceFacadeTest : BehaviorSpec({
             val request = upsertProductImageVOFixture(isMultipleThumbnailImage = true)
 
             Then("예외 발생") {
-                val exception = shouldThrow<BusinessLogicException> {
-                    productImageServiceFacade.upsertProductImages(request)
-                }
+                val exception =
+                    shouldThrow<BusinessLogicException> {
+                        productImageServiceFacade.upsertProductImages(request)
+                    }
                 exception.code shouldBe PRODUCT_IMAGE_THUMBNAIL_NOT_ONE
             }
         }
@@ -61,9 +63,10 @@ class ProductImageServiceFacadeTest : BehaviorSpec({
 
             every { productImageService.readByProduct(productId) } returns listOf()
             every { productImageService.deleteAll(any()) } returns true
-            every { productImageService.upsert(request) } returns List(request.upsertProductImageInternalVOs.size) {
-                it.toLong()
-            }
+            every { productImageService.upsert(request) } returns
+                List(request.upsertProductImageInternalVOs.size) {
+                    it.toLong()
+                }
 
             Then("정상 실행") {
                 shouldNotThrow<Exception> {

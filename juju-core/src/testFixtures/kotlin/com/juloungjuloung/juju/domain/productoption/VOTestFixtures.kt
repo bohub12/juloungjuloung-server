@@ -10,10 +10,11 @@ import com.navercorp.fixturemonkey.kotlin.setExp
 fun upsertProductOptionVOFixture(
     productId: Long = 1L,
     optionCategoryId: Long = 1L,
-    optionIds: List<Long> = listOf(
-        1L,
-        2L
-    ),
+    optionIds: List<Long> =
+        listOf(
+            1L,
+            2L
+        ),
     isEmptyOption: Boolean = false
 ): UpsertProductOptionVO {
     if (isEmptyOption) {

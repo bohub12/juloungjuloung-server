@@ -20,7 +20,10 @@ class ProductRepositoryImpl(
             .toDomain()
     }
 
-    override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Product> {
+    override fun findAllByOrderByCreatedAt(
+        page: Int,
+        size: Int
+    ): List<Product> {
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()

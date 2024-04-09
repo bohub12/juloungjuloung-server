@@ -15,8 +15,10 @@ import org.springframework.transaction.annotation.Transactional
 class RingService(
     private val ringRepository: RingRepository
 ) : ProductService {
-
-    override fun read(page: Int, size: Int): List<Product> {
+    override fun read(
+        page: Int,
+        size: Int
+    ): List<Product> {
         return ringRepository.findAllByOrderByCreatedAt(page, size)
     }
 

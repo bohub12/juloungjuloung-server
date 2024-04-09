@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Positive
 data class UpdateProductRequest(
     @Positive
     val id: Long,
-
     @NotNull
     val productType: ProductTypeEnum,
     val name: String?,

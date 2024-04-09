@@ -23,7 +23,6 @@ class ProductEntity(
     val totalDiamondCaratX100: Int,
     val isDisplay: Boolean
 ) : BaseEntity() {
-
     fun toDomain(): Product {
         return Product(
             id = this.id,

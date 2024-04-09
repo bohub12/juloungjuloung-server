@@ -10,7 +10,6 @@ class ProductImageEntity(
     val imageUrl: String,
     val isThumbnail: Boolean
 ) : BaseEntity() {
-
     fun toDomain(): ProductImage {
         return ProductImage(
             id = this.id,

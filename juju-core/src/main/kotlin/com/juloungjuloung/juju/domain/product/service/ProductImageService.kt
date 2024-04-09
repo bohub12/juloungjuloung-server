@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional
 class ProductImageService(
     private val productImageRepository: ProductImageRepository
 ) {
-
     fun readByProduct(productId: Long): List<ProductImage> {
         return productImageRepository.findByProduct(productId)
     }

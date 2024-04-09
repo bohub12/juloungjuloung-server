@@ -18,7 +18,6 @@ class TestConfiguration(
     @PersistenceContext
     private val entityManager: EntityManager
 ) {
-
     @Bean
     fun jpaQueryFactory(): JPAQueryFactory {
         return JPAQueryFactory(entityManager)

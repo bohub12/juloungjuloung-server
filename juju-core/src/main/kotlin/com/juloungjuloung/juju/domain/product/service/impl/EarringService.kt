@@ -15,7 +15,10 @@ import org.springframework.transaction.annotation.Transactional
 class EarringService(
     private val earringRepository: EarringRepository
 ) : ProductService {
-    override fun read(page: Int, size: Int): List<Product> {
+    override fun read(
+        page: Int,
+        size: Int
+    ): List<Product> {
         return earringRepository.findAllByOrderByCreatedAt(page, size)
     }
 

@@ -15,7 +15,6 @@ class AwsS3Service(
     private val awsCloudFrontProperties: AwsCloudFrontProperties,
     private val s3PreSigner: S3Presigner
 ) {
-
     fun createPreSignedUrlForUpload(
         path: String,
         fileExtension: ImageFileExtension
@@ -24,21 +23,26 @@ class AwsS3Service(
             throw IllegalStateException("path can not contain file extension")
         }
 
-        val putObjectRequest = PutObjectRequest.builder()
-            .bucket(awsS3Properties.bucket)
-            .key(path + fileExtension.extension)
-            .contentType(fileExtension.contentType)
-            .build()
+        val putObjectRequest =
+            PutObjectRequest.builder()
+                .bucket(awsS3Properties.bucket)
+                .key(path + fileExtension.extension)
+                .contentType(fileExtension.contentType)
+                .build()
 
-        val preSignRequest = PutObjectPresignRequest.builder()
-            .signatureDuration(Duration.ofMinutes(5)) // The URL will expire in 5 minutes.
-            .putObjectRequest(putObjectRequest)
-            .build()
+        val preSignRequest =
+            PutObjectPresignRequest.builder()
+                .signatureDuration(Duration.ofMinutes(5)) // The URL will expire in 5 minutes.
+                .putObjectRequest(putObjectRequest)
+                .build()
 
         return s3PreSigner.presignPutObject(preSignRequest).url().toString()
     }
 
-    fun getVirtualImagePath(uniquePath: String, fileExtension: ImageFileExtension): String {
+    fun getVirtualImagePath(
+        uniquePath: String,
+        fileExtension: ImageFileExtension
+    ): String {
         return awsCloudFrontProperties.imageDistributionDomain + "/" + uniquePath + fileExtension.extension
     }
 }

@@ -31,7 +31,6 @@ class ProductController(
     private val productServiceFacade: ProductServiceFacade,
     private val productOptionServiceFacade: ProductOptionServiceFacade
 ) {
-
     @GetMapping
     fun readProducts(
         @RequestParam(required = false, defaultValue = "BASE") productType: ProductTypeEnum,

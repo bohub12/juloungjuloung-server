@@ -15,7 +15,6 @@ class ProductImageServiceFacade(
     private val productImageService: ProductImageService,
     private val productService: ProductServiceImpl
 ) {
-
     @Transactional(readOnly = true)
     fun readByProduct(productId: Long): List<ProductImage> {
         findProductOrException(productId)
@@ -40,7 +39,10 @@ class ProductImageServiceFacade(
         return productImageService.upsert(upsertProductImageVO)
     }
 
-    private fun deletePersistedProductImagesExcludeRequest(productId: Long, requestedProductImageIds: List<Long>) {
+    private fun deletePersistedProductImagesExcludeRequest(
+        productId: Long,
+        requestedProductImageIds: List<Long>
+    ) {
         val persistedProductImages = readByProduct(productId).map { it.id }
 
         productImageService.deleteAll(persistedProductImages.filterNot { requestedProductImageIds.contains(it) })

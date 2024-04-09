@@ -23,16 +23,17 @@ class SlackAppender : UnsynchronizedAppenderBase<ILoggingEvent>() {
     private fun createSlackMessage(eventObject: ILoggingEvent): Map<String, Any> {
         val message = createMessageBody(eventObject)
         return mapOf(
-            "attachments" to listOf(
-                mapOf(
-                    "fallback" to "로그 전송 요청을 실패했어요 :cry:",
-                    "color" to "#2eb886",
-                    "pretext" to "에러가 발생했어요. 아래 로그를 확인해주세요 :cry:",
-                    "author_name" to "어드민서버-에러로그",
-                    "text" to message,
-                    "ts" to eventObject.timeStamp
+            "attachments" to
+                listOf(
+                    mapOf(
+                        "fallback" to "로그 전송 요청을 실패했어요 :cry:",
+                        "color" to "#2eb886",
+                        "pretext" to "에러가 발생했어요. 아래 로그를 확인해주세요 :cry:",
+                        "author_name" to "어드민서버-에러로그",
+                        "text" to message,
+                        "ts" to eventObject.timeStamp
+                    )
                 )
-            )
         )
     }
 

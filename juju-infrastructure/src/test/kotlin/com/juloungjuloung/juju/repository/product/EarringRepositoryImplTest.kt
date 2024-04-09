@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired
 
 @RepositoryIntegrationTest(EarringRepositoryImpl::class)
 class EarringRepositoryImplTest : SharedMySQLTestContainer() {
-
     @PersistenceContext
     lateinit var em: EntityManager
 

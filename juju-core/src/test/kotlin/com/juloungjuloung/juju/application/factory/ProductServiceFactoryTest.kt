@@ -16,14 +16,15 @@ import io.mockk.mockk
 
 class ProductServiceFactoryTest : BehaviorSpec({
     Given("Product Service들이 팩토리에 등록됐을 때") {
-        val productServiceFactory = ProductServiceFactory(
-            listOf(
-                BraceletService(mockk<BraceletRepository>()),
-                EarringService(mockk<EarringRepository>()),
-                NecklaceService(mockk<NecklaceRepository>()),
-                RingService(mockk<RingRepository>())
+        val productServiceFactory =
+            ProductServiceFactory(
+                listOf(
+                    BraceletService(mockk<BraceletRepository>()),
+                    EarringService(mockk<EarringRepository>()),
+                    NecklaceService(mockk<NecklaceRepository>()),
+                    RingService(mockk<RingRepository>())
+                )
             )
-        )
 
         When("정상적인 파라미터(enum)로 Service를 조회하면") {
             Then("정상적으로 리턴한다") {

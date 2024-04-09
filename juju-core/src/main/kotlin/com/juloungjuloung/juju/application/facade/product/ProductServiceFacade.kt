@@ -14,8 +14,11 @@ import org.springframework.transaction.annotation.Transactional
 class ProductServiceFacade(
     private val productServiceFactory: ProductServiceFactory
 ) {
-
-    fun read(productType: ProductTypeEnum, page: Int, size: Int): ProductsWithCount {
+    fun read(
+        productType: ProductTypeEnum,
+        page: Int,
+        size: Int
+    ): ProductsWithCount {
         val service = productServiceFactory.get(productType)
 
         return ProductsWithCount(

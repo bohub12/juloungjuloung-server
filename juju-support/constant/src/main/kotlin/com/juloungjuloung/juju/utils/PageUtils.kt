@@ -1,6 +1,10 @@
 package com.juloungjuloung.juju.utils
 
-fun getTotalPageCount(totalElementCount: Long, pageSize: Int, maximumPageCount: Int = 10): Int {
+fun getTotalPageCount(
+    totalElementCount: Long,
+    pageSize: Int,
+    maximumPageCount: Int = 10
+): Int {
     if (totalElementCount % pageSize != 0L) {
         return (totalElementCount / pageSize + 1).toInt()
     }

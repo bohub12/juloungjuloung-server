@@ -21,7 +21,10 @@ class EarringRepositoryImpl(
             .toDomain()
     }
 
-    override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Earring> {
+    override fun findAllByOrderByCreatedAt(
+        page: Int,
+        size: Int
+    ): List<Earring> {
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()

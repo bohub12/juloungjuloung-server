@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired
 
 @RepositoryIntegrationTest(NecklaceRepositoryImpl::class)
 class NecklaceRepositoryImplTest : SharedMySQLTestContainer() {
-
     @PersistenceContext
     lateinit var em: EntityManager
 
