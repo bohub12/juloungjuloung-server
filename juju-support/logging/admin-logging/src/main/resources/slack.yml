@@ -1,2 +1,6 @@
 slack:
     webHookUrl: ENC(jAqcJJGT59cYPgzwj/zAiwp7AvIszI0Ex4ullIVDeENLNSRwpdxL/u4hp6bvAqFWg0q9e4lkG6A+xcqzOkQVSS+DJxVLX3EmRIa3taBVJ4P1gMwMpVqF5RD4InKzjxQF)
+#jasypt:
+#    encryptor:
+#        algorithm: PBEWithMD5AndDES
+#        iv-generator-classname: org.jasypt.iv.NoIvGenerator
