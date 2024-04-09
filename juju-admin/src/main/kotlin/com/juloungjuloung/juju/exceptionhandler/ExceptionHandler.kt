@@ -25,8 +25,7 @@ class ExceptionHandler {
     @ExceptionHandler(BusinessLogicException::class)
     @ResponseStatus(BAD_REQUEST)
     fun exceptionHandle(e: BusinessLogicException): ApiResponse<Boolean> {
-        // TODO : error > info (expected exception)
-        logger.error("Business logic error", e)
+        logger.warn("Business logic error", e)
         return fail(e.code)
     }
 
