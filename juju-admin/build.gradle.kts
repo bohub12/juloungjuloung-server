@@ -14,6 +14,7 @@ val jasyptVersion: String by project
 
 dependencies {
     implementation(project(":juju-core"))
+    implementation(project(":juju-support:logging:admin-logging"))
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$swaggerVersion")

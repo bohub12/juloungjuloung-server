@@ -39,3 +39,5 @@ out/
 .DS_Store
 application-test.yml
 .jqwik-database
+log/
+**/*.log
