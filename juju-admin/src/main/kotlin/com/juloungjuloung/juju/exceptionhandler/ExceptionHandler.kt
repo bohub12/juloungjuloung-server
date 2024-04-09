@@ -16,7 +16,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @RestControllerAdvice
 class ExceptionHandler {
-
     val logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     /**

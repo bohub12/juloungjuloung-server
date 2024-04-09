@@ -21,7 +21,10 @@ class NecklaceRepositoryImpl(
             .toDomain()
     }
 
-    override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Necklace> {
+    override fun findAllByOrderByCreatedAt(
+        page: Int,
+        size: Int
+    ): List<Necklace> {
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()

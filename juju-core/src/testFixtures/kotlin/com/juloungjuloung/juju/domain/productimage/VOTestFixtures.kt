@@ -26,11 +26,12 @@ private fun upsertProductImageInternalVOFixture(
     exceedMaxSize: Boolean = false,
     includedPersistedRequest: Boolean = true
 ): List<UpsertProductImageInternalVO> {
-    val dummyThumbnailImageVO = if (includedPersistedRequest) {
-        UpsertProductImageInternalVO(1L, "thumbnail.png", true)
-    } else {
-        UpsertProductImageInternalVO(0L, "thumbnail.png", true)
-    }
+    val dummyThumbnailImageVO =
+        if (includedPersistedRequest) {
+            UpsertProductImageInternalVO(1L, "thumbnail.png", true)
+        } else {
+            UpsertProductImageInternalVO(0L, "thumbnail.png", true)
+        }
     val dummyNonThumbnailImageVO = UpsertProductImageInternalVO(0L, "normal.png", false)
 
     return if (!isMultipleThumbnailImage && !exceedMaxSize) {

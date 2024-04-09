@@ -23,9 +23,10 @@ class ProductImageServiceTest : BehaviorSpec({
             every { productImageRepository.findByIds(any()) } returns listOf()
 
             Then("예외 발생") {
-                val exception = shouldThrow<BusinessLogicException> {
-                    productImageService.upsert(upsertProductImageVOFixture)
-                }
+                val exception =
+                    shouldThrow<BusinessLogicException> {
+                        productImageService.upsert(upsertProductImageVOFixture)
+                    }
                 exception.code shouldBe BAD_REQUEST_ID
             }
         }

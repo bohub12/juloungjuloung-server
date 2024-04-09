@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional
 class ProductOptionService(
     private val productOptionRepository: ProductOptionRepository
 ) {
-
     @Transactional(readOnly = true)
     fun readByIds(productOptionIds: List<Long>): List<ProductOption> {
         return productOptionRepository.findByIds(productOptionIds)

@@ -9,7 +9,10 @@ data class ProductDetailResponse(
     val productOptionInfos: List<ProductOptionInfoResponse>
 ) {
     companion object {
-        fun from(product: Product, productOptionInfos: List<ProductOptionInfo>): ProductDetailResponse {
+        fun from(
+            product: Product,
+            productOptionInfos: List<ProductOptionInfo>
+        ): ProductDetailResponse {
             return ProductDetailResponse(
                 product = toResponse(product),
                 productOptionInfos = productOptionInfos.map { toResponse(it) }

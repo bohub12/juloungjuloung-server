@@ -14,7 +14,10 @@ import org.springframework.transaction.annotation.Transactional
 class ProductServiceImpl(
     private val productRepository: ProductRepository
 ) : ProductService {
-    override fun read(page: Int, size: Int): List<Product> {
+    override fun read(
+        page: Int,
+        size: Int
+    ): List<Product> {
         return productRepository.findAllByOrderByCreatedAt(page, size)
     }
 
@@ -38,7 +41,10 @@ class ProductServiceImpl(
         return ProductTypeEnum.BASE
     }
 
-    fun changeThumbnailImage(productId: Long, thumbnailImageUrl: String) {
+    fun changeThumbnailImage(
+        productId: Long,
+        thumbnailImageUrl: String
+    ) {
         val product = readById(productId)
 
         product.changeThumbnailImage(thumbnailImageUrl)

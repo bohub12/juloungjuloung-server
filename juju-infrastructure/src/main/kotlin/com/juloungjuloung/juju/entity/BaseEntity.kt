@@ -15,7 +15,6 @@ import java.time.LocalDateTime
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
 abstract class BaseEntity {
-
     @Id
     @GeneratedValue
     var id: Long = 0L

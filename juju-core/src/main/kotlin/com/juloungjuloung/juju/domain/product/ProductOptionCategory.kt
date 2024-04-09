@@ -19,7 +19,10 @@ data class ProductOptionInfo(
     val options: ProductOptions
 ) {
     companion object {
-        fun from(productOptionCategory: ProductOptionCategory, productOptions: List<ProductOption>): ProductOptionInfo {
+        fun from(
+            productOptionCategory: ProductOptionCategory,
+            productOptions: List<ProductOption>
+        ): ProductOptionInfo {
             return ProductOptionInfo(
                 optionCategory = productOptionCategory,
                 options = ProductOptions(productOptions.getByProductOptionCategoryId(productOptionCategory.id))

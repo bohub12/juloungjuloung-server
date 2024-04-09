@@ -24,9 +24,10 @@ class ProductImageController(
     private val productImageServiceFacade: ProductImageServiceFacade,
     private val createPreSignedUrlServiceFacade: CreatePreSignedUrlServiceFacade
 ) {
-
     @GetMapping
-    fun readProductImages(@RequestParam productId: Long): ApiResponse<List<ProductImageResponse>> {
+    fun readProductImages(
+        @RequestParam productId: Long
+    ): ApiResponse<List<ProductImageResponse>> {
         return success(productImageServiceFacade.readByProduct(productId).map { toResponse(it) })
     }
 

@@ -6,7 +6,6 @@ import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.junit.jupiter.Container
 
 abstract class SharedMySQLTestContainer {
-
     companion object {
         const val DATABASE_NAME: String = "juju-test-database"
         const val USERNAME: String = "root"
@@ -14,11 +13,12 @@ abstract class SharedMySQLTestContainer {
 
         @Container
         @JvmStatic
-        val MYSQL_CONTAINER = MySQLContainer<Nothing>("mysql:8")
-            .apply { withDatabaseName(DATABASE_NAME) }
-            .apply { withUsername(USERNAME) }
-            .apply { withPassword(PASSWORD) }
-            .apply { start() }
+        val MYSQL_CONTAINER =
+            MySQLContainer<Nothing>("mysql:8")
+                .apply { withDatabaseName(DATABASE_NAME) }
+                .apply { withUsername(USERNAME) }
+                .apply { withPassword(PASSWORD) }
+                .apply { start() }
 
         @DynamicPropertySource
         fun mySQLProperties(registry: DynamicPropertyRegistry) {

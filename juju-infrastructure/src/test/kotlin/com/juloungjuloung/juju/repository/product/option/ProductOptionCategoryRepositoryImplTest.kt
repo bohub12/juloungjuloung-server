@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired
 
 @RepositoryIntegrationTest(ProductOptionCategoryRepositoryImpl::class)
 class ProductOptionCategoryRepositoryImplTest {
-
     @PersistenceContext
     lateinit var em: EntityManager
 
@@ -48,7 +47,8 @@ class ProductOptionCategoryRepositoryImplTest {
         // when
         val updateProductOptionCategoryName = "Updated Option Category Name"
         productOptionCategoryRepositoryImpl.update(
-            productOptionCategory = ProductOptionCategory(
+            productOptionCategory =
+            ProductOptionCategory(
                 id = productOptionCategoryId,
                 productId = 1L,
                 name = updateProductOptionCategoryName

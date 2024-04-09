@@ -6,20 +6,22 @@ data class ApiResponse<T>(
     val code: Int,
     val message: String,
     val data: T?,
-
     @JsonInclude(JsonInclude.Include.NON_NULL)
     val pageResponse: PageResponse?
 ) {
     companion object {
+        fun <T> success(data: T) =
+            ApiResponse(
+                code = ApiResponseCode.SUCCESS.code,
+                message = ApiResponseCode.SUCCESS.message,
+                data = data,
+                pageResponse = null
+            )
 
-        fun <T> success(data: T) = ApiResponse(
-            code = ApiResponseCode.SUCCESS.code,
-            message = ApiResponseCode.SUCCESS.message,
-            data = data,
-            pageResponse = null
-        )
-
-        fun <T> success(data: T, pageResponse: PageResponse?): ApiResponse<T> {
+        fun <T> success(
+            data: T,
+            pageResponse: PageResponse?
+        ): ApiResponse<T> {
             return ApiResponse(
                 code = ApiResponseCode.SUCCESS.code,
                 message = ApiResponseCode.SUCCESS.message,

@@ -17,11 +17,12 @@ class AwsS3ServiceTest : BehaviorSpec({
     val awsS3Properties: AwsS3Properties = mockk<AwsS3Properties>()
     val awsCloudFrontProperties = mockk<AwsCloudFrontProperties>()
     val s3PreSigner: S3Presigner = mockk<S3Presigner>()
-    val awsS3Service = AwsS3Service(
-        awsS3Properties = awsS3Properties,
-        awsCloudFrontProperties = awsCloudFrontProperties,
-        s3PreSigner = s3PreSigner
-    )
+    val awsS3Service =
+        AwsS3Service(
+            awsS3Properties = awsS3Properties,
+            awsCloudFrontProperties = awsCloudFrontProperties,
+            s3PreSigner = s3PreSigner
+        )
 
     every { awsS3Properties.bucket } returns "test-s3"
     every {
@@ -42,10 +43,11 @@ class AwsS3ServiceTest : BehaviorSpec({
 
         When("정상적인 파라미터가 들어오면") {
             Then("정상적으로 url을 생성한다") {
-                val preSignedUrl = awsS3Service.createPreSignedUrlForUpload(
-                    UUID.randomUUID().toString(),
-                    ImageFileExtension.JPG
-                )
+                val preSignedUrl =
+                    awsS3Service.createPreSignedUrlForUpload(
+                        UUID.randomUUID().toString(),
+                        ImageFileExtension.JPG
+                    )
 
                 preSignedUrl shouldNotBe null
             }

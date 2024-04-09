@@ -15,8 +15,9 @@ fun toUpsertVO(request: UpsertProductOptionRequest): UpsertProductOptionVO {
     )
 }
 
-private fun toUpsertOptionCategoryInternalVO(request: UpsertProductOptionCategoryInternalRequest):
-    UpsertProductOptionCategoryInternalVO {
+private fun toUpsertOptionCategoryInternalVO(
+    request: UpsertProductOptionCategoryInternalRequest
+): UpsertProductOptionCategoryInternalVO {
     return UpsertProductOptionCategoryInternalVO(
         id = request.id,
         name = request.name

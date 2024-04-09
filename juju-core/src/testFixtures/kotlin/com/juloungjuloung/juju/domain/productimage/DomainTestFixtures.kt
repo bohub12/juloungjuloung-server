@@ -5,7 +5,11 @@ import com.juloungjuloung.juju.fixtureMonkey
 import com.navercorp.fixturemonkey.kotlin.giveMeBuilder
 import com.navercorp.fixturemonkey.kotlin.setExp
 
-fun productImageFixture(isThumbnail: Boolean = false, id: Long = 1L, productId: Long = 1L): ProductImage {
+fun productImageFixture(
+    isThumbnail: Boolean = false,
+    id: Long = 1L,
+    productId: Long = 1L
+): ProductImage {
     return fixtureMonkey.giveMeBuilder<ProductImage>()
         .setExp(ProductImage::id, id)
         .setExp(ProductImage::productId, productId)

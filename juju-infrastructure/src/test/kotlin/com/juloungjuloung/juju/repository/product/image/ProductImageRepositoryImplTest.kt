@@ -32,11 +32,12 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
         val notThumbnailImageIds = listOf(2L, 3L)
         val productId = 1L
 
-        val productImages = productImageCollectionFixture(
-            thumbnailId = thumbnailImageId,
-            notThumbnailIds = notThumbnailImageIds,
-            productId = productId
-        )
+        val productImages =
+            productImageCollectionFixture(
+                thumbnailId = thumbnailImageId,
+                notThumbnailIds = notThumbnailImageIds,
+                productId = productId
+            )
 
         productImageRepositoryImpl.saveAll(productImages)
 
@@ -89,10 +90,11 @@ class ProductImageRepositoryImplTest : SharedMySQLTestContainer() {
         // given
         val thumbnailImageId = 1L
         val notThumbnailImageIds = listOf(2L, 3L)
-        val productImages = productImageCollectionFixture(
-            thumbnailId = thumbnailImageId,
-            notThumbnailIds = notThumbnailImageIds
-        )
+        val productImages =
+            productImageCollectionFixture(
+                thumbnailId = thumbnailImageId,
+                notThumbnailIds = notThumbnailImageIds
+            )
 
         productImageRepositoryImpl.saveAll(productImages)
 

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired
 
 @RepositoryIntegrationTest(ProductOptionRepositoryImpl::class)
 class ProductOptionRepositoryImplTest {
-
     @PersistenceContext
     lateinit var em: EntityManager
 

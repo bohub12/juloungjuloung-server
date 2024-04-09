@@ -11,31 +11,33 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 @OpenAPIDefinition(
-    info = Info(
+    info =
+    Info(
         title = "juju Admin API",
         description = "juju Admin API Restdocs",
         version = "v1"
     )
 )
 class SwaggerConfig {
-
     @Bean
     fun openApi(): OpenAPI {
         val schemeName = "Authorization"
 
-        val securityRequirement = SecurityRequirement()
-            .addList(schemeName)
+        val securityRequirement =
+            SecurityRequirement()
+                .addList(schemeName)
 
-        val components = Components()
-            .addSecuritySchemes(
-                schemeName,
-                SecurityScheme()
-                    .name(schemeName)
-                    .type(SecurityScheme.Type.HTTP)
-                    .`in`(SecurityScheme.In.HEADER)
-                    .scheme("Bearer")
-                    .bearerFormat("JWT")
-            )
+        val components =
+            Components()
+                .addSecuritySchemes(
+                    schemeName,
+                    SecurityScheme()
+                        .name(schemeName)
+                        .type(SecurityScheme.Type.HTTP)
+                        .`in`(SecurityScheme.In.HEADER)
+                        .scheme("Bearer")
+                        .bearerFormat("JWT")
+                )
 
         return OpenAPI()
             .addSecurityItem(securityRequirement)

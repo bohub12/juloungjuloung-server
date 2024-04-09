@@ -21,7 +21,10 @@ class RingRepositoryImpl(
             .toDomain()
     }
 
-    override fun findAllByOrderByCreatedAt(page: Int, size: Int): List<Ring> {
+    override fun findAllByOrderByCreatedAt(
+        page: Int,
+        size: Int
+    ): List<Ring> {
         return delegate.findAllByOrderByCreatedAt(PageRequest.of(page, size))
             .map { it.toDomain() }
             .toList()

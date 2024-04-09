@@ -21,11 +21,12 @@ class ProductOptionServiceFacadeTest : BehaviorSpec({
     val productService = mockk<ProductServiceImpl>()
     val productOptionService = mockk<ProductOptionService>()
     val productOptionCategoryService = mockk<ProductOptionCategoryService>()
-    val productOptionServiceFacade = ProductOptionServiceFacade(
-        productOptionService = productOptionService,
-        productOptionCategoryService = productOptionCategoryService,
-        productService = productService
-    )
+    val productOptionServiceFacade =
+        ProductOptionServiceFacade(
+            productOptionService = productOptionService,
+            productOptionCategoryService = productOptionCategoryService,
+            productService = productService
+        )
 
     Given("상품 옵션 정보(카테고리, 옵션)을 저장/수정할 때") {
         val productId = 1L
@@ -34,9 +35,10 @@ class ProductOptionServiceFacadeTest : BehaviorSpec({
             val upsertProductOptionVO = upsertProductOptionVOFixture(isEmptyOption = true)
 
             Then("예외 발생") {
-                val exception = shouldThrow<BusinessLogicException> {
-                    productOptionServiceFacade.upsertProductOptions(upsertProductOptionVO)
-                }
+                val exception =
+                    shouldThrow<BusinessLogicException> {
+                        productOptionServiceFacade.upsertProductOptions(upsertProductOptionVO)
+                    }
                 exception.code shouldBe PRODUCT_OPTION_REQUIRES_AT_LEAST_ONE_OPTION
             }
         }
@@ -46,9 +48,10 @@ class ProductOptionServiceFacadeTest : BehaviorSpec({
             every { productService.readById(productId) } throws BusinessLogicException(BAD_REQUEST_ID)
 
             Then("예외 발생") {
-                val exception = shouldThrow<BusinessLogicException> {
-                    productOptionServiceFacade.upsertProductOptions(upsertProductOptionVO)
-                }
+                val exception =
+                    shouldThrow<BusinessLogicException> {
+                        productOptionServiceFacade.upsertProductOptions(upsertProductOptionVO)
+                    }
                 exception.code shouldBe BAD_REQUEST_ID
             }
         }
@@ -58,14 +61,16 @@ class ProductOptionServiceFacadeTest : BehaviorSpec({
             val upsertProductOptionVO = upsertProductOptionVOFixture(optionCategoryId = optionCategoryId)
 
             every { productService.readById(any()) } returns productFixture()
-            every { productOptionCategoryService.readById(optionCategoryId) } throws BusinessLogicException(
-                BAD_REQUEST_ID
-            )
+            every { productOptionCategoryService.readById(optionCategoryId) } throws
+                BusinessLogicException(
+                    BAD_REQUEST_ID
+                )
 
             Then("예외 발생") {
-                val exception = shouldThrow<BusinessLogicException> {
-                    productOptionServiceFacade.upsertProductOptions(upsertProductOptionVO)
-                }
+                val exception =
+                    shouldThrow<BusinessLogicException> {
+                        productOptionServiceFacade.upsertProductOptions(upsertProductOptionVO)
+                    }
                 exception.code shouldBe BAD_REQUEST_ID
             }
         }
@@ -73,19 +78,21 @@ class ProductOptionServiceFacadeTest : BehaviorSpec({
         When("저장되어 있지 않은 옵션ID를 포함한 요청이라면") {
             val optionCategoryId = 1L
             val optionIds = listOf(1L, 2L)
-            val upsertProductOptionVO = upsertProductOptionVOFixture(
-                optionCategoryId = optionCategoryId,
-                optionIds = optionIds
-            )
+            val upsertProductOptionVO =
+                upsertProductOptionVOFixture(
+                    optionCategoryId = optionCategoryId,
+                    optionIds = optionIds
+                )
 
             every { productService.readById(any()) } returns productFixture()
             every { productOptionCategoryService.readById(optionCategoryId) } returns productOptionCategoryFixture()
             every { productOptionService.readByIds(optionIds) } returns listOf()
 
             Then("예외 발생") {
-                val exception = shouldThrow<BusinessLogicException> {
-                    productOptionServiceFacade.upsertProductOptions(upsertProductOptionVO)
-                }
+                val exception =
+                    shouldThrow<BusinessLogicException> {
+                        productOptionServiceFacade.upsertProductOptions(upsertProductOptionVO)
+                    }
                 exception.code shouldBe BAD_REQUEST_ID
             }
         }
@@ -93,19 +100,22 @@ class ProductOptionServiceFacadeTest : BehaviorSpec({
         When("정상 요청이라면") {
             val optionCategoryId = 1L
             val optionIds = listOf(1L, 2L)
-            val upsertProductOptionVO = upsertProductOptionVOFixture(
-                optionCategoryId = optionCategoryId,
-                optionIds = optionIds
-            )
+            val upsertProductOptionVO =
+                upsertProductOptionVOFixture(
+                    optionCategoryId = optionCategoryId,
+                    optionIds = optionIds
+                )
 
             every { productService.readById(any()) } returns productFixture()
-            every { productOptionCategoryService.readById(optionCategoryId) } returns productOptionCategoryFixture(
-                id = optionCategoryId
-            )
-            every { productOptionService.readByIds(optionIds) } returns productOptionCollectionFixture(
-                ids = optionIds,
-                optionCategoryId = optionCategoryId
-            )
+            every { productOptionCategoryService.readById(optionCategoryId) } returns
+                productOptionCategoryFixture(
+                    id = optionCategoryId
+                )
+            every { productOptionService.readByIds(optionIds) } returns
+                productOptionCollectionFixture(
+                    ids = optionIds,
+                    optionCategoryId = optionCategoryId
+                )
 
             every { productOptionCategoryService.upsert(any()) } returns optionCategoryId
             every { productOptionService.upsert(any()) } returns optionIds
