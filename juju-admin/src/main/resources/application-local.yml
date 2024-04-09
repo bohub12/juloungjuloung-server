@@ -3,3 +3,4 @@ spring:
         import:
             - application-database-local.yml
             - aws-local.yml
+            - slack.yml
