@@ -6,6 +6,8 @@ import com.juloungjuloung.juju.domain.product.service.ProductService
 import com.juloungjuloung.juju.domain.product.vo.SaveProductVO
 import com.juloungjuloung.juju.domain.product.vo.UpdateProductVO
 import com.juloungjuloung.juju.enums.ProductTypeEnum
+import com.juloungjuloung.juju.response.ApiResponseCode.PRODUCT_IMAGE_REMOVE_CONDITION_THUMBNAIL
+import com.juloungjuloung.juju.utils.require
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -43,11 +45,18 @@ class ProductServiceImpl(
 
     fun changeThumbnailImage(
         productId: Long,
-        thumbnailImageUrl: String
+        thumbnailImageUrl: String?
     ) {
         val product = readById(productId)
 
-        product.changeThumbnailImage(thumbnailImageUrl)
+        if (thumbnailImageUrl.isNullOrBlank()) {
+            require(!product.isDisplay, PRODUCT_IMAGE_REMOVE_CONDITION_THUMBNAIL)
+
+            product.deleteThumbnailImage()
+        } else {
+            product.changeThumbnailImage(thumbnailImageUrl)
+        }
+
         productRepository.changeThumbnailImage(product)
     }
 }
