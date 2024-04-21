@@ -20,7 +20,10 @@ enum class ApiResponseCode(
     // 1100 [Product Image]
     PRODUCT_IMAGE_SIZE_EXCEED_MAX(1100, "상품 이미지의 개수가 10개 미만이여야 합니다"),
     PRODUCT_IMAGE_THUMBNAIL_NOT_ONE(1101, "상품 대표 이미지 개수가 1개여야 합니다"),
-    PRODUCT_IMAGE_REMOVE_CONDITION_THUMBNAIL(1102, "대표 이미지는 삭제할 수 없습니다. 대표 이미지를 변경 후 삭제해주시기 바랍니다"),
+    PRODUCT_IMAGE_REMOVE_CONDITION_THUMBNAIL(
+        1102,
+        "상품이 전시 중일 때에는 대표 이미지는 삭제할 수 없습니다. 상품 전시여부를 수정하시거나 대표 이미지를 변경하신 후 삭제해주시기 바랍니다"
+    ),
 
     // 1200 [Product Option]
     PRODUCT_OPTION_REQUIRES_AT_LEAST_ONE_OPTION(1200, "옵션 카테고리에 최소 한 개 이상의 옵션이 필요합니다")
