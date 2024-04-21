@@ -54,6 +54,10 @@ open class Product(
     fun changeThumbnailImage(imageUrl: String) {
         this.thumbnailImage = imageUrl
     }
+
+    fun deleteThumbnailImage() {
+        this.thumbnailImage = null
+    }
 }
 
 data class ProductsWithCount(

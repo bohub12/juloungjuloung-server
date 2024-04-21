@@ -30,12 +30,9 @@ class ProductImageServiceFacade(
     fun upsertProductImages(upsertProductImageVO: UpsertProductImageVO): List<Long> {
         val productImages = upsertProductImageVO.toDomain().validate()
 
+        productService.changeThumbnailImage(upsertProductImageVO.productId, productImages.getThumbnail()?.imageUrl)
+
         deletePersistedProductImagesExcludeRequest(upsertProductImageVO.productId, productImages.getProductImageIds())
-
-        if (productImages.containsThumbnail()) {
-            productService.changeThumbnailImage(upsertProductImageVO.productId, productImages.getThumbnail().imageUrl)
-        }
-
         return productImageService.upsert(upsertProductImageVO)
     }
 

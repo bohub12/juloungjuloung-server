@@ -45,8 +45,8 @@ data class ProductImages(
         return productImages.any { it.isThumbnail }
     }
 
-    fun getThumbnail(): ProductImage {
-        return productImages.first { it.isThumbnail }
+    fun getThumbnail(): ProductImage? {
+        return productImages.find { it.isThumbnail }
     }
 
     fun getProductImageIds(): List<Long> {
